@@ -25,6 +25,7 @@ Cell的完整UI结构
 ### 效果图（静态）
 
 ![MomentKit](https://github.com/CheeryLau/MomentKit/blob/master/Screenshot/screenshot_04.png)
+
 ![MomentKit](https://github.com/CheeryLau/MomentKit/blob/master/Screenshot/screenshot_05.png)
 
 ### 后记
