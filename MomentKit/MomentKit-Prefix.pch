@@ -19,8 +19,13 @@
 #import "NSAttributedString+MLExpression.h"
 
 
-
 // 屏幕物理尺寸宽度
-#define kWidth              [UIScreen mainScreen].bounds.size.width
+#define k_screen_width      [UIScreen mainScreen].bounds.size.width
 // 屏幕物理尺寸高度
-#define kHeight             [UIScreen mainScreen].bounds.size.height
+#define k_screen_height     [UIScreen mainScreen].bounds.size.height
+// 状态栏高度
+#define k_status_height     [[UIApplication sharedApplication] statusBarFrame].size.height
+// 导航栏高度
+#define k_nav_height        self.navigationController.navigationBar.height
+// 顶部整体高度
+#define k_top_height        (k_status_height + k_nav_height)

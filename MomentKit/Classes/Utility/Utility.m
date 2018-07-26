@@ -49,8 +49,8 @@
 #pragma mark - 获取单张图片的实际size
 + (CGSize)getSingleSize:(CGSize)singleSize
 {
-    CGFloat max_width = kWidth-150;
-    CGFloat max_height = kWidth-130;
+    CGFloat max_width = k_screen_width - 150;
+    CGFloat max_height = k_screen_width - 130;
     CGFloat image_width = singleSize.width;
     CGFloat image_height = singleSize.height;
     

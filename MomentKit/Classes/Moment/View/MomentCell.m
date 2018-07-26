@@ -159,7 +159,7 @@ CGFloat maxLimitHeight = 0;
     _deleteBtn.frame = CGRectMake(_timeLab.right + 25, _timeLab.top, 30, kTimeLabelH);
     bottom = _timeLab.bottom + kPaddingValue;
     // 操作视图
-    _menuView.frame = CGRectMake(kWidth-kOperateWidth-10, _timeLab.top-(kOperateHeight-kTimeLabelH)/2, kOperateWidth, kOperateHeight);
+    _menuView.frame = CGRectMake(k_screen_width-kOperateWidth-10, _timeLab.top-(kOperateHeight-kTimeLabelH)/2, kOperateWidth, kOperateHeight);
     _menuView.show = NO;
     // 处理评论/赞
     _commentView.frame = CGRectZero;
@@ -168,7 +168,7 @@ CGFloat maxLimitHeight = 0;
     [_commentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     // 处理赞
     CGFloat top = 0;
-    CGFloat width = kWidth-kRightMargin-_nameLab.left;
+    CGFloat width = k_screen_width-kRightMargin-_nameLab.left;
     if (moment.praiseNameList.length) {
         MLLinkLabel *likeLabel = kMLLinkLabel();
         likeLabel.delegate = self;

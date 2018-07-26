@@ -9,7 +9,7 @@
 // 头像视图的宽、高
 #define kFaceWidth          40
 // 操作按钮的宽度
-#define kOperateBtWidth     30
+#define kOperateBtnWidth    30
 // 操作视图的高度
 #define kOperateHeight      38
 // 操作视图的高度
@@ -25,7 +25,7 @@
 // 正文字体
 #define kTextFont           [UIFont systemFontOfSize:15.0]
 // 内容视图宽度
-#define kTextWidth          (kWidth-60-25)
+#define kTextWidth          (k_screen_width-60-25)
 // 评论字体
 #define kComTextFont        [UIFont systemFontOfSize:14.0]
 // 评论高亮字体

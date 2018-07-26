@@ -13,11 +13,11 @@
 
 @interface MomentViewController ()<UITableViewDelegate,UITableViewDataSource,MomentCellDelegate>
 
-@property (nonatomic,strong) NSMutableArray *momentList;
-@property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) UIView *tableHeadView;
-@property (nonatomic,strong) UIImageView *coverImageView;
-@property (nonatomic,strong) UIImageView *headImageView;
+@property (nonatomic, strong) NSMutableArray *momentList;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIView *tableHeaderView;
+@property (nonatomic, strong) UIImageView *coverImageView;
+@property (nonatomic, strong) UIImageView *headImageView;
 
 @end
 
@@ -31,13 +31,14 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"moment_camera"] style:UIBarButtonItemStylePlain target:self action:@selector(addMoment)];
     
     [self initTestInfo];
-    [self.view addSubview:self.tableView];
+    [self setUpUI];
 }
 
 #pragma mark - 测试数据
 - (void)initTestInfo
 {
-    NSMutableArray *commentList;
+    self.momentList = [[NSMutableArray alloc] init];
+    NSMutableArray *commentList = nil;
     for (int i = 0;  i < 10; i ++)  {
         // 评论
         commentList = [[NSMutableArray alloc] init];
@@ -78,75 +79,52 @@
     }
 }
 
-#pragma mark - Getter
-- (UITableView *)tableView
+#pragma mark - UI
+- (void)setUpUI
 {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight-64)];
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        _tableView.separatorColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
-        _tableView.separatorInset = UIEdgeInsetsZero;
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
-        _tableView.tableFooterView = [UIView new];
-        _tableView.tableHeaderView = self.tableHeadView;
-    }
-    return _tableView;
-}
-
-- (UIView *)tableHeadView
-{
-    if (!_tableHeadView) {
-        _tableHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWidth, 270)];
-        _tableHeadView.backgroundColor = [UIColor clearColor];
-        _tableHeadView.userInteractionEnabled = YES;
-        [_tableHeadView addSubview:self.coverImageView];
-        [_tableHeadView addSubview:self.headImageView];
-    }
-    return _tableHeadView;
-}
-
-- (UIImageView *)coverImageView
-{
-    if (!_coverImageView) {
-        _coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -64, kWidth, 270)];
-        _coverImageView.backgroundColor = [UIColor clearColor];
-        _coverImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _coverImageView.contentScaleFactor = [[UIScreen mainScreen] scale];
-        _coverImageView.clipsToBounds = YES;
-        _coverImageView.userInteractionEnabled = YES;
-        _coverImageView.image = [UIImage imageNamed:@"moment_cover"];
-    }
-    return _coverImageView;
-}
-
-- (UIImageView *)headImageView
-{
-    if (!_headImageView) {
-        _headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth-85, self.coverImageView.bottom-40, 75, 75)];
-        _headImageView.backgroundColor = [UIColor clearColor];
-        _headImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
-        _headImageView.layer.borderWidth = 2;
-        _headImageView.userInteractionEnabled = YES;
-        _headImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _headImageView.image = [UIImage imageNamed:@"moment_head"];
-    }
-    return _headImageView;
-}
-
-- (NSMutableArray *)momentList
-{
-    if (!_momentList) {
-        _momentList = [[NSMutableArray alloc] init];
-    }
-    return _momentList;
+    // 封面
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -k_top_height, k_screen_width, 270)];
+    imageView.backgroundColor = [UIColor clearColor];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.contentScaleFactor = [[UIScreen mainScreen] scale];
+    imageView.clipsToBounds = YES;
+    imageView.userInteractionEnabled = YES;
+    imageView.image = [UIImage imageNamed:@"moment_cover"];
+    self.coverImageView = imageView;
+    // 用户头像
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(k_screen_width-85, self.coverImageView.bottom-40, 75, 75)];
+    imageView.backgroundColor = [UIColor clearColor];
+    imageView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    imageView.layer.borderWidth = 2;
+    imageView.userInteractionEnabled = YES;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.image = [UIImage imageNamed:@"moment_head"];
+    self.headImageView = imageView;
+    // 表头
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, 270)];
+    view.backgroundColor = [UIColor clearColor];
+    view.userInteractionEnabled = YES;
+    [view addSubview:self.coverImageView];
+    [view addSubview:self.headImageView];
+    self.tableHeaderView = view;
+    // 表格
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, k_screen_height-k_top_height)];
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    tableView.separatorColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
+    tableView.separatorInset = UIEdgeInsetsZero;
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    tableView.tableFooterView = [UIView new];
+    tableView.tableHeaderView = self.tableHeaderView;
+    self.tableView = tableView;
+    [self.view addSubview:self.tableView];
 }
 
 #pragma mark - 发布动态
 - (void)addMoment
 {
-    
+    NSLog(@"新增");
 }
 
 #pragma mark - MomentCellDelegate
@@ -155,16 +133,19 @@
 {
     NSLog(@"击用户头像");
 }
+
 // 赞
 - (void)didLikeMoment:(MomentCell *)cell
 {
     NSLog(@"点赞");
 }
+
 // 评论
 - (void)didAddComment:(MomentCell *)cell
 {
     NSLog(@"评论");
 }
+
 // 查看全文/收起
 - (void)didSelectFullText:(MomentCell *)cell
 {
@@ -172,21 +153,23 @@
     
     [self.tableView reloadData];
 }
+
 // 删除
 - (void)didDeleteMoment:(MomentCell *)cell
 {
     NSLog(@"删除");
     NSInteger index = cell.tag;
-    //数组中移除
+    // 数组中移除
     [self.momentList removeObjectAtIndex:index];
-    //刷新表格
     [self.tableView reloadData];
 }
+
 // 选择评论
 - (void)didSelectComment:(Comment *)comment
 {
     NSLog(@"点击评论");
 }
+
 // 点击高亮文字
 - (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText momentCell:(MomentCell *)cell
 {

@@ -28,7 +28,7 @@
         _scrollView.showsVerticalScrollIndicator = NO;
         [self addSubview:_scrollView];
         // 页面控制
-        _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.height-40, kWidth, 20)];
+        _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.height-40, k_screen_width, 20)];
         _pageControl.pageIndicatorTintColor = [UIColor grayColor];
         _pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
         [self addSubview:_pageControl];
@@ -118,14 +118,11 @@
     }
     float scaleX = self.frame.size.width/picSize.width;
     float scaleY = self.frame.size.height/picSize.height;
-    if (scaleX > scaleY)
-    {
+    if (scaleX > scaleY) {
         float imgViewWidth = picSize.width*scaleY;
         self.maximumZoomScale = self.frame.size.width/imgViewWidth;
         _originRect = (CGRect){self.frame.size.width/2-imgViewWidth/2,0,imgViewWidth,self.frame.size.height};
-    }
-    else
-    {
+    } else  {
         float imgViewHeight = picSize.height*scaleX;
         self.maximumZoomScale = self.frame.size.height/imgViewHeight;
         _originRect = (CGRect){0,self.frame.size.height/2-imgViewHeight/2,self.frame.size.width,imgViewHeight};

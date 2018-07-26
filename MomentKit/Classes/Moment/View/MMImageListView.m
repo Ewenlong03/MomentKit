@@ -159,7 +159,7 @@
     }
     // 更新offset
     CGPoint offset = _previewView.scrollView.contentOffset;
-    offset.x = index * kWidth;
+    offset.x = index * k_screen_width;
     _previewView.scrollView.contentOffset = offset;
 }
 
