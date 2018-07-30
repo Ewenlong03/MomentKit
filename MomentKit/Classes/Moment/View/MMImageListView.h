@@ -15,8 +15,6 @@
 
 // 动态
 @property (nonatomic,strong) Moment *moment;
-// 获取视图高度
-+ (CGFloat)imageListHeightForMoment:(Moment *)moment;
 
 @end
 

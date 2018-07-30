@@ -34,5 +34,7 @@
 @property (nonatomic,assign) BOOL isFullText;
 // 评论集合
 @property (nonatomic,strong) NSArray *commentList;
+// Moment对应cell高度
+@property (nonatomic,assign) CGFloat rowHeight;
 
 @end

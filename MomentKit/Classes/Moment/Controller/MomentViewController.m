@@ -59,10 +59,10 @@
         moment.time = 1487649403;
         moment.singleWidth = 500;
         moment.singleHeight = 315;
-        if (i == 0) {
+        moment.location = @"北京 · 西单";
+        if (i == 5) {
             moment.commentList = nil;
             moment.praiseNameList = nil;
-            moment.location = @"北京 · 西单";
             moment.text = @"蜀绣又名“川绣”，是在丝绸或其他织物上采用蚕丝线绣出花纹图案的中国传统工艺，18107891687主要指以四川成都为中心的川西平原一带的刺绣。😁蜀绣最早见于西汉的记载，当时的工艺已相当成熟，同时传承了图案配色鲜艳、常用红绿颜色的特点。😁蜀绣又名“川绣”，是在丝绸或其他织物上采用蚕丝线绣出花纹图案的中国传统工艺，https://www.baidu.com，主要指以四川成都为中心的川西平原一带的刺绣。蜀绣最早见于西汉的记载，当时的工艺已相当成熟，同时传承了图案配色鲜艳、常用红绿颜色的特点。";
             moment.fileCount = 1;
         } else if (i == 1) {
@@ -129,12 +129,12 @@
 
 #pragma mark - MomentCellDelegate
 // 点击用户头像
-- (void)didClickHead:(MomentCell *)cell
+- (void)didClickProfile:(MomentCell *)cell
 {
     NSLog(@"击用户头像");
 }
 
-// 赞
+// 点赞
 - (void)didLikeMoment:(MomentCell *)cell
 {
     NSLog(@"点赞");
@@ -150,18 +150,25 @@
 - (void)didSelectFullText:(MomentCell *)cell
 {
     NSLog(@"全文/收起");
-    
-    [self.tableView reloadData];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 // 删除
 - (void)didDeleteMoment:(MomentCell *)cell
 {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定删除吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // 取消
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        // 删除
+        [self.momentList removeObject:cell.moment];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
     NSLog(@"删除");
-    NSInteger index = cell.tag;
-    // 数组中移除
-    [self.momentList removeObjectAtIndex:index];
-    [self.tableView reloadData];
 }
 
 // 选择评论
@@ -171,7 +178,7 @@
 }
 
 // 点击高亮文字
-- (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText momentCell:(MomentCell *)cell
+- (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText
 {
     NSLog(@"点击高亮文字：%@",linkText);
 }
@@ -196,7 +203,6 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor whiteColor];
     }
-    cell.tag = indexPath.row;
     cell.moment = [self.momentList objectAtIndex:indexPath.row];
     cell.delegate = self;
     return cell;
@@ -205,8 +211,9 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = [MomentCell momentCellHeightForMoment:[self.momentList objectAtIndex:indexPath.row]];
-    return height;
+    // 使用缓存行高，避免计算多次
+    Moment *moment = [self.momentList objectAtIndex:indexPath.row];
+    return moment.rowHeight;
 }
 
 #pragma mark - UITableViewDelegate

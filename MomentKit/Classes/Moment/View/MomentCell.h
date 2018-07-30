@@ -40,14 +40,11 @@
 // 操作视图
 @property (nonatomic, strong) MMOperateMenuView *menuView;
 
-
 // 动态
 @property (nonatomic, strong) Moment *moment;
 // 代理
 @property (nonatomic, assign) id<MomentCellDelegate> delegate;
 
-// 获取行高
-+ (CGFloat)momentCellHeightForMoment:(Moment *)moment;
 
 @end
 
@@ -56,19 +53,19 @@
 @optional
 
 // 点击用户头像
-- (void)didClickHead:(MomentCell *)cell;
-// 赞
+- (void)didClickProfile:(MomentCell *)cell;
+// 删除
+- (void)didDeleteMoment:(MomentCell *)cell;
+// 点击赞
 - (void)didLikeMoment:(MomentCell *)cell;
 // 评论
 - (void)didAddComment:(MomentCell *)cell;
 // 查看全文/收起
 - (void)didSelectFullText:(MomentCell *)cell;
-// 删除
-- (void)didDeleteMoment:(MomentCell *)cell;
 // 选择评论
 - (void)didSelectComment:(Comment *)comment;
 // 点击高亮文字
-- (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText momentCell:(MomentCell *)cell;
+- (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText;
 
 @end
 

@@ -43,26 +43,6 @@
     return self;
 }
 
-#pragma mark - 获取整体高度
-+ (CGFloat)imageListHeightForMoment:(Moment *)moment
-{
-    // 图片高度
-    CGFloat height = 0;
-    NSInteger count = moment.fileCount;
-    if (count == 0) {
-        height = 0;
-    } else if (count == 1) {
-        height += [Utility getSingleSize:CGSizeMake(moment.singleWidth, moment.singleHeight)].height;
-    } else if (count < 4) {
-        height += kImageWidth;
-    } else if (count < 7) {
-        height += (kImageWidth*2 + kImagePadding);
-    } else {
-        height += (kImageWidth*3 + kImagePadding*2);
-    }
-    return height;
-}
-
 #pragma mark - Setter
 - (void)setMoment:(Moment *)moment
 {

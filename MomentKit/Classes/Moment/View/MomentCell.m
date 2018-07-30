@@ -112,6 +112,7 @@ CGFloat maxLimitHeight = 0;
     _showAllBtn.hidden = YES;
     _linkLabel.hidden = YES;
     CGFloat bottom = _nameLab.bottom + kPaddingValue;
+    CGFloat rowHeight = 0;
     if ([moment.text length]) {
         _linkLabel.hidden = NO;
         _linkLabel.text = moment.text;
@@ -195,8 +196,8 @@ CGFloat maxLimitHeight = 0;
                 }
             }];
             [label setDidClickLinkText:^(MLLink *link, NSString *linkText) {
-                if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:momentCell:)]) {
-                    [self.delegate didClickLink:link linkText:linkText momentCell:self];
+                if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
+                    [self.delegate didClickLink:link linkText:linkText];
                 }
             }];
             [_commentView addSubview:label];
@@ -209,72 +210,18 @@ CGFloat maxLimitHeight = 0;
         _bgImageView.frame = CGRectMake(_nameLab.left, bottom, width, top + kArrowHeight);
         _bgImageView.image = [[UIImage imageNamed:@"comment_bg"] stretchableImageWithLeftCapWidth:40 topCapHeight:30];
         _commentView.frame = CGRectMake(_nameLab.left, bottom + kArrowHeight, width, top);
+        rowHeight = _commentView.bottom + kBlank;
+    } else {
+        rowHeight = _timeLab.bottom + kBlank;
     }
-}
-
-#pragma mark - 获取行高
-+ (CGFloat)momentCellHeightForMoment:(Moment *)moment;
-{
-    CGFloat height = kBlank;
-    // 名字
-    height += kNameLabelH+kPaddingValue;
-    // 正文
-    if (moment.text.length) {
-        MLLinkLabel *linkLab = kMLLinkLabel();
-        linkLab.font = kTextFont;
-        linkLab.text =  moment.text;
-        CGFloat labH = [linkLab preferredSizeWithMaxWidth:kTextWidth].height;
-        BOOL isHide = YES;
-        if (labH > maxLimitHeight) {
-            if (!moment.isFullText) {
-                labH = maxLimitHeight;
-            }
-            isHide = NO;
-        }
-        if (isHide) {
-            height += labH + kPaddingValue;
-        } else {
-            height += labH + kArrowHeight + kMoreLabHeight + kPaddingValue;
-        }
-    }
-    // 图片
-    height += [MMImageListView imageListHeightForMoment:moment]+kPaddingValue;
-    // 地理位置
-    if ([moment.location length]) {
-        height += kTimeLabelH+kPaddingValue;
-    }
-    // 时间
-    height += kTimeLabelH+kPaddingValue;
-    // 如果赞或评论不空，加kArrowHeight
-    CGFloat addH = 0;
-    // 赞
-    if (moment.praiseNameList.length) {
-        addH = kArrowHeight;
-        MLLinkLabel *linkLab = kMLLinkLabel();
-        linkLab.attributedText = kMLLinkLabelAttributedText(moment.praiseNameList);;
-        height += [linkLab preferredSizeWithMaxWidth:kTextWidth].height + 15;
-    }
-    // 评论
-    NSInteger count = [moment.commentList count];
-    if (count > 0) {
-        addH = kArrowHeight;
-        MLLinkLabel *linkLab = kMLLinkLabel();
-        for (NSInteger i = 0; i < count; i ++) {
-            linkLab.attributedText = kMLLinkLabelAttributedText([moment.commentList objectAtIndex:i]);
-            CGFloat commentH = [linkLab preferredSizeWithMaxWidth:kTextWidth].height + 5;
-            height += commentH;
-        }
-    }
-    if (addH == 0) {
-        height -= kPaddingValue;
-    }
-    height += kBlank + addH;
-    return height;
+    
+    // 这样做就是起到缓存行高的作用，省去重复计算!!!
+    _moment.rowHeight = rowHeight;
 }
 
 #pragma mark - 点击事件
 // 查看全文/收起
-- (void)fullTextClicked:(UIButton *)bt
+- (void)fullTextClicked:(UIButton *)sender
 {
     _showAllBtn.titleLabel.backgroundColor = kHLBgColor;
     dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC));
@@ -290,13 +237,13 @@ CGFloat maxLimitHeight = 0;
 // 点击头像
 - (void)clickHead:(UITapGestureRecognizer *)gesture
 {
-    if ([self.delegate respondsToSelector:@selector(didClickHead:)]) {
-        [self.delegate didClickHead:self];
+    if ([self.delegate respondsToSelector:@selector(didClickProfile:)]) {
+        [self.delegate didClickProfile:self];
     }
 }
 
 // 删除动态
-- (void)deleteMoment:(UIButton *)bt
+- (void)deleteMoment:(UIButton *)sender
 {
     _deleteBtn.titleLabel.backgroundColor = [UIColor lightGrayColor];
     dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC));
@@ -312,8 +259,8 @@ CGFloat maxLimitHeight = 0;
 - (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText linkLabel:(MLLinkLabel *)linkLabel
 {
     // 点击动态正文或者赞高亮
-    if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:momentCell:)]) {
-        [self.delegate didClickLink:link linkText:linkText momentCell:self];
+    if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
+        [self.delegate didClickLink:link linkText:linkText];
     }
 }
 @end
