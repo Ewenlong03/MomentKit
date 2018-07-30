@@ -56,7 +56,7 @@
 - (void)didClickProfile:(MomentCell *)cell;
 // 删除
 - (void)didDeleteMoment:(MomentCell *)cell;
-// 点击赞
+// 点赞
 - (void)didLikeMoment:(MomentCell *)cell;
 // 评论
 - (void)didAddComment:(MomentCell *)cell;
