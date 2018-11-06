@@ -32,6 +32,8 @@
 @property (nonatomic,assign) long long time;
 // 显示'全文'/'收起'
 @property (nonatomic,assign) BOOL isFullText;
+// 是否已经点赞
+@property (nonatomic,assign) BOOL isPraise;
 // 评论集合
 @property (nonatomic,strong) NSArray *commentList;
 // Moment对应cell高度

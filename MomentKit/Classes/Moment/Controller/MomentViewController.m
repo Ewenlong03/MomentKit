@@ -60,6 +60,7 @@
         moment.singleWidth = 500;
         moment.singleHeight = 315;
         moment.location = @"北京 · 西单";
+        moment.isPraise = NO;
         if (i == 5) {
             moment.commentList = nil;
             moment.praiseNameList = nil;
@@ -115,6 +116,7 @@
     tableView.separatorInset = UIEdgeInsetsZero;
     tableView.dataSource = self;
     tableView.delegate = self;
+    tableView.estimatedRowHeight = 0;
     tableView.tableFooterView = [UIView new];
     tableView.tableHeaderView = self.tableHeaderView;
     self.tableView = tableView;
@@ -138,6 +140,30 @@
 - (void)didLikeMoment:(MomentCell *)cell
 {
     NSLog(@"点赞");
+    Moment *moment = cell.moment;
+    NSMutableArray *tempArray = [NSMutableArray array];
+    if (moment.praiseNameList.length) {
+        tempArray = [NSMutableArray arrayWithArray:[moment.praiseNameList componentsSeparatedByString:@"，"]];
+    }
+    if (moment.isPraise) {
+        moment.isPraise = 0;
+        [tempArray removeObject:@"金大侠"];
+    } else {
+        moment.isPraise = 1;
+        [tempArray addObject:@"金大侠"];
+    }
+    NSMutableString *tempString = [NSMutableString string];
+    NSInteger count = [tempArray count];
+    for (NSInteger i = 0; i < count; i ++) {
+        if (i == 0) {
+            [tempString appendString:[tempArray objectAtIndex:i]];
+        } else {
+            [tempString appendString:[NSString stringWithFormat:@"，%@",[tempArray objectAtIndex:i]]];
+        }
+    }
+    moment.praiseNameList = tempString;
+    [self.momentList replaceObjectAtIndex:cell.tag withObject:moment];
+    [self.tableView reloadData];
 }
 
 // 评论
@@ -157,6 +183,7 @@
 // 删除
 - (void)didDeleteMoment:(MomentCell *)cell
 {
+    NSLog(@"删除");
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定删除吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         // 取消
@@ -164,11 +191,9 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         // 删除
         [self.momentList removeObject:cell.moment];
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView reloadData];
     }]];
     [self presentViewController:alert animated:YES completion:nil];
-    NSLog(@"删除");
 }
 
 // 选择评论
@@ -205,6 +230,7 @@
     }
     cell.moment = [self.momentList objectAtIndex:indexPath.row];
     cell.delegate = self;
+    cell.tag = indexPath.row;
     return cell;
 }
 
