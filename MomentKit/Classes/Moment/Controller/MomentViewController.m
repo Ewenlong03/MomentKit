@@ -73,7 +73,7 @@
         } else if (i == 2) {
             moment.fileCount = 9;
         } else {
-            moment.text = @"天界大乱，九州屠戮，当初被推下地狱cheerylau@126.com的她已经浴火归来，😭😭剑指仙界'你们杀了他，我便覆了你的天，毁了你的界，永世不得超生又如何！'👍👍";
+            moment.text = @"天界大乱，九州屠戮，当初被推下地狱ChellyLau@126.com的她已经浴火归来，😭😭剑指仙界'你们杀了他，我便覆了你的天，毁了你的界，永世不得超生又如何！'👍👍";
             moment.fileCount = arc4random()%10;
         }
         [self.momentList addObject:moment];
