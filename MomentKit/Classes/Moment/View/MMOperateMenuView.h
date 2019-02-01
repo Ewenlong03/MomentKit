@@ -5,6 +5,8 @@
 //  Created by LEA on 2017/12/15.
 //  Copyright © 2017年 LEA. All rights reserved.
 //
+//  朋友圈动态 > 评论/赞操作视图
+//
 
 #import <UIKit/UIKit.h>
 

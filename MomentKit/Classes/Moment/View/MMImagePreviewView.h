@@ -5,7 +5,7 @@
 //  Created by LEA on 2017/12/14.
 //  Copyright © 2017年 LEA. All rights reserved.
 //
-//  朋友圈动态>>图片预览视图
+//  朋友圈动态 > 图片预览视图
 //
 
 #import <UIKit/UIKit.h>

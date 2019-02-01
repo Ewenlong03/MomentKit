@@ -103,6 +103,7 @@
 
 - (void)likeClick
 {
+    [self menuClick];
     if (self.likeMoment) {
         self.likeMoment();
     }
@@ -110,6 +111,7 @@
 
 - (void)commentClick
 {
+    [self menuClick];
     if (self.commentMoment) {
         self.commentMoment();
     }

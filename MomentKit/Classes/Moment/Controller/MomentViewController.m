@@ -38,13 +38,14 @@
 - (void)initTestInfo
 {
     self.momentList = [[NSMutableArray alloc] init];
-    NSMutableArray *commentList = nil;
-    for (int i = 0;  i < 10; i ++)  {
+    NSMutableArray * commentList = nil;
+    for (int i = 0;  i < 10; i ++)
+    {
         // 评论
         commentList = [[NSMutableArray alloc] init];
-        int num = arc4random()%5 + 1;
+        int num = arc4random() % 5 + 1;
         for (int j = 0; j < num; j ++) {
-            Comment *comment = [[Comment alloc] init];
+            Comment * comment = [[Comment alloc] init];
             comment.userName = @"胡一菲";
             comment.text = @"天界大乱，九州屠戮，当初被推下地狱的她已经浴火归来.";
             comment.time = 1487649503;
@@ -52,7 +53,8 @@
             [commentList addObject:comment];
         }
         
-        Moment *moment = [[Moment alloc] init];
+        // 动态
+        Moment * moment = [[Moment alloc] init];
         moment.commentList = commentList;
         moment.praiseNameList = @"胡一菲，唐悠悠，陈美嘉，吕小布，曾小贤，张伟，关谷神奇";
         moment.userName = @"Jeanne";
@@ -140,19 +142,19 @@
 - (void)didLikeMoment:(MomentCell *)cell
 {
     NSLog(@"点赞");
-    Moment *moment = cell.moment;
-    NSMutableArray *tempArray = [NSMutableArray array];
+    Moment * moment = cell.moment;
+    NSMutableArray * tempArray = [NSMutableArray array];
     if (moment.praiseNameList.length) {
         tempArray = [NSMutableArray arrayWithArray:[moment.praiseNameList componentsSeparatedByString:@"，"]];
     }
     if (moment.isPraise) {
         moment.isPraise = 0;
-        [tempArray removeObject:@"金大侠"];
+        [tempArray removeObject:@"Jeanne"];
     } else {
         moment.isPraise = 1;
-        [tempArray addObject:@"金大侠"];
+        [tempArray addObject:@"Jeanne"];
     }
-    NSMutableString *tempString = [NSMutableString string];
+    NSMutableString * tempString = [NSMutableString string];
     NSInteger count = [tempArray count];
     for (NSInteger i = 0; i < count; i ++) {
         if (i == 0) {
@@ -184,7 +186,7 @@
 - (void)didDeleteMoment:(MomentCell *)cell
 {
     NSLog(@"删除");
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定删除吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"确定删除吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         // 取消
     }]];
@@ -221,9 +223,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"MomentCell";
-    MomentCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell == nil) {
+    static NSString * identifier = @"MomentCell";
+    MomentCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
         cell = [[MomentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor whiteColor];
@@ -238,15 +240,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // 使用缓存行高，避免计算多次
-    Moment *moment = [self.momentList objectAtIndex:indexPath.row];
+    Moment * moment = [self.momentList objectAtIndex:indexPath.row];
     return moment.rowHeight;
 }
 
 #pragma mark - UITableViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSIndexPath *indexPath =  [self.tableView indexPathForRowAtPoint:CGPointMake(scrollView.contentOffset.x, scrollView.contentOffset.y)];
-    MomentCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSIndexPath * indexPath =  [self.tableView indexPathForRowAtPoint:CGPointMake(scrollView.contentOffset.x, scrollView.contentOffset.y)];
+    MomentCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
     cell.menuView.show = NO;
 }
 

@@ -171,14 +171,14 @@ CGFloat maxLimitHeight = 0;
     CGFloat top = 0;
     CGFloat width = k_screen_width-kRightMargin-_nameLab.left;
     if (moment.praiseNameList.length) {
-        MLLinkLabel *likeLabel = kMLLinkLabel();
+        MLLinkLabel * likeLabel = kMLLinkLabel();
         likeLabel.delegate = self;
         likeLabel.attributedText = kMLLinkLabelAttributedText(moment.praiseNameList);
         CGSize attrStrSize = [likeLabel preferredSizeWithMaxWidth:kTextWidth];
         likeLabel.frame = CGRectMake(5, 8, attrStrSize.width, attrStrSize.height);
         [_commentView addSubview:likeLabel];
         // 分割线
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, likeLabel.bottom + 7, width, 0.5)];
+        UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, likeLabel.bottom + 7, width, 0.5)];
         line.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
         [_commentView addSubview:line];
         // 更新

@@ -5,6 +5,8 @@
 //  Created by LEA on 2017/12/14.
 //  Copyright © 2017年 LEA. All rights reserved.
 //
+//  朋友圈动态
+//
 
 #import <UIKit/UIKit.h>
 #import "Moment.h"
