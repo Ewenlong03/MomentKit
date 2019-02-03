@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import <SDWebImageDownloader.h>
 
 @interface AppDelegate ()
 
@@ -26,6 +27,7 @@
     _rootController = [[MainViewController alloc] init];
     self.window.rootViewController = _rootController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

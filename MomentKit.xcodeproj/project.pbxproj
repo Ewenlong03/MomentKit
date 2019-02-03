@@ -15,7 +15,6 @@
 		8B3BA0BE1FDFE1BF00407D25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B3BA0BC1FDFE1BF00407D25 /* LaunchScreen.storyboard */; };
 		8B3BA1171FDFE63A00407D25 /* UIView+Geometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3BA1161FDFE63A00407D25 /* UIView+Geometry.m */; };
 		8B3BA1351FDFE72300407D25 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3BA1341FDFE72300407D25 /* MainViewController.m */; };
-		8B3BA1381FDFE74C00407D25 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3BA1371FDFE74C00407D25 /* DiscoverViewController.m */; };
 		8B3BA1581FDFE91400407D25 /* MomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3BA13E1FDFE91400407D25 /* MomentViewController.m */; };
 		8B3BA1591FDFE91400407D25 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3BA1411FDFE91400407D25 /* Comment.m */; };
 		8B3BA15A1FDFE91400407D25 /* Moment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3BA1431FDFE91400407D25 /* Moment.m */; };
@@ -25,6 +24,18 @@
 		8BF765761FE2270C0064EC94 /* MomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF765751FE2270C0064EC94 /* MomentCell.m */; };
 		8BF765791FE2272A0064EC94 /* MMImageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF765781FE2272A0064EC94 /* MMImageListView.m */; };
 		8BF7657C1FE227450064EC94 /* MMImagePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7657B1FE227450064EC94 /* MMImagePreviewView.m */; };
+		FA58E4922205490700B788F8 /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4912205490700B788F8 /* WKWebViewController.m */; };
+		FA58E4AB2205784500B788F8 /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4A12205784400B788F8 /* AddressBookViewController.m */; };
+		FA58E4AC2205784500B788F8 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4A32205784400B788F8 /* MessageViewController.m */; };
+		FA58E4AD2205784500B788F8 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4A72205784400B788F8 /* MineViewController.m */; };
+		FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4AA2205784500B788F8 /* DiscoverViewController.m */; };
+		FA58E4B4220579D200B788F8 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4B3220579D200B788F8 /* SearchResultViewController.m */; };
+		FA58E4B722058AB500B788F8 /* NSString+Letter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4B622058AB500B788F8 /* NSString+Letter.m */; };
+		FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4B922058B0900B788F8 /* JPinYinUtil.m */; };
+		FA58E4BD22058DD800B788F8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4BC22058DD800B788F8 /* User.m */; };
+		FAAE6984220426FA005EFFAF /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE6982220426FA005EFFAF /* JKDBHelper.m */; };
+		FAAE6985220426FA005EFFAF /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE6983220426FA005EFFAF /* JKDBModel.m */; };
+		FAAE698922043787005EFFAF /* MomentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE698822043787005EFFAF /* MomentUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +52,6 @@
 		8B3BA1161FDFE63A00407D25 /* UIView+Geometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Geometry.m"; sourceTree = "<group>"; };
 		8B3BA1331FDFE72300407D25 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		8B3BA1341FDFE72300407D25 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		8B3BA1361FDFE74C00407D25 /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
-		8B3BA1371FDFE74C00407D25 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		8B3BA13D1FDFE91400407D25 /* MomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentViewController.h; sourceTree = "<group>"; };
 		8B3BA13E1FDFE91400407D25 /* MomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentViewController.m; sourceTree = "<group>"; };
 		8B3BA1401FDFE91400407D25 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
@@ -65,6 +74,30 @@
 		8BF7657B1FE227450064EC94 /* MMImagePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMImagePreviewView.m; sourceTree = "<group>"; };
 		982B6162EEA9642E2354D7BD /* libPods-MomentKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MomentKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB5E3DF6E7A80D531DC9322 /* Pods-MomentKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomentKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MomentKit/Pods-MomentKit.debug.xcconfig"; sourceTree = "<group>"; };
+		FA58E4902205490700B788F8 /* WKWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewController.h; sourceTree = "<group>"; };
+		FA58E4912205490700B788F8 /* WKWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewController.m; sourceTree = "<group>"; };
+		FA58E4A02205784400B788F8 /* AddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookViewController.h; sourceTree = "<group>"; };
+		FA58E4A12205784400B788F8 /* AddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewController.m; sourceTree = "<group>"; };
+		FA58E4A32205784400B788F8 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		FA58E4A42205784400B788F8 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		FA58E4A62205784400B788F8 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
+		FA58E4A72205784400B788F8 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
+		FA58E4A92205784500B788F8 /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
+		FA58E4AA2205784500B788F8 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
+		FA58E4B2220579D200B788F8 /* SearchResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
+		FA58E4B3220579D200B788F8 /* SearchResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
+		FA58E4B522058AB500B788F8 /* NSString+Letter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Letter.h"; sourceTree = "<group>"; };
+		FA58E4B622058AB500B788F8 /* NSString+Letter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Letter.m"; sourceTree = "<group>"; };
+		FA58E4B822058B0900B788F8 /* JPinYinUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPinYinUtil.h; sourceTree = "<group>"; };
+		FA58E4B922058B0900B788F8 /* JPinYinUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPinYinUtil.m; sourceTree = "<group>"; };
+		FA58E4BB22058DD800B788F8 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		FA58E4BC22058DD800B788F8 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		FAAE6980220426FA005EFFAF /* JKDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBModel.h; sourceTree = "<group>"; };
+		FAAE6981220426FA005EFFAF /* JKDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBHelper.h; sourceTree = "<group>"; };
+		FAAE6982220426FA005EFFAF /* JKDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBHelper.m; sourceTree = "<group>"; };
+		FAAE6983220426FA005EFFAF /* JKDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBModel.m; sourceTree = "<group>"; };
+		FAAE698722043787005EFFAF /* MomentUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentUtil.h; sourceTree = "<group>"; };
+		FAAE698822043787005EFFAF /* MomentUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +133,7 @@
 		8B3BA0AD1FDFE1BF00407D25 /* MomentKit */ = {
 			isa = PBXGroup;
 			children = (
+				8B3BA1141FDFE62600407D25 /* Utility */,
 				8B3BA1131FDFE62600407D25 /* Classes */,
 				8B3BA0B11FDFE1BF00407D25 /* AppDelegate.h */,
 				8B3BA0B21FDFE1BF00407D25 /* AppDelegate.m */,
@@ -124,12 +158,12 @@
 		8B3BA1131FDFE62600407D25 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FA58E4A22205784400B788F8 /* Message */,
+				FA58E49F2205784400B788F8 /* Addressbook */,
+				FA58E4A82205784500B788F8 /* Discover */,
+				FA58E4A52205784400B788F8 /* Mine */,
 				8B3BA1331FDFE72300407D25 /* MainViewController.h */,
 				8B3BA1341FDFE72300407D25 /* MainViewController.m */,
-				8B3BA1361FDFE74C00407D25 /* DiscoverViewController.h */,
-				8B3BA1371FDFE74C00407D25 /* DiscoverViewController.m */,
-				8B3BA1141FDFE62600407D25 /* Utility */,
-				8B3BA13B1FDFE91400407D25 /* Moment */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -137,12 +171,17 @@
 		8B3BA1141FDFE62600407D25 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				FAAE697F220426EE005EFFAF /* JKDBModel */,
 				8B3BA16C1FDFEAFD00407D25 /* Utility.h */,
 				8B3BA16D1FDFEAFD00407D25 /* Utility.m */,
 				8BD194111FE105AE00062E0A /* MLLabelUtil.h */,
 				8BD194121FE105AE00062E0A /* MLLabelUtil.m */,
 				8B3BA1151FDFE63A00407D25 /* UIView+Geometry.h */,
 				8B3BA1161FDFE63A00407D25 /* UIView+Geometry.m */,
+				FA58E4B522058AB500B788F8 /* NSString+Letter.h */,
+				FA58E4B622058AB500B788F8 /* NSString+Letter.m */,
+				FA58E4B822058B0900B788F8 /* JPinYinUtil.h */,
+				FA58E4B922058B0900B788F8 /* JPinYinUtil.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -153,6 +192,7 @@
 				8B3BA13C1FDFE91400407D25 /* Controller */,
 				8B3BA13F1FDFE91400407D25 /* Model */,
 				8B3BA1441FDFE91400407D25 /* View */,
+				FAAE69862204376A005EFFAF /* Utils */,
 			);
 			path = Moment;
 			sourceTree = "<group>";
@@ -162,6 +202,8 @@
 			children = (
 				8B3BA13D1FDFE91400407D25 /* MomentViewController.h */,
 				8B3BA13E1FDFE91400407D25 /* MomentViewController.m */,
+				FA58E4902205490700B788F8 /* WKWebViewController.h */,
+				FA58E4912205490700B788F8 /* WKWebViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -173,6 +215,8 @@
 				8B3BA1431FDFE91400407D25 /* Moment.m */,
 				8B3BA1401FDFE91400407D25 /* Comment.h */,
 				8B3BA1411FDFE91400407D25 /* Comment.m */,
+				FA58E4BB22058DD800B788F8 /* User.h */,
+				FA58E4BC22058DD800B788F8 /* User.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -208,6 +252,65 @@
 				982B6162EEA9642E2354D7BD /* libPods-MomentKit.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA58E49F2205784400B788F8 /* Addressbook */ = {
+			isa = PBXGroup;
+			children = (
+				FA58E4A02205784400B788F8 /* AddressBookViewController.h */,
+				FA58E4A12205784400B788F8 /* AddressBookViewController.m */,
+				FA58E4B2220579D200B788F8 /* SearchResultViewController.h */,
+				FA58E4B3220579D200B788F8 /* SearchResultViewController.m */,
+			);
+			path = Addressbook;
+			sourceTree = "<group>";
+		};
+		FA58E4A22205784400B788F8 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				FA58E4A42205784400B788F8 /* MessageViewController.h */,
+				FA58E4A32205784400B788F8 /* MessageViewController.m */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		FA58E4A52205784400B788F8 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				FA58E4A62205784400B788F8 /* MineViewController.h */,
+				FA58E4A72205784400B788F8 /* MineViewController.m */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		FA58E4A82205784500B788F8 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				FA58E4A92205784500B788F8 /* DiscoverViewController.h */,
+				FA58E4AA2205784500B788F8 /* DiscoverViewController.m */,
+				8B3BA13B1FDFE91400407D25 /* Moment */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		FAAE697F220426EE005EFFAF /* JKDBModel */ = {
+			isa = PBXGroup;
+			children = (
+				FAAE6981220426FA005EFFAF /* JKDBHelper.h */,
+				FAAE6982220426FA005EFFAF /* JKDBHelper.m */,
+				FAAE6980220426FA005EFFAF /* JKDBModel.h */,
+				FAAE6983220426FA005EFFAF /* JKDBModel.m */,
+			);
+			path = JKDBModel;
+			sourceTree = "<group>";
+		};
+		FAAE69862204376A005EFFAF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FAAE698722043787005EFFAF /* MomentUtil.h */,
+				FAAE698822043787005EFFAF /* MomentUtil.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,9 +408,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MomentKit/Pods-MomentKit-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -336,20 +442,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA58E4BD22058DD800B788F8 /* User.m in Sources */,
 				8B3BA1171FDFE63A00407D25 /* UIView+Geometry.m in Sources */,
 				8BD194131FE105AE00062E0A /* MLLabelUtil.m in Sources */,
-				8B3BA1381FDFE74C00407D25 /* DiscoverViewController.m in Sources */,
+				FAAE6985220426FA005EFFAF /* JKDBModel.m in Sources */,
+				FAAE6984220426FA005EFFAF /* JKDBHelper.m in Sources */,
 				8B3BA16E1FDFEAFD00407D25 /* Utility.m in Sources */,
+				FAAE698922043787005EFFAF /* MomentUtil.m in Sources */,
 				8B3BA1581FDFE91400407D25 /* MomentViewController.m in Sources */,
+				FA58E4AD2205784500B788F8 /* MineViewController.m in Sources */,
 				8BF765791FE2272A0064EC94 /* MMImageListView.m in Sources */,
+				FA58E4AB2205784500B788F8 /* AddressBookViewController.m in Sources */,
 				8B3BA0B31FDFE1BF00407D25 /* AppDelegate.m in Sources */,
+				FA58E4AC2205784500B788F8 /* MessageViewController.m in Sources */,
 				8B3BA15A1FDFE91400407D25 /* Moment.m in Sources */,
+				FA58E4922205490700B788F8 /* WKWebViewController.m in Sources */,
 				8BF7657C1FE227450064EC94 /* MMImagePreviewView.m in Sources */,
+				FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */,
 				8B3BA1351FDFE72300407D25 /* MainViewController.m in Sources */,
+				FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */,
 				8BE52D151FE35CC200B305C2 /* MMOperateMenuView.m in Sources */,
 				8B3BA0B01FDFE1BF00407D25 /* main.m in Sources */,
 				8B3BA1591FDFE91400407D25 /* Comment.m in Sources */,
+				FA58E4B4220579D200B788F8 /* SearchResultViewController.m in Sources */,
 				8BF765761FE2270C0064EC94 /* MomentCell.m in Sources */,
+				FA58E4B722058AB500B788F8 /* NSString+Letter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
