@@ -19,7 +19,7 @@ PS：这些页面只是为了不让一级页面显得空，本控件主要是**�
 
 ###  2、二级页面 > 朋友圈页面（MVC模式）
 
-1. 控制器（`Controller`）：朋友圈列表； 
+1. 控制器（`Controller`）：朋友圈列表`MomentViewController`； 
 2. 模型（`Model`）：`Moment`、`Comment`； 
 3. 视图（`View`）：
 
