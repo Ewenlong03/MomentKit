@@ -175,50 +175,6 @@
     return res;
 }
 
-/**
- * 创建表
- * 如果已经创建，返回YES
- */
-//+ (BOOL)createTable
-//{
-//    FMDatabase *db = [FMDatabase databaseWithPath:[JKDBHelper dbPath]];
-//    if (![db open]) {
-//        // NSLog(@"数据库打开失败!");
-//        return NO;
-//    }
-//    
-//    NSString *tableName = NSStringFromClass(self.class);
-//    NSString *columeAndType = [self.class getColumeAndTypeString];
-//    NSString *sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@(%@);",tableName,columeAndType];
-//    if (![db executeUpdate:sql]) {
-//        return NO;
-//    }
-//    
-//    NSMutableArray *columns = [NSMutableArray array];
-//    FMResultSet *resultSet = [db getTableSchema:tableName];
-//    while ([resultSet next]) {
-//        NSString *column = [resultSet stringForColumn:@"name"];
-//        [columns addObject:column];
-//    }
-//    NSDictionary *dict = [self.class getAllProperties];
-//    NSArray *properties = [dict objectForKey:@"name"];
-//    NSPredicate *filterPredicate = [NSPredicate predicateWithFormat:@"NOT (SELF IN %@)",columns];
-//    //过滤数组
-//    NSArray *resultArray = [properties filteredArrayUsingPredicate:filterPredicate];
-//
-//    for (NSString *column in resultArray) {
-//        NSUInteger index = [properties indexOfObject:column];
-//        NSString *proType = [[dict objectForKey:@"type"] objectAtIndex:index];
-//        NSString *fieldSql = [NSString stringWithFormat:@"%@ %@",column,proType];
-//        NSString *sql = [NSString stringWithFormat:@"ALTER TABLE %@ ADD COLUMN %@ ",NSStringFromClass(self.class),fieldSql];
-//        if (![db executeUpdate:sql]) {
-//            return NO;
-//        }
-//    }
-//    [db close];
-//    return YES;
-//}
-
 - (BOOL)saveOrUpdate
 {
     id primaryValue = [self valueForKey:primaryId];
@@ -237,7 +193,7 @@
         if ([primaryValue intValue] <= 0) {
             return [self save];
         }else{
-            self.pk = [primaryValue integerValue];
+            self.pk = [primaryValue intValue];
             return [self update];
         }
     }else{
@@ -593,6 +549,8 @@
                     [model setValue:[resultSet stringForColumn:columeName] forKey:columeName];
                 } else if ([columeType isEqualToString:SQLBLOB]) {
                     [model setValue:[resultSet dataForColumn:columeName] forKey:columeName];
+                } else if ([columeType isEqualToString:SQLREAL]) {
+                    [model setValue:[NSNumber numberWithDouble:[resultSet doubleForColumn:columeName]] forKey:columeName];
                 } else {
                     [model setValue:[NSNumber numberWithLongLong:[resultSet longLongIntForColumn:columeName]] forKey:columeName];
                 }

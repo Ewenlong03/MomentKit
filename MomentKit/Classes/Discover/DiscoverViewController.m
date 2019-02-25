@@ -22,7 +22,10 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = k_background_color;
-    self.titles = [NSArray arrayWithObjects:@[@"朋友圈"],@[@"扫一扫",@"摇一摇"],@[@"附近的人",@"漂流瓶"],@[@"购物",@"游戏"],@[@"小程序"], nil];
+    self.titles = [NSArray arrayWithObjects:
+                   @[@"朋友圈"],@[@"扫一扫",@"摇一摇"],
+                   @[@"附近的人",@"漂流瓶"],
+                   @[@"购物",@"游戏"],@[@"小程序"], nil];
     [self.view addSubview:self.tableView];
 }
 

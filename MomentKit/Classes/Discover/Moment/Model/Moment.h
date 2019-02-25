@@ -15,6 +15,10 @@
 
 // 正文
 @property (nonatomic, copy) NSString * text;
+// 发布位置(地标)
+@property (nonatomic, copy) NSString * landmark;
+// 发布位置(详细地址)
+@property (nonatomic, copy) NSString * address;
 // 发布位置
 @property (nonatomic, copy) NSString * location;
 // 发布者名字
@@ -24,9 +28,9 @@
 // 赞的人[逗号隔开的字符串]
 @property (nonatomic, copy) NSString * praiseNameList;
 // 单张图片的宽度
-@property (nonatomic, assign) CGFloat singleWidth;
+@property (nonatomic, assign) double singleWidth;
 // 单张图片的高度
-@property (nonatomic, assign) CGFloat singleHeight;
+@property (nonatomic, assign) double singleHeight;
 // 图片数量
 @property (nonatomic, assign) NSInteger fileCount;
 // 发布时间戳
@@ -35,7 +39,7 @@
 @property (nonatomic, assign) BOOL isFullText;
 // 是否已经点赞
 @property (nonatomic, assign) BOOL isPraise;
-// 精度
+// 经度
 @property (nonatomic, assign) double longitude;
 // 维度
 @property (nonatomic, assign) double latitude;
@@ -43,7 +47,7 @@
 @property (nonatomic, strong) NSArray<Comment *> *commentList;
 
 // Moment对应cell高度
-@property (nonatomic, assign) CGFloat rowHeight;
+@property (nonatomic, assign) double rowHeight;
 
 
 + (NSArray *)transients;

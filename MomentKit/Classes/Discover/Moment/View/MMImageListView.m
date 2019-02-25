@@ -34,7 +34,7 @@
         for (int i = 0; i < 9; i++) {
             MMImageView * imageView = [[MMImageView alloc] initWithFrame:CGRectZero];
             imageView.tag = 1000 + i;
-            [imageView setTapSmallView:^(MMImageView *imageView){
+            [imageView setClickHandler:^(MMImageView *imageView){
                 [self singleTapSmallViewCallback:imageView];
             }];
             [_imageViewsArray addObject:imageView];
@@ -61,7 +61,7 @@
 - (void)setMoment:(Moment *)moment
 {
     _moment = moment;
-    for (MMImageView *imageView in _imageViewsArray) {
+    for (MMImageView * imageView in _imageViewsArray) {
         imageView.hidden = YES;
     }
     // 图片区
@@ -77,13 +77,12 @@
     MMImageView * imageView = nil;
     for (NSInteger i = 0; i < count; i++)
     {
-        NSInteger rowNum = i/3;
-        NSInteger colNum = i%3;
+        NSInteger rowNum = i / 3;
+        NSInteger colNum = i % 3;
         if(count == 4) {
-            rowNum = i/2;
-            colNum = i%2;
+            rowNum = i / 2;
+            colNum = i % 2;
         }
-        
         CGFloat imageX = colNum * (kImageWidth + kImagePadding);
         CGFloat imageY = rowNum * (kImageWidth + kImagePadding);
         CGRect frame = CGRectMake(imageX, imageY, kImageWidth, kImageWidth);
@@ -96,7 +95,8 @@
         imageView = [self viewWithTag:1000+i];
         imageView.hidden = NO;
         imageView.frame = frame;
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[_imageArray objectAtIndex:i]] placeholderImage:nil];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[_imageArray objectAtIndex:i]]
+                     placeholderImage:nil];
     }
     self.width = kTextWidth;
     self.height = imageView.bottom;
@@ -188,16 +188,16 @@
         self.clipsToBounds  = YES;
         self.userInteractionEnabled = YES;
         
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCallback:)];
-        [self addGestureRecognizer:tap];
+        UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCallback:)];
+        [self addGestureRecognizer:singleTap];
     }
     return self;
 }
 
 - (void)singleTapGestureCallback:(UIGestureRecognizer *)gesture
 {
-    if (self.tapSmallView) {
-        self.tapSmallView(self);
+    if (self.clickHandler) {
+        self.clickHandler(self);
     }
 }
 

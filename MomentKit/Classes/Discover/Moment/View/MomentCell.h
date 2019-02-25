@@ -21,30 +21,30 @@
 @interface MomentCell : UITableViewCell <MLLinkLabelDelegate>
 
 // 头像
-@property (nonatomic, strong) UIImageView * headImageView;
+@property (nonatomic, strong) MMImageView * avatarImageView;
 // 名称
-@property (nonatomic, strong) UILabel *nameLab;
+@property (nonatomic, strong) UILabel * nameLab;
 // 时间
-@property (nonatomic, strong) UILabel *timeLab;
+@property (nonatomic, strong) UILabel * timeLab;
 // 位置
-@property (nonatomic, strong) UILabel *locationLab;
+@property (nonatomic, strong) UIButton * locationBtn;
 // 时间
-@property (nonatomic, strong) UIButton *deleteBtn;
+@property (nonatomic, strong) UIButton * deleteBtn;
 // 全文
-@property (nonatomic, strong) UIButton *showAllBtn;
+@property (nonatomic, strong) UIButton * showAllBtn;
 // 内容
-@property (nonatomic, strong) MLLinkLabel *linkLabel;
+@property (nonatomic, strong) MLLinkLabel * linkLabel;
 // 图片
-@property (nonatomic, strong) MMImageListView *imageListView;
+@property (nonatomic, strong) MMImageListView * imageListView;
 // 赞和评论视图
-@property (nonatomic, strong) UIView *commentView;
+@property (nonatomic, strong) UIView * commentView;
 // 赞和评论视图背景
-@property (nonatomic, strong) UIImageView *bgImageView;
+@property (nonatomic, strong) UIImageView * bgImageView;
 // 操作视图
-@property (nonatomic, strong) MMOperateMenuView *menuView;
+@property (nonatomic, strong) MMOperateMenuView * menuView;
 
 // 动态
-@property (nonatomic, strong) Moment *moment;
+@property (nonatomic, strong) Moment * moment;
 // 代理
 @property (nonatomic, assign) id<MomentCellDelegate> delegate;
 
@@ -69,9 +69,9 @@
 @interface CommentLabel : UIView <MLLinkLabelDelegate>
 
 // 内容Label
-@property (nonatomic, strong) MLLinkLabel *linkLabel;
+@property (nonatomic, strong) MLLinkLabel * linkLabel;
 // 评论
-@property (nonatomic, strong) Comment *comment;
+@property (nonatomic, strong) Comment * comment;
 // 点击评论高亮内容
 @property (nonatomic, copy) void (^didClickLinkText)(MLLink *link , NSString *linkText);
 // 点击评论

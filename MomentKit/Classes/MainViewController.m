@@ -10,7 +10,7 @@
 #import "DiscoverViewController.h"
 #import "MineViewController.h"
 #import "MessageViewController.h"
-#import "AddressBookViewController.h"
+#import "ContactsViewController.h"
 #import "MomentUtil.h"
 
 @interface MainViewController ()
@@ -30,10 +30,10 @@
 
     // 控制器
     MessageViewController * messageVC = [[MessageViewController alloc] init];
-    AddressBookViewController * addressVC = [[AddressBookViewController alloc] init];
+    ContactsViewController * contactsVC = [[ContactsViewController alloc] init];
     DiscoverViewController * discoverVC = [[DiscoverViewController alloc] init];
     MineViewController * mineVC = [[MineViewController alloc] init];
-    NSArray * controllers = @[messageVC,addressVC,discoverVC,mineVC];
+    NSArray * controllers = @[messageVC,contactsVC,discoverVC,mineVC];
     // tabbar
     NSArray * titles = @[@"微信",@"通讯录",@"发现",@"我"];
     NSMutableArray * viewControllers = [[NSMutableArray alloc] init];
@@ -73,7 +73,7 @@
         return;
     }
     // 名字
-    NSArray * names = @[@"小艺大佬",@"陈哲轩",@"安鑫",@"欧阳果",@"韩艺",@"Jeanne",@"童璐",@"祝子琪",@"林霜",@"徐小琪"];
+    NSArray * names = @[@"刘瑾",@"陈哲轩",@"安鑫",@"欧阳沁",@"韩艺",@"宋铭",@"童璐",@"祝子琪",@"林霜",@"赵星桐"];
     // 头像网络图片
     
     NSArray * images = @[@"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2633478757,1609564776&fm=26&gp=0.jpg",
@@ -125,7 +125,11 @@
         moment.time = 1549162615;
         moment.singleWidth = 640;
         moment.singleHeight = 506;
-        moment.location = @"北京 · 西单";
+        moment.location = @"杭州 · 雷峰塔景区";
+        moment.landmark = @"雷峰塔景区";
+        moment.address = @"杭州市西湖区南山路15号";
+        moment.latitude = 30.231250;
+        moment.longitude = 120.148550;
         moment.isPraise = NO;
         if (i == 0) {
             moment.fileCount = 4;

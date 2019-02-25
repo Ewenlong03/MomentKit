@@ -32,17 +32,17 @@
 - (NSString *)letters
 {
     NSMutableString * letterString = [NSMutableString string];
-    int len = (int)[self length];
-    for (int i = 0;i < len;i++)
+    NSInteger len = [self length];
+    for (NSInteger i = 0;i < len; i ++)
     {
-        NSString *oneChar = [[self substringFromIndex:i] substringToIndex:1];
-        if (![oneChar canBeConvertedToEncoding:NSASCIIStringEncoding]) {
-            NSArray *temA = makePinYin2([oneChar characterAtIndex:0]);
-            if ([temA count]>0) {
-                oneChar = [temA objectAtIndex:0];
+        NSString * character = [[self substringFromIndex:i] substringToIndex:1];
+        if (![character canBeConvertedToEncoding:NSASCIIStringEncoding]) {
+            NSArray * temp = makePinYin2([character characterAtIndex:0]);
+            if ([temp count]>0) {
+                character = [temp objectAtIndex:0];
             }
         }
-        [letterString appendString:oneChar];
+        [letterString appendString:character];
     }
     return letterString;
 }

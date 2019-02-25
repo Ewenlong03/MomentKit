@@ -24,12 +24,13 @@
 		8BF765761FE2270C0064EC94 /* MomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF765751FE2270C0064EC94 /* MomentCell.m */; };
 		8BF765791FE2272A0064EC94 /* MMImageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF765781FE2272A0064EC94 /* MMImageListView.m */; };
 		8BF7657C1FE227450064EC94 /* MMImagePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7657B1FE227450064EC94 /* MMImagePreviewView.m */; };
+		FA15602122238249001B626B /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA15601E22238249001B626B /* SearchResultViewController.m */; };
+		FA15602522238268001B626B /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA15602422238268001B626B /* ContactsViewController.m */; };
+		FA15603122239686001B626B /* MMLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA15603022239686001B626B /* MMLocationViewController.m */; };
 		FA58E4922205490700B788F8 /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4912205490700B788F8 /* WKWebViewController.m */; };
-		FA58E4AB2205784500B788F8 /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4A12205784400B788F8 /* AddressBookViewController.m */; };
 		FA58E4AC2205784500B788F8 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4A32205784400B788F8 /* MessageViewController.m */; };
 		FA58E4AD2205784500B788F8 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4A72205784400B788F8 /* MineViewController.m */; };
 		FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4AA2205784500B788F8 /* DiscoverViewController.m */; };
-		FA58E4B4220579D200B788F8 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4B3220579D200B788F8 /* SearchResultViewController.m */; };
 		FA58E4B722058AB500B788F8 /* NSString+Letter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4B622058AB500B788F8 /* NSString+Letter.m */; };
 		FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4B922058B0900B788F8 /* JPinYinUtil.m */; };
 		FA58E4BD22058DD800B788F8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4BC22058DD800B788F8 /* User.m */; };
@@ -74,18 +75,20 @@
 		8BF7657B1FE227450064EC94 /* MMImagePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMImagePreviewView.m; sourceTree = "<group>"; };
 		982B6162EEA9642E2354D7BD /* libPods-MomentKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MomentKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB5E3DF6E7A80D531DC9322 /* Pods-MomentKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomentKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MomentKit/Pods-MomentKit.debug.xcconfig"; sourceTree = "<group>"; };
+		FA15601E22238249001B626B /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
+		FA15602022238249001B626B /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
+		FA15602322238268001B626B /* ContactsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		FA15602422238268001B626B /* ContactsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		FA15602F22239686001B626B /* MMLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMLocationViewController.h; sourceTree = "<group>"; };
+		FA15603022239686001B626B /* MMLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMLocationViewController.m; sourceTree = "<group>"; };
 		FA58E4902205490700B788F8 /* WKWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewController.h; sourceTree = "<group>"; };
 		FA58E4912205490700B788F8 /* WKWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewController.m; sourceTree = "<group>"; };
-		FA58E4A02205784400B788F8 /* AddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookViewController.h; sourceTree = "<group>"; };
-		FA58E4A12205784400B788F8 /* AddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewController.m; sourceTree = "<group>"; };
 		FA58E4A32205784400B788F8 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		FA58E4A42205784400B788F8 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		FA58E4A62205784400B788F8 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		FA58E4A72205784400B788F8 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		FA58E4A92205784500B788F8 /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		FA58E4AA2205784500B788F8 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
-		FA58E4B2220579D200B788F8 /* SearchResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
-		FA58E4B3220579D200B788F8 /* SearchResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
 		FA58E4B522058AB500B788F8 /* NSString+Letter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Letter.h"; sourceTree = "<group>"; };
 		FA58E4B622058AB500B788F8 /* NSString+Letter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Letter.m"; sourceTree = "<group>"; };
 		FA58E4B822058B0900B788F8 /* JPinYinUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPinYinUtil.h; sourceTree = "<group>"; };
@@ -158,12 +161,12 @@
 		8B3BA1131FDFE62600407D25 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FA58E4A22205784400B788F8 /* Message */,
-				FA58E49F2205784400B788F8 /* Addressbook */,
-				FA58E4A82205784500B788F8 /* Discover */,
-				FA58E4A52205784400B788F8 /* Mine */,
 				8B3BA1331FDFE72300407D25 /* MainViewController.h */,
 				8B3BA1341FDFE72300407D25 /* MainViewController.m */,
+				FA58E4A22205784400B788F8 /* Message */,
+				FA15601C22238249001B626B /* Contacts */,
+				FA58E4A82205784500B788F8 /* Discover */,
+				FA58E4A52205784400B788F8 /* Mine */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -174,8 +177,6 @@
 				FAAE697F220426EE005EFFAF /* JKDBModel */,
 				8B3BA16C1FDFEAFD00407D25 /* Utility.h */,
 				8B3BA16D1FDFEAFD00407D25 /* Utility.m */,
-				8BD194111FE105AE00062E0A /* MLLabelUtil.h */,
-				8BD194121FE105AE00062E0A /* MLLabelUtil.m */,
 				8B3BA1151FDFE63A00407D25 /* UIView+Geometry.h */,
 				8B3BA1161FDFE63A00407D25 /* UIView+Geometry.m */,
 				FA58E4B522058AB500B788F8 /* NSString+Letter.h */,
@@ -204,6 +205,8 @@
 				8B3BA13E1FDFE91400407D25 /* MomentViewController.m */,
 				FA58E4902205490700B788F8 /* WKWebViewController.h */,
 				FA58E4912205490700B788F8 /* WKWebViewController.m */,
+				FA15602F22239686001B626B /* MMLocationViewController.h */,
+				FA15603022239686001B626B /* MMLocationViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -254,15 +257,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FA58E49F2205784400B788F8 /* Addressbook */ = {
+		FA15601C22238249001B626B /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				FA58E4A02205784400B788F8 /* AddressBookViewController.h */,
-				FA58E4A12205784400B788F8 /* AddressBookViewController.m */,
-				FA58E4B2220579D200B788F8 /* SearchResultViewController.h */,
-				FA58E4B3220579D200B788F8 /* SearchResultViewController.m */,
+				FA15602322238268001B626B /* ContactsViewController.h */,
+				FA15602422238268001B626B /* ContactsViewController.m */,
+				FA15602022238249001B626B /* SearchResultViewController.h */,
+				FA15601E22238249001B626B /* SearchResultViewController.m */,
 			);
-			path = Addressbook;
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 		FA58E4A22205784400B788F8 /* Message */ = {
@@ -307,6 +310,8 @@
 		FAAE69862204376A005EFFAF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8BD194111FE105AE00062E0A /* MLLabelUtil.h */,
+				8BD194121FE105AE00062E0A /* MLLabelUtil.m */,
 				FAAE698722043787005EFFAF /* MomentUtil.h */,
 				FAAE698822043787005EFFAF /* MomentUtil.m */,
 			);
@@ -324,7 +329,6 @@
 				8B3BA0A71FDFE1BF00407D25 /* Sources */,
 				8B3BA0A81FDFE1BF00407D25 /* Frameworks */,
 				8B3BA0A91FDFE1BF00407D25 /* Resources */,
-				996CB24BE021F17B0E5069EB /* [CP] Embed Pods Frameworks */,
 				5516B2761DE141263583EE32 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -408,31 +412,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MomentKit/Pods-MomentKit-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MomentKit/Pods-MomentKit-resources.sh",
+				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MomentKit/Pods-MomentKit-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		996CB24BE021F17B0E5069EB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MomentKit/Pods-MomentKit-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MomentKit/Pods-MomentKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -452,19 +443,20 @@
 				8B3BA1581FDFE91400407D25 /* MomentViewController.m in Sources */,
 				FA58E4AD2205784500B788F8 /* MineViewController.m in Sources */,
 				8BF765791FE2272A0064EC94 /* MMImageListView.m in Sources */,
-				FA58E4AB2205784500B788F8 /* AddressBookViewController.m in Sources */,
 				8B3BA0B31FDFE1BF00407D25 /* AppDelegate.m in Sources */,
+				FA15602122238249001B626B /* SearchResultViewController.m in Sources */,
 				FA58E4AC2205784500B788F8 /* MessageViewController.m in Sources */,
 				8B3BA15A1FDFE91400407D25 /* Moment.m in Sources */,
 				FA58E4922205490700B788F8 /* WKWebViewController.m in Sources */,
 				8BF7657C1FE227450064EC94 /* MMImagePreviewView.m in Sources */,
+				FA15602522238268001B626B /* ContactsViewController.m in Sources */,
 				FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */,
 				8B3BA1351FDFE72300407D25 /* MainViewController.m in Sources */,
 				FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */,
 				8BE52D151FE35CC200B305C2 /* MMOperateMenuView.m in Sources */,
 				8B3BA0B01FDFE1BF00407D25 /* main.m in Sources */,
 				8B3BA1591FDFE91400407D25 /* Comment.m in Sources */,
-				FA58E4B4220579D200B788F8 /* SearchResultViewController.m in Sources */,
+				FA15603122239686001B626B /* MMLocationViewController.m in Sources */,
 				8BF765761FE2270C0064EC94 /* MomentCell.m in Sources */,
 				FA58E4B722058AB500B788F8 /* NSString+Letter.m in Sources */,
 			);

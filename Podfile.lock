@@ -1,33 +1,21 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
-    - AFNetworking/NSURLSession
+  - AMap3DMap (6.7.0):
+    - AMapFoundation (~> 1.5)
+  - AMapFoundation (1.5.6)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - MJRefresh (3.1.15.7)
   - MLLabel (1.10.5)
   - MMWebView (1.1)
-  - SDWebImage (4.4.4):
-    - SDWebImage/Core (= 4.4.4)
-  - SDWebImage/Core (4.4.4)
+  - SDWebImage (4.4.5):
+    - SDWebImage/Core (= 4.4.5)
+  - SDWebImage/Core (4.4.5)
   - UUActionSheet (1.7)
   - UUButton (1.1)
 
 DEPENDENCIES:
-  - AFNetworking
+  - AMap3DMap
   - FMDB
   - MJRefresh
   - MLLabel
@@ -36,16 +24,29 @@ DEPENDENCIES:
   - UUActionSheet
   - UUButton
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AMap3DMap
+    - AMapFoundation
+    - FMDB
+    - MJRefresh
+    - MLLabel
+    - MMWebView
+    - SDWebImage
+    - UUActionSheet
+    - UUButton
+
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AMap3DMap: 7bb992e6bfb99e34e6c7a368958dde9d743a23f1
+  AMapFoundation: 20fce2a12cd152e1092afdd04379cdac21932185
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   MLLabel: d76124055a2205e7f76878e62cd06ba925ba0c97
   MMWebView: 4d7c3789bc558e615bed91e9fb3e1a2a62a514ad
-  SDWebImage: c00ec18ab25d10e5ffac109b0f78d1b4341c9691
+  SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
   UUActionSheet: a73fb593b835e66f679e51c9ccdf470070475c60
   UUButton: 9a19bbe0c812a6920de21da8acca7a2d0bad52da
 
-PODFILE CHECKSUM: 4ec26f0ef436e5e155d15eccef029edc944b0855
+PODFILE CHECKSUM: 57f6860b10b79aa8018baaea58b70a4049a61cf7
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.6.0

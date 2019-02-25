@@ -22,7 +22,7 @@
 @interface MMImageView : UIImageView
 
 // 点击小图
-@property (nonatomic, copy) void (^tapSmallView)(MMImageView *imageView);
+@property (nonatomic, copy) void (^clickHandler)(MMImageView *imageView);
 
 @end
 

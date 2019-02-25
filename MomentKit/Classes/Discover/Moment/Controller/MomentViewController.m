@@ -8,16 +8,17 @@
 
 #import "MomentViewController.h"
 #import "WKWebViewController.h"
+#import "MMLocationViewController.h"
 #import "MomentCell.h"
 #import "MomentUtil.h"
 
 @interface MomentViewController ()<UITableViewDelegate,UITableViewDataSource,UUActionSheetDelegate,MomentCellDelegate>
 
-@property (nonatomic, strong) NSMutableArray *momentList;
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIView *tableHeaderView;
-@property (nonatomic, strong) UIImageView *coverImageView;
-@property (nonatomic, strong) UIImageView *headImageView;
+@property (nonatomic, strong) NSMutableArray * momentList;
+@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) UIView * tableHeaderView;
+@property (nonatomic, strong) MMImageView * coverImageView;
+@property (nonatomic, strong) MMImageView * avatarImageView;
 
 @end
 
@@ -45,32 +46,20 @@
 - (void)setUpUI
 {
     // 封面
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -k_top_height, k_screen_width, 270)];
-    imageView.backgroundColor = [UIColor lightGrayColor];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.contentScaleFactor = [[UIScreen mainScreen] scale];
-    imageView.clipsToBounds = YES;
-    imageView.userInteractionEnabled = YES;
+    MMImageView * imageView = [[MMImageView alloc] initWithFrame:CGRectMake(0, -k_top_height, k_screen_width, 270)];
     imageView.image = [UIImage imageNamed:@"moment_cover"];
     self.coverImageView = imageView;
     // 用户头像
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(k_screen_width-85, self.coverImageView.bottom-40, 75, 75)];
-    imageView.backgroundColor = [UIColor lightGrayColor];
+    imageView = [[MMImageView alloc] initWithFrame:CGRectMake(k_screen_width-85, self.coverImageView.bottom-40, 75, 75)];
     imageView.layer.borderColor = [[UIColor whiteColor] CGColor];
     imageView.layer.borderWidth = 2;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.contentScaleFactor = [[UIScreen mainScreen] scale];
-    imageView.clipsToBounds = YES;
-    imageView.userInteractionEnabled = YES;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.image = [UIImage imageNamed:@"moment_head"];
-    self.headImageView = imageView;
+    self.avatarImageView = imageView;
     // 表头
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, 270)];
-    view.backgroundColor = [UIColor clearColor];
     view.userInteractionEnabled = YES;
     [view addSubview:self.coverImageView];
-    [view addSubview:self.headImageView];
+    [view addSubview:self.avatarImageView];
     self.tableHeaderView = view;
     // 表格
     UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, k_screen_height-k_top_height)];
@@ -81,11 +70,11 @@
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.estimatedRowHeight = 0;
-    tableView.tableFooterView = [UIView new];
     tableView.tableHeaderView = self.tableHeaderView;
+    tableView.tableFooterView = [UIView new];
+    [self.view addSubview:tableView];
     self.tableView = tableView;
-    [self.view addSubview:self.tableView];
-    // 刷新
+    // 上拉加载更多
     MJRefreshBackNormalFooter * footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         Moment * moment = [self.momentList lastObject];
         NSArray * tempList = [MomentUtil getMomentList:moment.pk pageNum:10];
@@ -138,6 +127,12 @@
             [self presentViewController:alert animated:YES completion:nil];
             break;
         }
+        case MMOperateTypeLocation: // 位置
+        {
+            MMLocationViewController * controller = [[MMLocationViewController alloc] init];
+            controller.moment = cell.moment;;
+            [self.navigationController pushViewController:controller animated:YES];
+        }
         case MMOperateTypeLike: // 点赞
         {
             // data
@@ -165,7 +160,9 @@
         case MMOperateTypeFull: // 全文/收起
         {
             NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            if (indexPath) {
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
             break;
         }
         default:
@@ -254,9 +251,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor whiteColor];
     }
+    cell.tag = indexPath.row;
     cell.moment = [self.momentList objectAtIndex:indexPath.row];
     cell.delegate = self;
-    cell.tag = indexPath.row;
     return cell;
 }
 
@@ -268,7 +265,7 @@
     return moment.rowHeight;
 }
 
-#pragma mark - UITableViewDelegate
+#pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     NSIndexPath * indexPath =  [self.tableView indexPathForRowAtPoint:CGPointMake(scrollView.contentOffset.x, scrollView.contentOffset.y)];
