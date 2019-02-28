@@ -176,7 +176,7 @@
     } else {
         MUser * user = [[self.userList objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         label.text = user.name;
-        [imageView sd_setImageWithURL:[NSURL URLWithString:user.portrait] placeholderImage:nil];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:user.portrait] placeholderImage:[UIImage imageNamed:@"mine_head"]];
     }
     return cell;
 }

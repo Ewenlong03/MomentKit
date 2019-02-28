@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Message.h"
 
-//#### 对话controller
 @interface MessageViewController : UIViewController
 
 @end
 
-//#### 对话cell
 @interface MessageCell : UITableViewCell
 
 @property (nonatomic, strong) Message * message;

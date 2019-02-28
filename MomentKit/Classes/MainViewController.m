@@ -28,6 +28,11 @@
     self.tabBar.tintColor = [UIColor colorWithRed:14.0/255.0 green:178.0/255.0 blue:10.0/255.0 alpha:1.0];
     [self.tabBar setBackgroundImage:[Utility imageWithRenderColor:[UIColor whiteColor] renderSize:CGSizeMake(3, 3)]];
 
+    // 初始化
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [MomentUtil initMomentData];
+    });
+    
     // 控制器
     MessageViewController * messageVC = [[MessageViewController alloc] init];
     ContactsViewController * contactsVC = [[ContactsViewController alloc] init];
@@ -59,10 +64,6 @@
         [viewControllers addObject:navigation];
     }
     self.viewControllers = viewControllers;
-    // 初始化
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [MomentUtil initMomentData];
-    });
 }
 
 #pragma mark -

@@ -7,6 +7,7 @@ target 'MomentKit' do
     pod "FMDB"
     pod "MLLabel"
     pod "AMap3DMap"
+    pod "UMengAnalytics-NO-IDFA"
     pod "MMWebView"
     pod "UUButton"
     pod "UUActionSheet"

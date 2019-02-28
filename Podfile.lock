@@ -11,6 +11,7 @@ PODS:
   - SDWebImage (4.4.5):
     - SDWebImage/Core (= 4.4.5)
   - SDWebImage/Core (4.4.5)
+  - UMengAnalytics-NO-IDFA (4.2.5)
   - UUActionSheet (1.7)
   - UUButton (1.1)
 
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - MLLabel
   - MMWebView
   - SDWebImage
+  - UMengAnalytics-NO-IDFA
   - UUActionSheet
   - UUButton
 
@@ -33,6 +35,7 @@ SPEC REPOS:
     - MLLabel
     - MMWebView
     - SDWebImage
+    - UMengAnalytics-NO-IDFA
     - UUActionSheet
     - UUButton
 
@@ -44,9 +47,10 @@ SPEC CHECKSUMS:
   MLLabel: d76124055a2205e7f76878e62cd06ba925ba0c97
   MMWebView: 4d7c3789bc558e615bed91e9fb3e1a2a62a514ad
   SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   UUActionSheet: a73fb593b835e66f679e51c9ccdf470070475c60
   UUButton: 9a19bbe0c812a6920de21da8acca7a2d0bad52da
 
-PODFILE CHECKSUM: 57f6860b10b79aa8018baaea58b70a4049a61cf7
+PODFILE CHECKSUM: 0c31d1d849a7c344ad05e0ddcf70be7ad1e89344
 
 COCOAPODS: 1.6.0

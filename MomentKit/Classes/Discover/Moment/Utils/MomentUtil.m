@@ -13,15 +13,10 @@
 #pragma mark - 初始化
 + (void)initMomentData
 {
-    [MUser clearTable];
-    [Message clearTable];
-    [Comment clearTable];
-    [Moment clearTable];
-    
-//    NSInteger count = [[User findAll] count];
-//    if (count > 0) {
-//        return;
-//    }
+    NSInteger count = [[MUser findAll] count];
+    if (count > 0) {
+        return;
+    }
     // 名字
     NSArray * names = @[@"刘瑾",@"陈哲轩",@"安鑫",@"欧阳沁",@"韩艺",@"宋铭",@"童璐",@"祝子琪",@"林霜",@"赵星桐"];
     // 头像网络图片
