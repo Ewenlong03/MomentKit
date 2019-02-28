@@ -24,16 +24,18 @@
 		8BF765761FE2270C0064EC94 /* MomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF765751FE2270C0064EC94 /* MomentCell.m */; };
 		8BF765791FE2272A0064EC94 /* MMImageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF765781FE2272A0064EC94 /* MMImageListView.m */; };
 		8BF7657C1FE227450064EC94 /* MMImagePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7657B1FE227450064EC94 /* MMImagePreviewView.m */; };
-		FA15602122238249001B626B /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA15601E22238249001B626B /* SearchResultViewController.m */; };
-		FA15602522238268001B626B /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA15602422238268001B626B /* ContactsViewController.m */; };
 		FA15603122239686001B626B /* MMLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA15603022239686001B626B /* MMLocationViewController.m */; };
 		FA58E4922205490700B788F8 /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4912205490700B788F8 /* WKWebViewController.m */; };
-		FA58E4AC2205784500B788F8 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4A32205784400B788F8 /* MessageViewController.m */; };
 		FA58E4AD2205784500B788F8 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4A72205784400B788F8 /* MineViewController.m */; };
 		FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4AA2205784500B788F8 /* DiscoverViewController.m */; };
 		FA58E4B722058AB500B788F8 /* NSString+Letter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4B622058AB500B788F8 /* NSString+Letter.m */; };
 		FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4B922058B0900B788F8 /* JPinYinUtil.m */; };
-		FA58E4BD22058DD800B788F8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4BC22058DD800B788F8 /* User.m */; };
+		FAA79A012227DB00000716F8 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA799FD2227DB00000716F8 /* ContactsViewController.m */; };
+		FAA79A022227DB00000716F8 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA79A002227DB00000716F8 /* SearchResultViewController.m */; };
+		FAA79A072227DB12000716F8 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA79A052227DB12000716F8 /* MessageViewController.m */; };
+		FAA79A0A2227DB22000716F8 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA79A092227DB22000716F8 /* Message.m */; };
+		FAA79A1F2227E14E000716F8 /* MUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA79A1E2227E14E000716F8 /* MUser.m */; };
+		FAA79A222227E159000716F8 /* MPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA79A212227E159000716F8 /* MPicture.m */; };
 		FAAE6984220426FA005EFFAF /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE6982220426FA005EFFAF /* JKDBHelper.m */; };
 		FAAE6985220426FA005EFFAF /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE6983220426FA005EFFAF /* JKDBModel.m */; };
 		FAAE698922043787005EFFAF /* MomentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE698822043787005EFFAF /* MomentUtil.m */; };
@@ -75,16 +77,10 @@
 		8BF7657B1FE227450064EC94 /* MMImagePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMImagePreviewView.m; sourceTree = "<group>"; };
 		982B6162EEA9642E2354D7BD /* libPods-MomentKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MomentKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB5E3DF6E7A80D531DC9322 /* Pods-MomentKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomentKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MomentKit/Pods-MomentKit.debug.xcconfig"; sourceTree = "<group>"; };
-		FA15601E22238249001B626B /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
-		FA15602022238249001B626B /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
-		FA15602322238268001B626B /* ContactsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
-		FA15602422238268001B626B /* ContactsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		FA15602F22239686001B626B /* MMLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMLocationViewController.h; sourceTree = "<group>"; };
 		FA15603022239686001B626B /* MMLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMLocationViewController.m; sourceTree = "<group>"; };
 		FA58E4902205490700B788F8 /* WKWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewController.h; sourceTree = "<group>"; };
 		FA58E4912205490700B788F8 /* WKWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewController.m; sourceTree = "<group>"; };
-		FA58E4A32205784400B788F8 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
-		FA58E4A42205784400B788F8 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		FA58E4A62205784400B788F8 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		FA58E4A72205784400B788F8 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		FA58E4A92205784500B788F8 /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
@@ -93,8 +89,18 @@
 		FA58E4B622058AB500B788F8 /* NSString+Letter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Letter.m"; sourceTree = "<group>"; };
 		FA58E4B822058B0900B788F8 /* JPinYinUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPinYinUtil.h; sourceTree = "<group>"; };
 		FA58E4B922058B0900B788F8 /* JPinYinUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPinYinUtil.m; sourceTree = "<group>"; };
-		FA58E4BB22058DD800B788F8 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		FA58E4BC22058DD800B788F8 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		FAA799FD2227DB00000716F8 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		FAA799FE2227DB00000716F8 /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
+		FAA799FF2227DB00000716F8 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		FAA79A002227DB00000716F8 /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
+		FAA79A052227DB12000716F8 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		FAA79A062227DB12000716F8 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		FAA79A082227DB22000716F8 /* Message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		FAA79A092227DB22000716F8 /* Message.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		FAA79A1D2227E14E000716F8 /* MUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUser.h; sourceTree = "<group>"; };
+		FAA79A1E2227E14E000716F8 /* MUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUser.m; sourceTree = "<group>"; };
+		FAA79A202227E159000716F8 /* MPicture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPicture.h; sourceTree = "<group>"; };
+		FAA79A212227E159000716F8 /* MPicture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPicture.m; sourceTree = "<group>"; };
 		FAAE6980220426FA005EFFAF /* JKDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBModel.h; sourceTree = "<group>"; };
 		FAAE6981220426FA005EFFAF /* JKDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBHelper.h; sourceTree = "<group>"; };
 		FAAE6982220426FA005EFFAF /* JKDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBHelper.m; sourceTree = "<group>"; };
@@ -218,8 +224,10 @@
 				8B3BA1431FDFE91400407D25 /* Moment.m */,
 				8B3BA1401FDFE91400407D25 /* Comment.h */,
 				8B3BA1411FDFE91400407D25 /* Comment.m */,
-				FA58E4BB22058DD800B788F8 /* User.h */,
-				FA58E4BC22058DD800B788F8 /* User.m */,
+				FAA79A1D2227E14E000716F8 /* MUser.h */,
+				FAA79A1E2227E14E000716F8 /* MUser.m */,
+				FAA79A202227E159000716F8 /* MPicture.h */,
+				FAA79A212227E159000716F8 /* MPicture.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,10 +268,10 @@
 		FA15601C22238249001B626B /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				FA15602322238268001B626B /* ContactsViewController.h */,
-				FA15602422238268001B626B /* ContactsViewController.m */,
-				FA15602022238249001B626B /* SearchResultViewController.h */,
-				FA15601E22238249001B626B /* SearchResultViewController.m */,
+				FAA799FF2227DB00000716F8 /* ContactsViewController.h */,
+				FAA799FD2227DB00000716F8 /* ContactsViewController.m */,
+				FAA799FE2227DB00000716F8 /* SearchResultViewController.h */,
+				FAA79A002227DB00000716F8 /* SearchResultViewController.m */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -271,8 +279,8 @@
 		FA58E4A22205784400B788F8 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				FA58E4A42205784400B788F8 /* MessageViewController.h */,
-				FA58E4A32205784400B788F8 /* MessageViewController.m */,
+				FAA79A042227DB12000716F8 /* Controller */,
+				FAA79A032227DB12000716F8 /* Model */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -294,6 +302,24 @@
 				8B3BA13B1FDFE91400407D25 /* Moment */,
 			);
 			path = Discover;
+			sourceTree = "<group>";
+		};
+		FAA79A032227DB12000716F8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FAA79A082227DB22000716F8 /* Message.h */,
+				FAA79A092227DB22000716F8 /* Message.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FAA79A042227DB12000716F8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FAA79A062227DB12000716F8 /* MessageViewController.h */,
+				FAA79A052227DB12000716F8 /* MessageViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		FAAE697F220426EE005EFFAF /* JKDBModel */ = {
@@ -433,28 +459,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA58E4BD22058DD800B788F8 /* User.m in Sources */,
 				8B3BA1171FDFE63A00407D25 /* UIView+Geometry.m in Sources */,
+				FAA79A072227DB12000716F8 /* MessageViewController.m in Sources */,
 				8BD194131FE105AE00062E0A /* MLLabelUtil.m in Sources */,
 				FAAE6985220426FA005EFFAF /* JKDBModel.m in Sources */,
 				FAAE6984220426FA005EFFAF /* JKDBHelper.m in Sources */,
 				8B3BA16E1FDFEAFD00407D25 /* Utility.m in Sources */,
+				FAA79A222227E159000716F8 /* MPicture.m in Sources */,
 				FAAE698922043787005EFFAF /* MomentUtil.m in Sources */,
+				FAA79A012227DB00000716F8 /* ContactsViewController.m in Sources */,
 				8B3BA1581FDFE91400407D25 /* MomentViewController.m in Sources */,
 				FA58E4AD2205784500B788F8 /* MineViewController.m in Sources */,
 				8BF765791FE2272A0064EC94 /* MMImageListView.m in Sources */,
 				8B3BA0B31FDFE1BF00407D25 /* AppDelegate.m in Sources */,
-				FA15602122238249001B626B /* SearchResultViewController.m in Sources */,
-				FA58E4AC2205784500B788F8 /* MessageViewController.m in Sources */,
 				8B3BA15A1FDFE91400407D25 /* Moment.m in Sources */,
 				FA58E4922205490700B788F8 /* WKWebViewController.m in Sources */,
 				8BF7657C1FE227450064EC94 /* MMImagePreviewView.m in Sources */,
-				FA15602522238268001B626B /* ContactsViewController.m in Sources */,
+				FAA79A0A2227DB22000716F8 /* Message.m in Sources */,
 				FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */,
 				8B3BA1351FDFE72300407D25 /* MainViewController.m in Sources */,
+				FAA79A1F2227E14E000716F8 /* MUser.m in Sources */,
 				FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */,
 				8BE52D151FE35CC200B305C2 /* MMOperateMenuView.m in Sources */,
 				8B3BA0B01FDFE1BF00407D25 /* main.m in Sources */,
+				FAA79A022227DB00000716F8 /* SearchResultViewController.m in Sources */,
 				8B3BA1591FDFE91400407D25 /* Comment.m in Sources */,
 				FA15603122239686001B626B /* MMLocationViewController.m in Sources */,
 				8BF765761FE2270C0064EC94 /* MomentCell.m in Sources */,

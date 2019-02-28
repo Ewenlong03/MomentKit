@@ -13,12 +13,10 @@
 
 @interface MMImageListView ()
 
-// 图片数组
-@property (nonatomic, strong) NSArray *imageArray;
 // 图片视图数组
-@property (nonatomic, strong) NSMutableArray *imageViewsArray;
+@property (nonatomic, strong) NSMutableArray * imageViewsArray;
 // 预览视图
-@property (nonatomic, strong) MMImagePreviewView *previewView;
+@property (nonatomic, strong) MMImagePreviewView * previewView;
 
 @end
 
@@ -41,18 +39,7 @@
             [self addSubview:imageView];
         }
         // 预览视图
-        _previewView = [[MMImagePreviewView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        // 测试网络图片
-        _imageArray = [[NSMutableArray alloc] initWithObjects:
-                       @"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3110881033,2007189544&fm=26&gp=0.jpg",
-                       @"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2487114660,3715789872&fm=26&gp=0.jpg",
-                       @"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2022825927,4080151337&fm=26&gp=0.jpg",
-                       @"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3409408983,232289470&fm=27&gp=0.jpg",
-                       @"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1621006471,2082577216&fm=26&gp=0.jpg",
-                       @"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3737190694,876071200&fm=26&gp=0.jpg",
-                       @"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2927189981,1776495486&fm=27&gp=0.jpg",
-                       @"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3530818737,3303073876&fm=26&gp=0.jpg",
-                       @"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4107522323,2122317060&fm=26&gp=0.jpg", nil];        
+        _previewView = [[MMImagePreviewView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];      
     }
     return self;
 }
@@ -65,7 +52,7 @@
         imageView.hidden = YES;
     }
     // 图片区
-    NSInteger count = moment.fileCount;
+    NSInteger count = [moment.pictureList count];
     if (count == 0) {
         self.size = CGSizeZero;
         return;
@@ -87,7 +74,7 @@
         CGFloat imageY = rowNum * (kImageWidth + kImagePadding);
         CGRect frame = CGRectMake(imageX, imageY, kImageWidth, kImageWidth);
         
-        //单张图片需计算实际显示size
+        // 单张图片需计算实际显示size
         if (count == 1) {
             CGSize singleSize = [Utility getSingleSize:CGSizeMake(moment.singleWidth, moment.singleHeight)];
             frame = CGRectMake(0, 0, singleSize.width, singleSize.height);
@@ -95,7 +82,9 @@
         imageView = [self viewWithTag:1000+i];
         imageView.hidden = NO;
         imageView.frame = frame;
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[_imageArray objectAtIndex:i]]
+        // 赋值
+        MPicture * picture = [moment.pictureList objectAtIndex:i];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:picture.thumbnail]
                      placeholderImage:nil];
     }
     self.width = kTextWidth;
@@ -112,8 +101,8 @@
     // 清空
     [_previewView.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     // 添加子视图
-    NSInteger index = imageView.tag-1000;
-    NSInteger count = _moment.fileCount;
+    NSInteger index = imageView.tag - 1000;
+    NSInteger count = [_moment.pictureList count];
     CGRect convertRect;
     if (count == 1) {
         [_previewView.pageControl removeFromSuperview];

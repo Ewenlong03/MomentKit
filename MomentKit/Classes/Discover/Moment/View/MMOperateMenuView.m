@@ -91,9 +91,9 @@
     self.menuView.left = menu_left;
 }
 
-- (void)setIsPraise:(BOOL)isPraise
+- (void)setisLike:(BOOL)isLike
 {
-    if (isPraise) {
+    if (isLike) {
         [self.likeBtn setTitle:@"取消" forState:UIControlStateNormal];
     } else {
         [self.likeBtn setTitle:@"赞" forState:UIControlStateNormal];

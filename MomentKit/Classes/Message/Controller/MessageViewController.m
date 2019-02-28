@@ -198,8 +198,4 @@
     return _timeLabel;
 }
 
-@end
-
-@implementation Message
-
-@end
+@end 

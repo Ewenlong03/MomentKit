@@ -12,7 +12,7 @@
 
 + (NSArray *)transients
 {
-    return [NSArray arrayWithObjects:@"commentList", nil];
+    return [NSArray arrayWithObjects:@"commentList",@"likeList",@"pictureList", nil];
 }
 
 @end

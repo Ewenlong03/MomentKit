@@ -146,7 +146,7 @@ CGFloat lineSpacing = 5;
     }
     // 图片
     _imageListView.moment = moment;
-    if (moment.fileCount > 0) {
+    if ([moment.pictureList count] > 0) {
         _imageListView.origin = CGPointMake(_nameLab.left, bottom);
         bottom = _imageListView.bottom + kPaddingValue;
     }
@@ -168,7 +168,7 @@ CGFloat lineSpacing = 5;
     // 操作视图
     _menuView.frame = CGRectMake(k_screen_width-kOperateWidth-10, _timeLab.top-(kOperateHeight-kTimeLabelH)/2, kOperateWidth, kOperateHeight);
     _menuView.show = NO;
-    _menuView.isPraise = moment.isPraise;
+    _menuView.isLike = moment.isLike;
     // 处理评论/赞
     _commentView.frame = CGRectZero;
     _bgImageView.frame = CGRectZero;
@@ -177,10 +177,10 @@ CGFloat lineSpacing = 5;
     // 处理赞
     CGFloat top = 0;
     CGFloat width = k_screen_width - kRightMargin - _nameLab.left;
-    if (moment.praiseNameList.length) {
+    if ([moment.likeList count]) {
         MLLinkLabel * likeLabel = kMLLinkLabel();
         likeLabel.delegate = self;
-        likeLabel.attributedText = kMLLinkLabelAttributedText(moment.praiseNameList);
+        likeLabel.attributedText = kMLLinkLabelAttributedText(moment);
         CGSize attrStrSize = [likeLabel preferredSizeWithMaxWidth:kTextWidth];
         likeLabel.frame = CGRectMake(5, 8, attrStrSize.width, attrStrSize.height);
         [_commentView addSubview:likeLabel];

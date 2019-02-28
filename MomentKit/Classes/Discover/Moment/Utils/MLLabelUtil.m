@@ -7,6 +7,7 @@
 //
 
 #import "MLLabelUtil.h"
+#import "MomentUtil.h"
 
 @implementation MLLabelUtil
 
@@ -41,24 +42,28 @@ NSMutableAttributedString *kMLLinkLabelAttributedText(id object)
     NSMutableAttributedString *attributedText = nil;
     if ([object isKindOfClass:[Comment class]])
     {
-        Comment *comment = (Comment *)object;
-        if (comment.isReply) {
-            NSString *likeString  = [NSString stringWithFormat:@"LEA回复%@：%@",comment.userName,comment.text];
+        Comment * comment = (Comment *)object;
+        NSString * fromName = comment.fromUser.name;
+        NSString * toName = comment.toUser.name;
+        if (comment.toUser)
+        {
+            NSString * likeString  = [NSString stringWithFormat:@"%@回复%@：%@",fromName,toName,comment.text];
             attributedText = [[NSMutableAttributedString alloc] initWithString:likeString];
-            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:@"LEA"}
-                                    range:[likeString rangeOfString:@"LEA"]];
-            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:comment.userName}
-                                    range:[likeString rangeOfString:comment.userName]];
+            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:fromName}
+                                    range:[likeString rangeOfString:fromName]];
+            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:toName}
+                                    range:[likeString rangeOfString:toName]];
         } else {
-            NSString *likeString  = [NSString stringWithFormat:@"%@：%@",comment.userName,comment.text];
+            NSString *likeString  = [NSString stringWithFormat:@"%@：%@",fromName,comment.text];
             attributedText = [[NSMutableAttributedString alloc] initWithString:likeString];
-            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:comment.userName}
-                                    range:[likeString rangeOfString:comment.userName]];
+            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:fromName}
+                                    range:[likeString rangeOfString:fromName]];
         }
     }
-    if ([object isKindOfClass:[NSString class]])
+    if ([object isKindOfClass:[Moment class]])
     {
-        NSString *content = (NSString *)object;
+        Moment * moment = (Moment *)object;
+        NSString * content = [MomentUtil getLikeString:moment];
         NSString *likeString = [NSString stringWithFormat:@"[赞] %@",content];
         attributedText = [[NSMutableAttributedString alloc] initWithString:likeString];
         NSArray *nameList = [content componentsSeparatedByString:@"，"];
@@ -67,7 +72,7 @@ NSMutableAttributedString *kMLLinkLabelAttributedText(id object)
                                     range:[likeString rangeOfString:name]];
         }
         
-        //添加'赞'的图片
+        // 添加'赞'的图片
         NSRange range = NSMakeRange(0, 3);
         NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
         textAttachment.image = [UIImage imageNamed:@"moment_like_hl"];

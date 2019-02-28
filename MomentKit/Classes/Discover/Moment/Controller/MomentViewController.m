@@ -137,16 +137,21 @@
         {
             // data
             Moment * moment = cell.moment;
-            NSMutableArray * praiseList = [NSMutableArray arrayWithArray:[MomentUtil getPraiseList:moment.praiseNameList]];
-            if (moment.isPraise) {
-                moment.isPraise = 0;
-                [praiseList removeObject:@"LEA"];
+            MUser * user = [MUser findFirstByCriteria:@"WHERE type = 1"];
+            NSMutableArray * likeList = [NSMutableArray arrayWithArray:moment.likeList];
+            if (moment.isLike) {
+                moment.isLike = 0;
+                NSPredicate * predicate = [NSPredicate predicateWithFormat:@"type = 1"];
+                NSArray * result = [likeList filteredArrayUsingPredicate:predicate];
+                if ([result count]) {
+                    MUser * removeUser = [result firstObject];
+                    [likeList removeObject:removeUser];
+                }
             } else {
-                moment.isPraise = 1;
-                [praiseList addObject:@"LEA"];
+                moment.isLike = 1;
+                [likeList addObject:user];
             }
-            moment.praiseNameList = [MomentUtil getPraiseString:praiseList];
-            [moment update];
+            moment.likeList = likeList;
             // UI
             [self.momentList replaceObjectAtIndex:cell.tag withObject:moment];
             [self.tableView reloadData];

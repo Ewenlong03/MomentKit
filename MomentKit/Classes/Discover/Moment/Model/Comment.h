@@ -9,18 +9,18 @@
 //
 
 #import "JKDBModel.h"
+#import "MUser.h"
 
 @interface Comment : JKDBModel
 
 // 正文
 @property (nonatomic, copy) NSString * text;
-// 发布者名字
-@property (nonatomic, copy) NSString * userName;
-// 发布时间戳
-@property (nonatomic, assign) long long time;
-// 关联动态的PK
-@property (nonatomic, assign) int momentPk;
-// 回复
-@property (nonatomic, assign) BOOL isReply;
+// xxx: （来源）
+@property (nonatomic, strong) MUser * fromUser;
+// 回复:xxx （目标）
+@property (nonatomic, strong) MUser * toUser;
+
+
++ (NSArray *)transients;
 
 @end

@@ -15,7 +15,7 @@
 // 显示|隐藏
 @property (nonatomic, assign) BOOL show;
 // 是否已赞
-@property (nonatomic, assign) BOOL isPraise;
+@property (nonatomic, assign) BOOL isLike;
 // 赞|评论
 @property (nonatomic, copy) void (^operateMenu)(MMOperateType operateType);
 

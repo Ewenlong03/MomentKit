@@ -10,4 +10,9 @@
 
 @implementation Comment
 
++ (NSArray *)transients
+{
+    return [NSArray arrayWithObjects:@"fromUser",@"toUser", nil];
+}
+
 @end

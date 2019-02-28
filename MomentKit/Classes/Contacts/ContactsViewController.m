@@ -10,7 +10,7 @@
 #import "SearchResultViewController.h"
 #import "NSString+Letter.h"
 #import "Utility.h"
-#import "User.h"
+#import "MUser.h"
 
 @interface ContactsViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -36,7 +36,7 @@
 - (void)configData
 {
     // 联系人数据 ↓↓
-    NSArray * users = [User findAll];
+    NSArray * users = [MUser findAll];
     // 分组和排序 ↓↓
     UILocalizedIndexedCollation * indexedCollation = [UILocalizedIndexedCollation currentCollation];
     self.sectionTitles = [[NSMutableArray alloc] initWithArray:[indexedCollation sectionTitles]];
@@ -48,7 +48,7 @@
         [newSectionsArray addObject:array];
     }
     // 插入数据
-    for (User * user in users)
+    for (MUser * user in users)
     {
         if (user.name.length <= 0) {
             NSMutableArray * sectionTitles = newSectionsArray.lastObject;
@@ -174,7 +174,7 @@
         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"message_%ld",indexPath.row]];
         label.text = [[self.userList objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     } else {
-        User * user = [[self.userList objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        MUser * user = [[self.userList objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         label.text = user.name;
         [imageView sd_setImageWithURL:[NSURL URLWithString:user.portrait] placeholderImage:nil];
     }

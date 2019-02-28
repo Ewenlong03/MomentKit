@@ -46,7 +46,7 @@
     UIView * bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height-k_top_height-bottomHeight, self.view.width, bottomHeight)];
     [self.view addSubview:bottomView];
     // 地标
-    UILabel * _locationLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, bottomView.width - 30, 60)];
+    UILabel * _locationLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, bottomView.width - 30, 60)];
     _locationLab.backgroundColor = [UIColor clearColor];
     _locationLab.font = [UIFont systemFontOfSize:12.0];
     _locationLab.textColor = [UIColor grayColor];

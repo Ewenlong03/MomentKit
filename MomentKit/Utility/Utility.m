@@ -55,7 +55,6 @@
     // 获取日期差
     NSDateComponents * delta = [calendar components:unit fromDate:curDate toDate:date options:0];
     NSInteger day = delta.day;
-    //
     NSString * temString = nil;
     if (day == 0) { // 今天
         [dateFormatter setDateFormat:@"HH:mm"];
@@ -72,25 +71,25 @@
 // 获取单张图片的实际size
 + (CGSize)getSingleSize:(CGSize)singleSize
 {
-    CGFloat max_width = k_screen_width - 150;
-    CGFloat max_height = k_screen_width - 130;
-    CGFloat image_width = singleSize.width;
-    CGFloat image_height = singleSize.height;
+    CGFloat maxWidth = k_screen_width - 150;
+    CGFloat maxHeight = k_screen_width - 130;
+    CGFloat width = singleSize.width;
+    CGFloat height = singleSize.height;
     
-    CGFloat result_width = 0;
-    CGFloat result_height = 0;
-    if (image_height/image_width > 3.0) {
-        result_height = max_height;
-        result_width = result_height/2;
-    }  else  {
-        result_width = max_width;
-        result_height = max_width*image_height/image_width;
-        if (result_height > max_height) {
-            result_height = max_height;
-            result_width = max_height*image_width/image_height;
+    CGFloat outWidth = 0;
+    CGFloat outHeight = 0;
+    if (height / width > 3.0) { // 细长图
+        outHeight = maxHeight;
+        outWidth = outHeight / 2.0;
+    } else  {
+        outWidth = maxWidth;
+        outHeight = maxWidth * height / width;
+        if (outHeight > maxHeight) {
+            outHeight = maxHeight;
+            outWidth = maxHeight * width / height;
         }
     }
-    return CGSizeMake(result_width, result_height);
+    return CGSizeMake(outWidth, outHeight);
 }
 
 // 颜色转图片

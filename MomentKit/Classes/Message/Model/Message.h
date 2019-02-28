@@ -1,27 +1,15 @@
 //
-//  MessageViewController.h
+//  Message.h
 //  MomentKit
 //
-//  Created by LEA on 2019/2/2.
+//  Created by 刘倩 on 2019/2/28.
 //  Copyright © 2019 LEA. All rights reserved.
 //
+//  对话Model
+//
 
-#import <UIKit/UIKit.h>
+#import "JKDBModel.h"
 
-//#### 对话controller
-@interface MessageViewController : UIViewController
-
-@end
-
-//#### 对话cell
-@class Message;
-@interface MessageCell : UITableViewCell
-
-@property (nonatomic, strong) Message * message;
-
-@end
-
-//#### 对话Model
 @interface Message : JKDBModel
 
 // 名字
@@ -34,3 +22,4 @@
 @property (nonatomic, assign) long long time;
 
 @end
+

@@ -6,9 +6,9 @@ target 'MomentKit' do
     pod "MJRefresh"
     pod "FMDB"
     pod "MLLabel"
+    pod "AMap3DMap"
     pod "MMWebView"
     pod "UUButton"
     pod "UUActionSheet"
-    pod "AMap3DMap"
     
 end

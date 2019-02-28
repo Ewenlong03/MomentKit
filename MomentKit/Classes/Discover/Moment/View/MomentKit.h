@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, MMOperateType) {
 #define kRightMargin        15
 
 // 内容视图宽度
-#define kTextWidth          (k_screen_width-60-25)
+#define kTextWidth          (k_screen_width - 60 - 25)
 // 正文字体
 #define kTextFont           [UIFont systemFontOfSize:17.0]
 // 评论字体

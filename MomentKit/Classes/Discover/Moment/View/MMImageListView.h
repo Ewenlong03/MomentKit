@@ -14,7 +14,7 @@
 @interface MMImageListView : UIView
 
 // 动态
-@property (nonatomic,strong) Moment *moment;
+@property (nonatomic,strong) Moment * moment;
 
 @end
 

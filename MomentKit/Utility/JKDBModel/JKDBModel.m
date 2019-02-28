@@ -482,6 +482,8 @@
                      [model setValue:[resultSet stringForColumn:columeName] forKey:columeName];
                  } else if ([columeType isEqualToString:SQLBLOB]) {
                      [model setValue:[resultSet dataForColumn:columeName] forKey:columeName];
+                 } else if ([columeType isEqualToString:SQLREAL]) {
+                     [model setValue:[NSNumber numberWithDouble:[resultSet doubleForColumn:columeName]] forKey:columeName];
                  } else {
                      [model setValue:[NSNumber numberWithLongLong:[resultSet longLongIntForColumn:columeName]] forKey:columeName];
                  }
