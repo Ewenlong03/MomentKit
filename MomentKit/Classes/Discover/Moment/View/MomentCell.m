@@ -197,11 +197,17 @@ CGFloat lineSpacing = 5;
         for (NSInteger i = 0; i < count; i ++) {
             CommentLabel * label = [[CommentLabel alloc] initWithFrame:CGRectMake(0, top, width, 0)];
             label.comment = [moment.commentList objectAtIndex:i];
+            // 点击评论
             [label setDidClickText:^(Comment *comment) {
-                if ([self.delegate respondsToSelector:@selector(didSelectComment:)]) {
-                    [self.delegate didSelectComment:comment];
+                // 当前moment相对tableView的frame
+                CGRect rect = [[label superview] convertRect:label.frame toView:self.superview];
+                [AppDelegate sharedInstance].convertRect = rect;
+                
+                if ([self.delegate respondsToSelector:@selector(didOperateMoment:selectComment:)]) {
+                    [self.delegate didOperateMoment:self selectComment:comment];
                 }
             }];
+            // 点击高亮
             [label setDidClickLinkText:^(MLLink *link, NSString *linkText) {
                 if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
                     [self.delegate didClickLink:link linkText:linkText];

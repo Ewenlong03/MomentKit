@@ -11,5 +11,6 @@ target 'MomentKit' do
     pod "MMWebView"
     pod "UUButton"
     pod "UUActionSheet"
-    
+    pod "YYText"
+
 end

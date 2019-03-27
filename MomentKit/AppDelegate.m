@@ -73,4 +73,9 @@
 }
 
 
++ (AppDelegate *)sharedInstance
+{
+    return ((AppDelegate *)[[UIApplication sharedApplication] delegate]);
+}
+
 @end

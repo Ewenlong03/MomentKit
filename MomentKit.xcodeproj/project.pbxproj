@@ -30,6 +30,8 @@
 		FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4AA2205784500B788F8 /* DiscoverViewController.m */; };
 		FA58E4B722058AB500B788F8 /* NSString+Letter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4B622058AB500B788F8 /* NSString+Letter.m */; };
 		FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4B922058B0900B788F8 /* JPinYinUtil.m */; };
+		FA7A7601224B0B5200A1A483 /* MomentConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A7600224B0B5200A1A483 /* MomentConstant.m */; };
+		FA9597762249D425007CD252 /* UIScrollView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9597752249D425007CD252 /* UIScrollView+Category.m */; };
 		FAA79A012227DB00000716F8 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA799FD2227DB00000716F8 /* ContactsViewController.m */; };
 		FAA79A022227DB00000716F8 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA79A002227DB00000716F8 /* SearchResultViewController.m */; };
 		FAA79A072227DB12000716F8 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA79A052227DB12000716F8 /* MessageViewController.m */; };
@@ -39,6 +41,7 @@
 		FAAE6984220426FA005EFFAF /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE6982220426FA005EFFAF /* JKDBHelper.m */; };
 		FAAE6985220426FA005EFFAF /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE6983220426FA005EFFAF /* JKDBModel.m */; };
 		FAAE698922043787005EFFAF /* MomentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE698822043787005EFFAF /* MomentUtil.m */; };
+		FABE69D82248C21600E574D3 /* MMCommentInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE69D72248C21600E574D3 /* MMCommentInputView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +69,6 @@
 		8B3BA16D1FDFEAFD00407D25 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		8BD194111FE105AE00062E0A /* MLLabelUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLLabelUtil.h; sourceTree = "<group>"; };
 		8BD194121FE105AE00062E0A /* MLLabelUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLLabelUtil.m; sourceTree = "<group>"; };
-		8BD194151FE1086C00062E0A /* MomentKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentKit.h; sourceTree = "<group>"; };
 		8BE52D131FE35CC200B305C2 /* MMOperateMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMOperateMenuView.h; sourceTree = "<group>"; };
 		8BE52D141FE35CC200B305C2 /* MMOperateMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMOperateMenuView.m; sourceTree = "<group>"; };
 		8BF765741FE2270C0064EC94 /* MomentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentCell.h; sourceTree = "<group>"; };
@@ -89,6 +91,11 @@
 		FA58E4B622058AB500B788F8 /* NSString+Letter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Letter.m"; sourceTree = "<group>"; };
 		FA58E4B822058B0900B788F8 /* JPinYinUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPinYinUtil.h; sourceTree = "<group>"; };
 		FA58E4B922058B0900B788F8 /* JPinYinUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPinYinUtil.m; sourceTree = "<group>"; };
+		FA7A75FA224B089E00A1A483 /* MomentMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentMacros.h; sourceTree = "<group>"; };
+		FA7A75FF224B0B5200A1A483 /* MomentConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentConstant.h; sourceTree = "<group>"; };
+		FA7A7600224B0B5200A1A483 /* MomentConstant.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentConstant.m; sourceTree = "<group>"; };
+		FA9597742249D425007CD252 /* UIScrollView+Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Category.h"; sourceTree = "<group>"; };
+		FA9597752249D425007CD252 /* UIScrollView+Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Category.m"; sourceTree = "<group>"; };
 		FAA799FD2227DB00000716F8 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		FAA799FE2227DB00000716F8 /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
 		FAA799FF2227DB00000716F8 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
@@ -107,6 +114,8 @@
 		FAAE6983220426FA005EFFAF /* JKDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBModel.m; sourceTree = "<group>"; };
 		FAAE698722043787005EFFAF /* MomentUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentUtil.h; sourceTree = "<group>"; };
 		FAAE698822043787005EFFAF /* MomentUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentUtil.m; sourceTree = "<group>"; };
+		FABE69D62248C21600E574D3 /* MMCommentInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCommentInputView.h; sourceTree = "<group>"; };
+		FABE69D72248C21600E574D3 /* MMCommentInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMCommentInputView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +194,8 @@
 				8B3BA16D1FDFEAFD00407D25 /* Utility.m */,
 				8B3BA1151FDFE63A00407D25 /* UIView+Geometry.h */,
 				8B3BA1161FDFE63A00407D25 /* UIView+Geometry.m */,
+				FA9597742249D425007CD252 /* UIScrollView+Category.h */,
+				FA9597752249D425007CD252 /* UIScrollView+Category.m */,
 				FA58E4B522058AB500B788F8 /* NSString+Letter.h */,
 				FA58E4B622058AB500B788F8 /* NSString+Letter.m */,
 				FA58E4B822058B0900B788F8 /* JPinYinUtil.h */,
@@ -235,7 +246,9 @@
 		8B3BA1441FDFE91400407D25 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8BD194151FE1086C00062E0A /* MomentKit.h */,
+				FA7A75FA224B089E00A1A483 /* MomentMacros.h */,
+				FA7A75FF224B0B5200A1A483 /* MomentConstant.h */,
+				FA7A7600224B0B5200A1A483 /* MomentConstant.m */,
 				8BF765741FE2270C0064EC94 /* MomentCell.h */,
 				8BF765751FE2270C0064EC94 /* MomentCell.m */,
 				8BF765771FE2272A0064EC94 /* MMImageListView.h */,
@@ -244,6 +257,8 @@
 				8BF7657B1FE227450064EC94 /* MMImagePreviewView.m */,
 				8BE52D131FE35CC200B305C2 /* MMOperateMenuView.h */,
 				8BE52D141FE35CC200B305C2 /* MMOperateMenuView.m */,
+				FABE69D62248C21600E574D3 /* MMCommentInputView.h */,
+				FABE69D72248C21600E574D3 /* MMCommentInputView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -460,6 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B3BA1171FDFE63A00407D25 /* UIView+Geometry.m in Sources */,
+				FA9597762249D425007CD252 /* UIScrollView+Category.m in Sources */,
 				FAA79A072227DB12000716F8 /* MessageViewController.m in Sources */,
 				8BD194131FE105AE00062E0A /* MLLabelUtil.m in Sources */,
 				FAAE6985220426FA005EFFAF /* JKDBModel.m in Sources */,
@@ -477,6 +493,7 @@
 				8BF7657C1FE227450064EC94 /* MMImagePreviewView.m in Sources */,
 				FAA79A0A2227DB22000716F8 /* Message.m in Sources */,
 				FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */,
+				FABE69D82248C21600E574D3 /* MMCommentInputView.m in Sources */,
 				8B3BA1351FDFE72300407D25 /* MainViewController.m in Sources */,
 				FAA79A1F2227E14E000716F8 /* MUser.m in Sources */,
 				FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */,
@@ -485,6 +502,7 @@
 				FAA79A022227DB00000716F8 /* SearchResultViewController.m in Sources */,
 				8B3BA1591FDFE91400407D25 /* Comment.m in Sources */,
 				FA15603122239686001B626B /* MMLocationViewController.m in Sources */,
+				FA7A7601224B0B5200A1A483 /* MomentConstant.m in Sources */,
 				8BF765761FE2270C0064EC94 /* MomentCell.m in Sources */,
 				FA58E4B722058AB500B788F8 /* NSString+Letter.m in Sources */,
 			);

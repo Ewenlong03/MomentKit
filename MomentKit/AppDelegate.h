@@ -12,6 +12,10 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+// 用于记录当前点击的评论frame
+@property (nonatomic, assign) CGRect convertRect;
+
++ (AppDelegate *)sharedInstance;
 
 @end
 

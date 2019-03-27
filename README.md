@@ -48,7 +48,8 @@ PS：这些页面只是为了不让一级页面显得空，本控件主要是**�
 6. 支持数据库增删改查（`FMDB`+`JKDBModel`）；
 7. 支持上拉加载更多（`MJRefresh`）； 
 8. 支持点赞 | 取消点赞；
-9. 其他功能 > 未完待续；
+9. 支持评论、回复评论以及删除评论；
+10. 其他功能 > 未完待续；
 
 
 ## 效果图（动画）
@@ -61,6 +62,7 @@ PS：这些页面只是为了不让一级页面显得空，本控件主要是**�
 ![MomentKit](https://github.com/ChellyLau/MomentKit/blob/master/Screenshot/screenshot_1.png)
 ![MomentKit](https://github.com/ChellyLau/MomentKit/blob/master/Screenshot/screenshot_2.png)
 ![MomentKit](https://github.com/ChellyLau/MomentKit/blob/master/Screenshot/screenshot_3.png)
+![MomentKit](https://github.com/ChellyLau/MomentKit/blob/master/Screenshot/screenshot_4.png)
 
 
 ## 后记

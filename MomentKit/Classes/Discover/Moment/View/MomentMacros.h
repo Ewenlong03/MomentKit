@@ -1,19 +1,15 @@
 //
-//  MomentKit.h
+//  MomentMacros.h
 //  MomentKit
 //
-//  Created by LEA on 2017/12/13.
-//  Copyright © 2017年 LEA. All rights reserved.
+//  Created by LEA on 2019/3/27.
+//  Copyright © 2019 LEA. All rights reserved.
 //
 
-typedef NS_ENUM(NSInteger, MMOperateType) {
-    MMOperateTypeLike = 1,      // 点赞
-    MMOperateTypeComment,       // 评论
-    MMOperateTypeDelete,        // 删除
-    MMOperateTypeLocation,      // 位置
-    MMOperateTypeFull,          // 显示全文
-    MMOperateTypeProfile,       // 点击头像
-};
+// 弱引用
+#define WS(wSelf)           __weak typeof(self) wSelf = self
+// RGB颜色
+#define MMRGBColor(r,g,b)   [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
 // 头像视图的宽、高
 #define kAvatarWidth        40

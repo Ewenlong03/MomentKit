@@ -9,16 +9,23 @@
 #import "MomentViewController.h"
 #import "WKWebViewController.h"
 #import "MMLocationViewController.h"
+#import "MMCommentInputView.h"
 #import "MomentCell.h"
 #import "MomentUtil.h"
 
 @interface MomentViewController ()<UITableViewDelegate,UITableViewDataSource,UUActionSheetDelegate,MomentCellDelegate>
 
-@property (nonatomic, strong) NSMutableArray * momentList;
-@property (nonatomic, strong) UITableView * tableView;
-@property (nonatomic, strong) UIView * tableHeaderView;
-@property (nonatomic, strong) MMImageView * coverImageView;
-@property (nonatomic, strong) MMImageView * avatarImageView;
+@property (nonatomic, strong) NSMutableArray * momentList;  // 朋友圈动态列表
+@property (nonatomic, strong) UITableView * tableView; // 表格
+@property (nonatomic, strong) UIView * tableHeaderView; // 表头
+@property (nonatomic, strong) MMImageView * coverImageView; // 封面
+@property (nonatomic, strong) MMImageView * avatarImageView; // 当前用户头像
+@property (nonatomic, strong) MMCommentInputView * commentInputView; // 评论输入框
+@property (nonatomic, strong) MomentCell * operateCell; // 当前操作朋友圈动态
+@property (nonatomic, strong) Comment * operateComment; // 当前操作评论
+@property (nonatomic, strong) MUser * loginUser; // 当前用户
+@property (nonatomic, strong) NSIndexPath * selectedIndexPath; // 当前评论indexPath
+@property (nonatomic, assign) CGFloat keyboardHeight; // 键盘高度
 
 @end
 
@@ -31,19 +38,20 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"moment_camera"] style:UIBarButtonItemStylePlain target:self action:@selector(addMoment)];
     
-    [self setUpData];
-    [self setUpUI];
+    [self configData];
+    [self configUI];
 }
 
-#pragma mark - 测试数据
-- (void)setUpData
+#pragma mark - 模拟数据
+- (void)configData
 {
+    self.loginUser = [MUser findFirstByCriteria:@"WHERE type = 1"];
     self.momentList = [[NSMutableArray alloc] init];
     [self.momentList addObjectsFromArray:[MomentUtil getMomentList:0 pageNum:10]];
 }
 
 #pragma mark - UI
-- (void)setUpUI
+- (void)configUI
 {
     // 封面
     MMImageView * imageView = [[MMImageView alloc] initWithFrame:CGRectMake(0, -k_top_height, k_screen_width, 270)];
@@ -101,6 +109,46 @@
     NSLog(@"新增");
 }
 
+#pragma mark - 评论相关
+- (void)addComment:(NSString *)commentText
+{
+    Comment * comment = [[Comment alloc] init];
+    comment.text = commentText;
+    comment.fromUser = self.loginUser;
+    if (self.operateComment) { // 回复评论
+        comment.toUser = self.operateComment.fromUser;
+    }
+    [comment save];
+    // 更新评论列表
+    Moment * moment = self.operateCell.moment;
+    NSMutableArray * commentList = [[NSMutableArray alloc] initWithArray:moment.commentList];
+    [commentList addObject:comment];
+    moment.commentList = commentList;
+    self.operateCell.moment = moment;
+    // 刷新
+    [UIView performWithoutAnimation:^{
+        [self.tableView reloadRowsAtIndexPaths:@[self.selectedIndexPath]
+                              withRowAnimation:UITableViewRowAnimationNone];
+    }];
+}
+
+// 滚动table
+- (void)scrollForComment
+{
+    if (self.keyboardHeight > 0) {
+        CGRect rect = [AppDelegate sharedInstance].convertRect;
+        rect = [self.tableView convertRect:rect toView:nil];
+        CGFloat delta = self.commentInputView.ctTop - rect.origin.y - rect.size.height;
+        [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y - delta) animated:YES];
+    } else {
+        if(self.selectedIndexPath.section == self.momentList.count - 1){
+            [UIView performWithoutAnimation:^{
+                [self.tableView scrollToBottomAnimated:NO];
+            }];
+        }
+    }
+}
+
 #pragma mark - MomentCellDelegate
 - (void)didOperateMoment:(MomentCell *)cell operateType:(MMOperateType)operateType;
 {
@@ -137,7 +185,6 @@
         {
             // data
             Moment * moment = cell.moment;
-            MUser * user = [MUser findFirstByCriteria:@"WHERE type = 1"];
             NSMutableArray * likeList = [NSMutableArray arrayWithArray:moment.likeList];
             if (moment.isLike) {
                 moment.isLike = 0;
@@ -149,24 +196,40 @@
                 }
             } else {
                 moment.isLike = 1;
-                [likeList addObject:user];
+                [likeList addObject:self.loginUser];
             }
             moment.likeList = likeList;
-            // UI
             [self.momentList replaceObjectAtIndex:cell.tag withObject:moment];
-            [self.tableView reloadData];
+            // UI
+            NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+            if (indexPath) {
+                [UIView performWithoutAnimation:^{
+                    [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                          withRowAnimation:UITableViewRowAnimationNone];
+                }];
+            }
             break;
         }
-        case MMOperateTypeComment: // 评论
+        case MMOperateTypeComment: // 添加评论
         {
-            NSLog(@"评论");
+            self.operateCell = cell;
+            self.operateComment = nil;
+            
+            self.selectedIndexPath = [self.tableView indexPathForCell:cell];
+            CGRect rect = [self.tableView rectForRowAtIndexPath:self.selectedIndexPath];
+            [AppDelegate sharedInstance].convertRect = rect;
+            self.commentInputView.comment = nil;
+            [self.commentInputView show];
             break;
         }
         case MMOperateTypeFull: // 全文/收起
         {
             NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
             if (indexPath) {
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                [UIView performWithoutAnimation:^{
+                    [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                          withRowAnimation:UITableViewRowAnimationNone];
+                }];
             }
             break;
         }
@@ -176,9 +239,20 @@
 }
 
 // 选择评论
-- (void)didSelectComment:(Comment *)comment
+- (void)didOperateMoment:(MomentCell *)cell selectComment:(Comment *)comment
 {
-    NSLog(@"点击评论");
+    self.operateCell = cell;
+    self.operateComment = comment;
+    
+    if (comment.fromUser.type == 1) { // 删除自己的评论
+        UUActionSheet * sheet = [[UUActionSheet alloc] initWithTitle:@"删除我的评论" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:nil];
+        sheet.tag = MMDelCommentTag;
+        [sheet showInView:self.view.window];
+    } else { // 回复评论
+        self.selectedIndexPath = [self.tableView indexPathForCell:cell];
+        self.commentInputView.comment = comment;
+        [self.commentInputView show];
+    }
 }
 
 // 点击高亮文字
@@ -196,11 +270,8 @@
         }
         case MLLinkTypePhoneNumber: // 电话
         {
-            UUActionSheet * sheet = [[UUActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"%@可能是一个电话号码，你可以",link.linkValue]
-                                                                delegate:self
-                                                       cancelButtonTitle:@"取消"
-                                                  destructiveButtonTitle:@"呼叫"
-                                                       otherButtonTitles:@"复制号码",nil];
+            UUActionSheet * sheet = [[UUActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"%@可能是一个电话号码，你可以",link.linkValue] delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"呼叫" otherButtonTitles:@"复制号码",nil];
+            sheet.tag = MMHandlePhoneTag;
             [sheet showInView:self.view.window];
             break;
         }
@@ -221,17 +292,43 @@
 #pragma mark - UUActionSheetDelegate
 - (void)actionSheet:(UUActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSString * title = actionSheet.title;
-    NSString * subString = [title substringWithRange:NSMakeRange(0, [title length] - 13)];
-    if (buttonIndex == 0) { // 拨打电话
-        UIWebView * webView = [[UIWebView alloc] init];
-        NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",subString]];
-        [webView loadRequest:[NSURLRequest requestWithURL:url]];
-        [self.view addSubview:webView];
-    } else if (buttonIndex == 1) { // 复制
-        [[UIPasteboard generalPasteboard] setPersistent:YES];
-        [[UIPasteboard generalPasteboard] setValue:subString forPasteboardType:[UIPasteboardTypeListString objectAtIndex:0]];
-    } else { // 取消
+    if (actionSheet.tag == MMHandlePhoneTag) { // 电话
+        NSString * title = actionSheet.title;
+        NSString * subString = [title substringWithRange:NSMakeRange(0, [title length] - 13)];
+        if (buttonIndex == 0) { // 拨打电话
+            UIWebView * webView = [[UIWebView alloc] init];
+            NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",subString]];
+            [webView loadRequest:[NSURLRequest requestWithURL:url]];
+            [self.view addSubview:webView];
+        } else if (buttonIndex == 1) { // 复制
+            [[UIPasteboard generalPasteboard] setPersistent:YES];
+            [[UIPasteboard generalPasteboard] setValue:subString forPasteboardType:[UIPasteboardTypeListString objectAtIndex:0]];
+        } else { // 取消
+            
+        }
+    } else if (actionSheet.tag == MMDelCommentTag) { // 删除自己的评论
+        if (buttonIndex == 0)
+        {
+            // 移除Moment的评论
+            Moment * moment = self.operateCell.moment;
+            NSMutableArray * tempList = [NSMutableArray arrayWithArray:moment.commentList];
+            [tempList removeObject:self.operateComment];
+            moment.commentList = tempList;
+            // 移除数据库
+            [self.operateComment deleteObject];
+            // 刷新
+            [self.momentList replaceObjectAtIndex:self.operateCell.tag withObject:moment];
+            NSIndexPath * indexPath = [self.tableView indexPathForCell:self.operateCell];
+            if (indexPath) {
+                [UIView performWithoutAnimation:^{
+                    [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                          withRowAnimation:UITableViewRowAnimationNone];
+                }];
+            }
+        } else { // 取消
+            
+        }
+    } else {
         
     }
 }
@@ -276,6 +373,24 @@
     NSIndexPath * indexPath =  [self.tableView indexPathForRowAtPoint:CGPointMake(scrollView.contentOffset.x, scrollView.contentOffset.y)];
     MomentCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
     cell.menuView.show = NO;
+}
+
+#pragma mark - lazy load
+- (MMCommentInputView *)commentInputView
+{
+    if (!_commentInputView) {
+        _commentInputView = [[MMCommentInputView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+      
+        WS(wSelf);
+        [_commentInputView setMMCompleteInputTextBlock:^(NSString *commentText) { // 完成文本输入
+            [wSelf addComment:commentText];
+        }];
+        [_commentInputView setMMContainerWillChangeFrameBlock:^(CGFloat keyboardHeight) { // 输入框监听
+            wSelf.keyboardHeight = keyboardHeight;
+            [wSelf scrollForComment];
+        }];
+    }
+    return _commentInputView;
 }
 
 #pragma mark -

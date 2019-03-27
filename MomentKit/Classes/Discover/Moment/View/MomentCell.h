@@ -11,7 +11,6 @@
 #import <UIKit/UIKit.h>
 #import "MMOperateMenuView.h"
 #import "MMImageListView.h"
-#import "MomentKit.h"
 #import "Moment.h"
 #import "Comment.h"
 
@@ -58,7 +57,7 @@
 // 点击头像|删除|点赞|评论|全文/收起
 - (void)didOperateMoment:(MomentCell *)cell operateType:(MMOperateType)operateType;
 // 选择评论
-- (void)didSelectComment:(Comment *)comment;
+- (void)didOperateMoment:(MomentCell *)cell selectComment:(Comment *)comment;
 // 点击高亮文字
 - (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText;
 
