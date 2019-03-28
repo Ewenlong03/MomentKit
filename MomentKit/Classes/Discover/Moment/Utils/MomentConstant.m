@@ -20,3 +20,9 @@ CGFloat const MarginHeight = 15;
 CGFloat const MMHandlePhoneTag = 1000;
 // 删除评论
 CGFloat const MMDelCommentTag = 1001;
+
+// 延迟执行
+void GCD_AFTER(CGFloat time,dispatch_block_t block)
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), block);
+}

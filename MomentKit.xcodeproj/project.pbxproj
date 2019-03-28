@@ -246,9 +246,6 @@
 		8B3BA1441FDFE91400407D25 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FA7A75FA224B089E00A1A483 /* MomentMacros.h */,
-				FA7A75FF224B0B5200A1A483 /* MomentConstant.h */,
-				FA7A7600224B0B5200A1A483 /* MomentConstant.m */,
 				8BF765741FE2270C0064EC94 /* MomentCell.h */,
 				8BF765751FE2270C0064EC94 /* MomentCell.m */,
 				8BF765771FE2272A0064EC94 /* MMImageListView.h */,
@@ -351,6 +348,9 @@
 		FAAE69862204376A005EFFAF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FA7A75FA224B089E00A1A483 /* MomentMacros.h */,
+				FA7A75FF224B0B5200A1A483 /* MomentConstant.h */,
+				FA7A7600224B0B5200A1A483 /* MomentConstant.m */,
 				8BD194111FE105AE00062E0A /* MLLabelUtil.h */,
 				8BD194121FE105AE00062E0A /* MLLabelUtil.m */,
 				FAAE698722043787005EFFAF /* MomentUtil.h */,

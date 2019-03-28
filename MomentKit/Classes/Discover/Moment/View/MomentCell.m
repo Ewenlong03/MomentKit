@@ -236,8 +236,7 @@ CGFloat lineSpacing = 5;
 - (void)locationClicked:(UIButton *)sender
 {
     _locationBtn.titleLabel.backgroundColor = kHLBgColor;
-    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
-    dispatch_after(when, dispatch_get_main_queue(), ^{
+    GCD_AFTER(0.3, ^{  // 延迟执行
         _locationBtn.titleLabel.backgroundColor = [UIColor clearColor];
         if ([self.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
             [self.delegate didOperateMoment:self operateType:MMOperateTypeLocation];
@@ -249,8 +248,7 @@ CGFloat lineSpacing = 5;
 - (void)fullTextClicked:(UIButton *)sender
 {
     _showAllBtn.titleLabel.backgroundColor = kHLBgColor;
-    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
-    dispatch_after(when, dispatch_get_main_queue(), ^{
+    GCD_AFTER(0.3, ^{  // 延迟执行
         _showAllBtn.titleLabel.backgroundColor = [UIColor clearColor];
         _moment.isFullText = !_moment.isFullText;
         [_moment update];
@@ -264,8 +262,7 @@ CGFloat lineSpacing = 5;
 - (void)deleteClicked:(UIButton *)sender
 {
     _deleteBtn.titleLabel.backgroundColor = [UIColor lightGrayColor];
-    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
-    dispatch_after(when, dispatch_get_main_queue(), ^{
+    GCD_AFTER(0.3, ^{  // 延迟执行
         _deleteBtn.titleLabel.backgroundColor = [UIColor clearColor];
         if ([self.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
             [self.delegate didOperateMoment:self operateType:MMOperateTypeDelete];
@@ -323,8 +320,7 @@ CGFloat lineSpacing = 5;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC));
-    dispatch_after(when, dispatch_get_main_queue(), ^{
+    GCD_AFTER(0.3, ^{  // 延迟执行
         self.backgroundColor = [UIColor clearColor];
         if (self.didClickText) {
             self.didClickText(_comment);

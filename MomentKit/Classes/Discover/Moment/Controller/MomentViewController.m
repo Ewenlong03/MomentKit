@@ -78,6 +78,8 @@
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.estimatedRowHeight = 0;
+    tableView.estimatedSectionHeaderHeight = 0;
+    tableView.estimatedSectionFooterHeight = 0;
     tableView.tableHeaderView = self.tableHeaderView;
     tableView.tableFooterView = [UIView new];
     [self.view addSubview:tableView];
@@ -137,9 +139,11 @@
 {
     if (self.keyboardHeight > 0) {
         CGRect rect = [AppDelegate sharedInstance].convertRect;
+        // 转换成window坐标
         rect = [self.tableView convertRect:rect toView:nil];
         CGFloat delta = self.commentInputView.ctTop - rect.origin.y - rect.size.height;
-        [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y - delta) animated:YES];
+        CGFloat offsetY = self.tableView.contentOffset.y - delta;
+        [self.tableView setContentOffset:CGPointMake(0, offsetY) animated:YES];
     } else {
         if(self.selectedIndexPath.section == self.momentList.count - 1){
             [UIView performWithoutAnimation:^{

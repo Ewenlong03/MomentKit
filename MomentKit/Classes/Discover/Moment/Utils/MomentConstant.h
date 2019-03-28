@@ -30,3 +30,5 @@ FOUNDATION_EXTERN CGFloat const MMHandlePhoneTag;
 // 删除评论
 FOUNDATION_EXTERN CGFloat const MMDelCommentTag;
 
+// 延迟执行
+void GCD_AFTER(CGFloat time,dispatch_block_t block);

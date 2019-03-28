@@ -9,6 +9,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UUButton.h>
 
 @interface MMOperateMenuView : UIView
 
@@ -18,5 +19,12 @@
 @property (nonatomic, assign) BOOL isLike;
 // 赞|评论
 @property (nonatomic, copy) void (^operateMenu)(MMOperateType operateType);
+
+@end
+
+@interface MMOperateMenuButton : UUButton
+
+// 动画
+@property (nonatomic, readwrite, assign) BOOL allowAnimation;
 
 @end

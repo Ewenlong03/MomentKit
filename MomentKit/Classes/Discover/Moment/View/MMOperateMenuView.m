@@ -7,7 +7,6 @@
 //
 
 #import "MMOperateMenuView.h"
-#import <UUButton.h>
 
 @interface MMOperateMenuView ()
 
@@ -38,15 +37,14 @@
     view.backgroundColor = [UIColor colorWithRed:70.0/255.0 green:74.0/255.0 blue:75.0/255.0 alpha:1.0];
     view.layer.cornerRadius = 4.0;
     view.layer.masksToBounds = YES;
+    [self addSubview:view];
     // 点赞
-    UUButton *btn = [[UUButton alloc] initWithFrame:CGRectMake(0, 0, view.width/2, kOperateHeight)];
-    btn.backgroundColor = [UIColor clearColor];
-    btn.spacing = 3;
+    MMOperateMenuButton *btn = [[MMOperateMenuButton alloc] initWithFrame:CGRectMake(0, 0, view.width/2, kOperateHeight)];
     btn.tag = MMOperateTypeLike;
-    btn.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    btn.allowAnimation = YES;
     [btn setTitle:@"赞" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"moment_like"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"moment_like_hl"] forState:UIControlStateHighlighted];
     [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:btn];
     self.likeBtn = btn;
@@ -55,26 +53,22 @@
     line.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
     [view addSubview:line];
     // 评论
-    btn = [[UUButton alloc] initWithFrame:CGRectMake(line.right, 0, btn.width, kOperateHeight)];
-    btn.backgroundColor = [UIColor clearColor];
-    btn.spacing = 3;
+    btn = [[MMOperateMenuButton alloc] initWithFrame:CGRectMake(line.right, 0, btn.width, kOperateHeight)];
     btn.tag = MMOperateTypeComment;
-    btn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [btn setTitle:@"评论" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"moment_comment"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"moment_comment_hl"] forState:UIControlStateHighlighted];
     [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:btn];
     self.commentBtn = btn;
     self.menuView = view;
-    [self addSubview:self.menuView];
     // 菜单操作按钮
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(kOperateWidth-kOperateBtnWidth, 0, kOperateBtnWidth, kOperateHeight)];
+    UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(kOperateWidth-kOperateBtnWidth, 0, kOperateBtnWidth, kOperateHeight)];
     [button setImage:[UIImage imageNamed:@"moment_operate"] forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:@"moment_operate_hl"] forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(menuClick) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:button];
     self.menuBtn = button;
-    [self addSubview:self.menuBtn];
 }
 
 #pragma mark - 显示/不显示
@@ -119,9 +113,8 @@
 - (void)buttonClick:(UIButton *)sender
 {
     [self menuClick];
-    // 刷新UI
-    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
-    dispatch_after(when, dispatch_get_main_queue(), ^{
+    // 0.1秒刷新UI
+    GCD_AFTER(0.1, ^{
         MMOperateType operateType = sender.tag;
         if (self.operateMenu) {
             self.operateMenu(operateType);
@@ -131,3 +124,57 @@
 
 @end
 
+
+@interface MMOperateMenuButton ()
+
+@property (nonatomic, strong) UIImageView * likeAnimationView;
+
+@end
+
+@implementation MMOperateMenuButton
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self == [super initWithFrame:frame]) {
+        self.spacing = 3;
+        self.backgroundColor = [UIColor clearColor];
+        self.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
+        _allowAnimation = NO;
+        // 点赞动画
+        UIImageView * imageView = [[UIImageView alloc] init];
+        imageView.hidden = YES;
+        self.likeAnimationView = imageView;
+        [self addSubview:imageView];
+    }
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.likeAnimationView.frame = self.imageView.frame;
+}
+
+// 监听事件
+- (void)sendAction:(SEL)action to:(nullable id)target forEvent:(nullable UIEvent *)event
+{
+    if (!self.allowAnimation) {
+        [super sendAction:action to:target forEvent:event];
+        return;
+    }
+    // 显示动画
+    self.likeAnimationView.hidden = NO;
+    self.likeAnimationView.image = [self imageForState:UIControlStateHighlighted];
+    self.likeAnimationView.transform = CGAffineTransformIdentity;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.likeAnimationView.transform = CGAffineTransformScale(self.imageView.transform, 0.4, 0.4);
+    } completion:^(BOOL finished) {
+        self.likeAnimationView.transform  = CGAffineTransformIdentity;
+        self.likeAnimationView.hidden = YES;
+        [super sendAction:action to:target forEvent:event];
+    }];
+}
+
+@end
