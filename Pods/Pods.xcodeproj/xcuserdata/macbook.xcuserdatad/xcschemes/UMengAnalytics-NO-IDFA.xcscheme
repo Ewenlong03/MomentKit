@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "234F3657D882E0F1425F3332532D4978"
+               BuildableName = "UMengAnalytics-NO-IDFA"
                BlueprintName = "UMengAnalytics-NO-IDFA"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "UMengAnalytics-NO-IDFA">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

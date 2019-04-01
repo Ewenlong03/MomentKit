@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Moment.h"
+#import "MLocation.h"
 
 @interface MMLocationViewController : UIViewController
 
-@property (nonatomic, strong) Moment * moment;
+@property (nonatomic, strong) MLocation * location;
 
 @end

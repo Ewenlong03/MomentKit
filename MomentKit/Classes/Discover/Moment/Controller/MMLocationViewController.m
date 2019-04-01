@@ -25,7 +25,7 @@
 
 - (void)configUI
 {
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(_moment.latitude, _moment.longitude);
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(_location.latitude, _location.longitude);
     // 地图
     CGFloat bottomHeight = k_iphone_x ? 100 : 70;
     MAMapView * _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - bottomHeight)];
@@ -53,7 +53,7 @@
     _locationLab.numberOfLines = 0;
     [bottomView addSubview:_locationLab];
     // 拼接地址
-    NSString * location = [NSString stringWithFormat:@"%@\n%@",_moment.landmark,_moment.address];
+    NSString * location = [NSString stringWithFormat:@"%@\n%@",_location.landmark,_location.address];
     NSMutableParagraphStyle * style = [[NSMutableParagraphStyle alloc] init];
     style.lineSpacing = 5;
     NSMutableAttributedString * attributedText = [[NSMutableAttributedString alloc] initWithString:location];
@@ -62,10 +62,10 @@
                            range:NSMakeRange(0,[location length])];
     [attributedText addAttribute:NSFontAttributeName
                            value:[UIFont systemFontOfSize:18.0]
-                           range:NSMakeRange(0,[_moment.landmark length])];
+                           range:NSMakeRange(0,[_location.landmark length])];
     [attributedText addAttribute:NSForegroundColorAttributeName
                            value:[UIColor blackColor]
-                           range:NSMakeRange(0,[_moment.landmark length])];
+                           range:NSMakeRange(0,[_location.landmark length])];
     _locationLab.attributedText = attributedText;
 }
 

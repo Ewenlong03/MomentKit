@@ -34,7 +34,7 @@
 {
     // 菜单容器视图
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(kOperateWidth-kOperateBtnWidth, 0, kOperateWidth-kOperateBtnWidth, kOperateHeight)];
-    view.backgroundColor = [UIColor colorWithRed:70.0/255.0 green:74.0/255.0 blue:75.0/255.0 alpha:1.0];
+    view.backgroundColor = MMRGBColor(70.0,74.0,75.0);
     view.layer.cornerRadius = 4.0;
     view.layer.masksToBounds = YES;
     [self addSubview:view];
@@ -85,7 +85,7 @@
     self.menuView.left = menu_left;
 }
 
-- (void)setisLike:(BOOL)isLike
+- (void)setIsLike:(BOOL)isLike
 {
     if (isLike) {
         [self.likeBtn setTitle:@"取消" forState:UIControlStateNormal];
@@ -145,8 +145,8 @@
         // 点赞动画
         UIImageView * imageView = [[UIImageView alloc] init];
         imageView.hidden = YES;
-        self.likeAnimationView = imageView;
         [self addSubview:imageView];
+        self.likeAnimationView = imageView;
     }
     return self;
 }

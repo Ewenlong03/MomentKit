@@ -42,6 +42,7 @@
 		FAAE6985220426FA005EFFAF /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE6983220426FA005EFFAF /* JKDBModel.m */; };
 		FAAE698922043787005EFFAF /* MomentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE698822043787005EFFAF /* MomentUtil.m */; };
 		FABE69D82248C21600E574D3 /* MMCommentInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE69D72248C21600E574D3 /* MMCommentInputView.m */; };
+		FAFA5FFC2251E29800129168 /* MLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFA5FFB2251E29800129168 /* MLocation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,8 @@
 		FAAE698822043787005EFFAF /* MomentUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentUtil.m; sourceTree = "<group>"; };
 		FABE69D62248C21600E574D3 /* MMCommentInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCommentInputView.h; sourceTree = "<group>"; };
 		FABE69D72248C21600E574D3 /* MMCommentInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMCommentInputView.m; sourceTree = "<group>"; };
+		FAFA5FFA2251E29800129168 /* MLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLocation.h; sourceTree = "<group>"; };
+		FAFA5FFB2251E29800129168 /* MLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLocation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +242,8 @@
 				FAA79A1E2227E14E000716F8 /* MUser.m */,
 				FAA79A202227E159000716F8 /* MPicture.h */,
 				FAA79A212227E159000716F8 /* MPicture.m */,
+				FAFA5FFA2251E29800129168 /* MLocation.h */,
+				FAFA5FFB2251E29800129168 /* MLocation.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 				FAA79A012227DB00000716F8 /* ContactsViewController.m in Sources */,
 				8B3BA1581FDFE91400407D25 /* MomentViewController.m in Sources */,
 				FA58E4AD2205784500B788F8 /* MineViewController.m in Sources */,
+				FAFA5FFC2251E29800129168 /* MLocation.m in Sources */,
 				8BF765791FE2272A0064EC94 /* MMImageListView.m in Sources */,
 				8B3BA0B31FDFE1BF00407D25 /* AppDelegate.m in Sources */,
 				8B3BA15A1FDFE91400407D25 /* Moment.m in Sources */,

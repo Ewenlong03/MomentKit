@@ -20,6 +20,11 @@
 // 回复:xxx （目标）
 @property (nonatomic, strong) MUser * toUser;
 
+// xxx: （来源）
+@property (nonatomic, assign) NSInteger fromId;
+// 回复:xxx （目标）
+@property (nonatomic, assign) NSInteger toId;
+
 
 + (NSArray *)transients;
 

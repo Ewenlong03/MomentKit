@@ -27,13 +27,14 @@ CGFloat lineSpacing = 5;
 
 - (void)configUI
 {
-    __weak typeof(self) weakSelf = self;
+    WS(wSelf);
     // 头像视图
     _avatarImageView = [[MMImageView alloc] initWithFrame:CGRectMake(10, kBlank, kAvatarWidth, kAvatarWidth)];
     [_avatarImageView setClickHandler:^(MMImageView *imageView) {
-        if ([weakSelf.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
-            [weakSelf.delegate didOperateMoment:weakSelf operateType:MMOperateTypeProfile];
+        if ([wSelf.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
+            [wSelf.delegate didOperateMoment:wSelf operateType:MMOperateTypeProfile];
         }
+        [wSelf hideMenu];
     }];
     [self.contentView addSubview:_avatarImageView];
     // 名字视图
@@ -67,6 +68,9 @@ CGFloat lineSpacing = 5;
     [_showAllBtn sizeToFit];
     // 图片区
     _imageListView = [[MMImageListView alloc] initWithFrame:CGRectZero];
+    [_imageListView setSingleTapHandler:^(MMImageView *imageView) {
+        [wSelf hideMenu];
+    }];
     [self.contentView addSubview:_imageListView];
     // 位置视图
     _locationBtn = [[UIButton alloc] init];
@@ -96,8 +100,8 @@ CGFloat lineSpacing = 5;
     // 操作视图
     _menuView = [[MMOperateMenuView alloc] initWithFrame:CGRectZero];
     [_menuView setOperateMenu:^(MMOperateType operateType) { // 评论|赞
-        if ([weakSelf.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
-            [weakSelf.delegate didOperateMoment:weakSelf operateType:operateType];
+        if ([wSelf.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
+            [wSelf.delegate didOperateMoment:wSelf operateType:operateType];
         }
     }];
     [self.contentView addSubview:_menuView];
@@ -110,9 +114,9 @@ CGFloat lineSpacing = 5;
 {
     _moment = moment;
     // 头像
-    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:moment.userPortrait] placeholderImage:nil];
+    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:moment.user.portrait] placeholderImage:nil];
     // 昵称
-    _nameLab.text = moment.userName;
+    _nameLab.text = moment.user.name;
     // 正文
     _showAllBtn.hidden = YES;
     _linkLabel.hidden = YES;
@@ -153,8 +157,8 @@ CGFloat lineSpacing = 5;
     // 位置
     _timeLab.text = [Utility getMomentTime:moment.time];
     [_timeLab sizeToFit];
-    if ([moment.location length]) {
-        [_locationBtn setTitle:moment.location forState:UIControlStateNormal];
+    if (moment.location) {
+        [_locationBtn setTitle:moment.location.position forState:UIControlStateNormal];
         [_locationBtn sizeToFit];
         _locationBtn.hidden = NO;
         _locationBtn.frame = CGRectMake(_nameLab.left, bottom, _locationBtn.width, kTimeLabelH);
@@ -206,12 +210,14 @@ CGFloat lineSpacing = 5;
                 if ([self.delegate respondsToSelector:@selector(didOperateMoment:selectComment:)]) {
                     [self.delegate didOperateMoment:self selectComment:comment];
                 }
+                [self hideMenu];
             }];
             // 点击高亮
             [label setDidClickLinkText:^(MLLink *link, NSString *linkText) {
                 if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
                     [self.delegate didClickLink:link linkText:linkText];
                 }
+                [self hideMenu];
             }];
             [_commentView addSubview:label];
             // 更新
@@ -242,6 +248,7 @@ CGFloat lineSpacing = 5;
             [self.delegate didOperateMoment:self operateType:MMOperateTypeLocation];
         }
     });
+    [self hideMenu];
 }
 
 // 查看全文/收起
@@ -256,6 +263,7 @@ CGFloat lineSpacing = 5;
             [self.delegate didOperateMoment:self operateType:MMOperateTypeFull];
         }
     });
+    [self hideMenu];
 }
 
 // 删除动态
@@ -268,6 +276,7 @@ CGFloat lineSpacing = 5;
             [self.delegate didOperateMoment:self operateType:MMOperateTypeDelete];
         }
     });
+    [self hideMenu];
 }
 
 #pragma mark - MLLinkLabelDelegate
@@ -277,7 +286,21 @@ CGFloat lineSpacing = 5;
     if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
         [self.delegate didClickLink:link linkText:linkText];
     }
+    [self hideMenu];
 }
+
+#pragma mark - UITouch
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self hideMenu];
+}
+
+// 隐藏评论Menu
+- (void)hideMenu
+{
+    if (self.menuView.show) self.menuView.show = NO;
+}
+
 @end
 
 #pragma mark - ------------------ 评论 ------------------

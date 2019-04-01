@@ -11,6 +11,7 @@
 #import "Moment.h"
 #import "Message.h"
 #import "MPicture.h"
+#import "MLocation.h"
 #import "MUser.h"
 
 @interface MomentUtil : NSObject
@@ -23,4 +24,16 @@
 // 获取字符数组
 + (NSString *)getLikeString:(Moment *)moment;
 
+// id集合
++ (NSArray *)getIdListByIds:(NSString *)ids;
+// ids
++ (NSString *)getIdsByIdList:(NSArray *)idList;
+
 @end
+
+
+//
+//  Moment、Comment、MUser(赞)、MPicture之间的关联均以Model存储的PK为关联。
+//  正常应该是由JSON数据转化，这么做主要为了测试方便。
+//
+

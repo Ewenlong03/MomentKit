@@ -114,11 +114,14 @@
 #pragma mark - 评论相关
 - (void)addComment:(NSString *)commentText
 {
+    // 新增评论
     Comment * comment = [[Comment alloc] init];
     comment.text = commentText;
     comment.fromUser = self.loginUser;
+    comment.fromId = self.loginUser.pk;
     if (self.operateComment) { // 回复评论
         comment.toUser = self.operateComment.fromUser;
+        comment.toId = self.operateComment.fromUser.pk;
     }
     [comment save];
     // 更新评论列表
@@ -126,8 +129,16 @@
     NSMutableArray * commentList = [[NSMutableArray alloc] initWithArray:moment.commentList];
     [commentList addObject:comment];
     moment.commentList = commentList;
-    self.operateCell.moment = moment;
+    NSMutableString * ids = [[NSMutableString alloc] initWithString:moment.commentIds];
+    if ([ids length]) {
+        [ids appendFormat:@",%d",comment.pk];
+    } else {
+        [ids appendFormat:@"%d",comment.pk];
+    }
+    moment.commentIds = ids;
+    [moment update];
     // 刷新
+    self.operateCell.moment = moment;
     [UIView performWithoutAnimation:^{
         [self.tableView reloadRowsAtIndexPaths:@[self.selectedIndexPath]
                               withRowAnimation:UITableViewRowAnimationNone];
@@ -182,7 +193,7 @@
         case MMOperateTypeLocation: // 位置
         {
             MMLocationViewController * controller = [[MMLocationViewController alloc] init];
-            controller.moment = cell.moment;;
+            controller.location = cell.moment.location;
             [self.navigationController pushViewController:controller animated:YES];
         }
         case MMOperateTypeLike: // 点赞
@@ -190,21 +201,26 @@
             // data
             Moment * moment = cell.moment;
             NSMutableArray * likeList = [NSMutableArray arrayWithArray:moment.likeList];
-            if (moment.isLike) {
+            NSMutableArray * idList = [NSMutableArray arrayWithArray:[moment.likeIds componentsSeparatedByString:@","]];
+            if (moment.isLike) { // 取消点赞
                 moment.isLike = 0;
                 NSPredicate * predicate = [NSPredicate predicateWithFormat:@"type = 1"];
                 NSArray * result = [likeList filteredArrayUsingPredicate:predicate];
                 if ([result count]) {
                     MUser * removeUser = [result firstObject];
                     [likeList removeObject:removeUser];
+                    [idList removeObject:[NSString stringWithFormat:@"%d",removeUser.pk]];
                 }
-            } else {
+            } else { // 点赞
                 moment.isLike = 1;
                 [likeList addObject:self.loginUser];
+                [idList addObject:[NSString stringWithFormat:@"%d",self.loginUser.pk]];
             }
             moment.likeList = likeList;
+            moment.likeIds = [MomentUtil getIdsByIdList:idList];
+            [moment update];
+            // 刷新
             [self.momentList replaceObjectAtIndex:cell.tag withObject:moment];
-            // UI
             NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
             if (indexPath) {
                 [UIView performWithoutAnimation:^{
@@ -317,8 +333,12 @@
             Moment * moment = self.operateCell.moment;
             NSMutableArray * tempList = [NSMutableArray arrayWithArray:moment.commentList];
             [tempList removeObject:self.operateComment];
+            NSMutableArray * idList = [NSMutableArray arrayWithArray:[MomentUtil getIdListByIds:moment.commentIds]];
+            [idList removeObject:[NSString stringWithFormat:@"%d",self.operateComment.pk]];
+            moment.commentIds = [MomentUtil getIdsByIdList:idList];
             moment.commentList = tempList;
-            // 移除数据库
+            // 数据库更新
+            [moment update];
             [self.operateComment deleteObject];
             // 刷新
             [self.momentList replaceObjectAtIndex:self.operateCell.tag withObject:moment];

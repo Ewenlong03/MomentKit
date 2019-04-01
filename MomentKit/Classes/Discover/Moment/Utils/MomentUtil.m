@@ -44,7 +44,9 @@
                            @"安利我喜欢的插画师：晓艺大佬。"];
     
     // 用户 ↓↓
-    for (int i = 0; i < [names count]; i ++)
+    NSInteger max = [names count];
+    Comment * formerComment = nil; // 前一个
+    for (NSInteger i = 0; i < max; i ++)
     {
         // 用户
         MUser * user = [[MUser alloc] init];
@@ -61,7 +63,21 @@
         // 评论
         Comment * comment = [[Comment alloc] init];
         comment.text = [contents objectAtIndex:i];
+        if (i == 0) {
+            comment.fromId = arc4random() % 10 + 1;
+            comment.toId = 0;
+        } else {
+            NSInteger fromId = arc4random() % 10 + 1;
+            if (fromId == formerComment.fromId) {
+                comment.fromId = fromId;
+                comment.toId = 0;
+            } else {
+                comment.fromId = fromId;
+                comment.toId = formerComment.fromId;
+            }
+        }
         [comment save];
+        formerComment = comment;
         // 图片
         MPicture * picture = [[MPicture alloc] init];
         picture.thumbnail = [images objectAtIndex:i];
@@ -74,22 +90,27 @@
     user.type = 1;
     [user save];
     
+    // 位置
+    MLocation * location = [[MLocation alloc] init];
+    location.position = @"杭州 · 雷峰塔景区";
+    location.landmark = @"雷峰塔景区";
+    location.address = @"杭州市西湖区南山路15号";
+    location.latitude = 30.231250;
+    location.longitude = 120.148550;
+    [location save];
+    
     // 动态  ↓↓
     for (int i = 0; i < 35; i ++)
     {
-        NSInteger index = arc4random() % 9;
         // 动态
         Moment * moment = [[Moment alloc] init];
-        moment.userName = [names objectAtIndex:index];
-        moment.userPortrait = [images objectAtIndex:index];
+        moment.userId = arc4random() % 10 + 1;
+        moment.likeIds = [MomentUtil getIdsByMaxPK:arc4random() % 10 + 1];
+        moment.commentIds = [MomentUtil getIdsByMaxPK:arc4random() % 10 + 1];
+        moment.pictureIds = [MomentUtil getIdsByMaxPK:arc4random() % 9 + 1];
         moment.time = 1549162615;
         moment.singleWidth = 640;
         moment.singleHeight = 506;
-        moment.location = @"杭州 · 雷峰塔景区";
-        moment.landmark = @"雷峰塔景区";
-        moment.address = @"杭州市西湖区南山路15号";
-        moment.latitude = 30.231250;
-        moment.longitude = 120.148550;
         moment.isLike = 0;
         if (i == 0) {
             moment.text = @"“不要脸”画家呼葱觅蒜再出新作，以飞鸟为材画出仙侠新境界。详见链接：https://baijiahao.baidu.com/s?id=1611814670460612719&wfr=spider&for=pc";
@@ -109,10 +130,7 @@
 }
 
 #pragma mark - 获取
-
 // 获取动态集合
-// 说明：由于暂未建立Moment、Comment、MUser(赞)、MPicture之间的关联，暂时以随机数据做展示
-// ---
 + (NSArray *)getMomentList:(int)momentId pageNum:(int)pageNum
 {
     NSString * sql = nil;
@@ -127,47 +145,105 @@
     for (NSInteger i = 0; i < count; i ++)
     {
         Moment * moment = [tempList objectAtIndex:i];
-        // 评论 ↓↓
-        NSMutableArray * commemtList = [[NSMutableArray alloc] init];
-        NSInteger maxPK = arc4random() % 10 + 1;
-        NSArray * tempComList = [Comment findByCriteria:[NSString stringWithFormat:@"WHERE PK <= %ld",maxPK]];
-        NSInteger comCount = [tempComList count];
-        MUser * fromUser = nil;
-        for (NSInteger j = 0; j < comCount ; j ++) { // 配置评论用户>后一个回复前一个
-            Comment * comment = [tempComList objectAtIndex:j];
-            if ((j + 1) % 2 == 0) {
-                NSInteger toPK = arc4random() % 10 + 1;
-                if (fromUser.pk != toPK) {
-                    comment.fromUser = [MUser findFirstByCriteria:[NSString stringWithFormat:@"WHERE PK = %ld",toPK]];
-                    comment.toUser = fromUser;
-                } else {
-                    NSInteger fromPK = arc4random() % 10 + 1;
-                    fromUser = [MUser findFirstByCriteria:[NSString stringWithFormat:@"WHERE PK = %ld",fromPK]];
-                    comment.fromUser = fromUser;
-                    comment.toUser = nil;
-                }
+        // 处理评论 ↓↓
+        NSArray * idList = [MomentUtil getIdListByIds:moment.commentIds];
+        NSInteger count = [idList count];
+        NSMutableArray * list = [NSMutableArray array];
+        for (NSInteger i = 0; i < count; i ++)
+        {
+            NSInteger pk = [[idList objectAtIndex:i] integerValue];
+            Comment * comment = [Comment findFirstByCriteria:[NSString stringWithFormat:@"WHERE PK = %ld",(long)pk]];
+            MUser * user = nil;
+            if (comment.fromId != 0) {
+                user = [MUser findFirstByCriteria:[NSString stringWithFormat:@"WHERE PK = %ld",(long)comment.fromId]];
             } else {
-                NSInteger fromPK = arc4random() % 10 + 1;
-                fromUser = [MUser findFirstByCriteria:[NSString stringWithFormat:@"WHERE PK = %ld",fromPK]];
-                comment.fromUser = fromUser;
-                comment.toUser = nil;
+                user = nil;
             }
-            [commemtList addObject:comment];
+            comment.fromUser = user;
+            if (comment.toId != 0) {
+                user = [MUser findFirstByCriteria:[NSString stringWithFormat:@"WHERE PK = %ld",(long)comment.toId]];
+            } else {
+                user = nil;
+            }
+            comment.toUser = user;
+            [list addObject:comment];
         }
-        moment.commentList = commemtList;
-        // 赞 ↓↓
-        moment.likeList = [[MUser findAll] subarrayWithRange:NSMakeRange(0, arc4random() % 10)];
-        // 图片 ↓↓
-        moment.pictureList = [[MPicture findAll] subarrayWithRange:NSMakeRange(0, arc4random() % 10)];
+        moment.commentList = list;
+        // 处理赞  ↓↓
+        idList = [MomentUtil getIdListByIds:moment.likeIds];
+        count = [idList count];
+        list = [NSMutableArray array];
+        for (NSInteger i = 0; i < count; i ++)
+        {
+            NSInteger pk = [[idList objectAtIndex:i] integerValue];
+            MUser * user = [MUser findFirstByCriteria:[NSString stringWithFormat:@"WHERE PK = %ld",(long)pk]];
+            [list addObject:user];
+        }
+        moment.likeList = list;
+        // 处理图片 ↓↓
+        idList = [MomentUtil getIdListByIds:moment.pictureIds];
+        count = [idList count];
+        list = [NSMutableArray array];
+        for (NSInteger i = 0; i < count; i ++)
+        {
+            NSInteger pk = [[idList objectAtIndex:i] integerValue];
+            MPicture * pic = [MPicture findFirstByCriteria:[NSString stringWithFormat:@"WHERE PK = %ld",(long)pk]];
+            [list addObject:pic];
+        }
+        moment.pictureList = list;
+        // 发布者
+        MUser * user = [MUser findFirstByCriteria:[NSString stringWithFormat:@"WHERE PK = %ld",moment.userId]];
+        moment.user = user;
+        // 位置
+        MLocation * location = [MLocation findByPK:1];
+        moment.location = location;
+        // == 加入集合
         [momentList addObject:moment];
     }
     return momentList;
 }
 
+#pragma mark - 辅助方法
+// 获取ids
++ (NSString *)getIdsByMaxPK:(NSInteger)maxPK
+{
+    NSMutableString * ids = [[NSMutableString alloc] init];
+    for (int i = 1; i <= maxPK; i ++) {
+        if (i == maxPK) {
+            [ids appendString:[NSString stringWithFormat:@"%d",i]];
+        } else {
+            [ids appendString:[NSString stringWithFormat:@"%d,",i]];
+        }
+    }
+    return ids;
+}
+
+// id集合
++ (NSArray *)getIdListByIds:(NSString *)ids
+{
+    return [ids componentsSeparatedByString:@","];
+}
+
+// ids
++ (NSString *)getIdsByIdList:(NSArray *)idList
+{
+    NSMutableString * ids = [[NSMutableString alloc] init];
+    NSInteger count = [idList count];
+    for (NSInteger i = 0; i < count; i ++) {
+        NSString * idd = [idList objectAtIndex:i];
+        if (i == count - 1) {
+            [ids appendString:[NSString stringWithFormat:@"%@",idd]];
+        } else {
+            [ids appendString:[NSString stringWithFormat:@"%@,",idd]];
+        }
+    }
+    return ids;
+}
+
 // 数组转字符
 + (NSString *)getLikeString:(Moment *)moment
 {
-    NSMutableString * likeString = [NSMutableString string];
+    NSMutableString * likeString = [[NSMutableString alloc] init];
     NSInteger count = [moment.likeList count];
     for (NSInteger i = 0; i < count; i ++)
     {

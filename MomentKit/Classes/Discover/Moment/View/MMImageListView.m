@@ -34,6 +34,9 @@
             imageView.tag = 1000 + i;
             [imageView setClickHandler:^(MMImageView *imageView){
                 [self singleTapSmallViewCallback:imageView];
+                if (self.singleTapHandler) {
+                    self.singleTapHandler(imageView);
+                }
             }];
             [_imageViewsArray addObject:imageView];
             [self addSubview:imageView];
