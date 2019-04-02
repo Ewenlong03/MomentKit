@@ -84,7 +84,7 @@
     return self;
 }
 
-#pragma mark - Getter
+#pragma mark - getter
 - (UIImageView *)imageView
 {
     if (!_imageView) {
@@ -97,7 +97,7 @@
     return _imageView;
 }
 
-#pragma mark - Setter
+#pragma mark - setter
 - (void)setImage:(UIImage *)image
 {
     self.imageView.image = image;
@@ -142,10 +142,9 @@
     } else {
         zoomScale = self.maximumZoomScale;
     }
-    [UIView animateWithDuration:0.35
-                     animations:^{
-                         self.zoomScale = zoomScale;
-                     }];
+    [UIView animateWithDuration:0.35 animations:^{
+        self.zoomScale = zoomScale;
+    }];
 }
 
 - (void)singleTapGestureCallback:(UITapGestureRecognizer *)gesture

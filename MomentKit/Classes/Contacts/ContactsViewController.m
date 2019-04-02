@@ -8,6 +8,7 @@
 
 #import "ContactsViewController.h"
 #import "SearchResultViewController.h"
+#import "MMImageListView.h"
 #import "NSString+Letter.h"
 #import "Utility.h"
 #import "MUser.h"
@@ -144,30 +145,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * identifier = @"AddressBookCell";
+    static NSString * identifier = @"ContactsCell";
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.backgroundColor = [UIColor whiteColor];
         cell.separatorInset = UIEdgeInsetsMake(0, 65, 0, 0);
-        
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 5, 40, 40)];
-        imageView.backgroundColor = [UIColor lightGrayColor];
+        // 头像
+        MMImageView * imageView = [[MMImageView alloc] initWithFrame:CGRectMake(15, 5, 40, 40)];
         imageView.tag = 101;
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.contentScaleFactor = [[UIScreen mainScreen] scale];
-        imageView.clipsToBounds = YES;
         imageView.layer.cornerRadius = 4.0;
         imageView.layer.masksToBounds = YES;
         [cell.contentView addSubview:imageView];
-        
+        // 昵称
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, k_screen_width-100, 50)];
         label.tag = 102;
         label.font = [UIFont systemFontOfSize:17.0];
         [cell.contentView addSubview:label];
     }
-    UIImageView * imageView = [cell.contentView viewWithTag:101];
+    MMImageView * imageView = [cell.contentView viewWithTag:101];
     UILabel * label = [cell.contentView viewWithTag:102];
     // 赋值
     if (indexPath.section == 0) {

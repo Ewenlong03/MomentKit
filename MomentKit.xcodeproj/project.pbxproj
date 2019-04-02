@@ -25,6 +25,7 @@
 		8BF765791FE2272A0064EC94 /* MMImageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF765781FE2272A0064EC94 /* MMImageListView.m */; };
 		8BF7657C1FE227450064EC94 /* MMImagePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7657B1FE227450064EC94 /* MMImagePreviewView.m */; };
 		FA15603122239686001B626B /* MMLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA15603022239686001B626B /* MMLocationViewController.m */; };
+		FA45864222533E5000CF66E1 /* MK.db in Resources */ = {isa = PBXBuildFile; fileRef = FA45864122533E5000CF66E1 /* MK.db */; };
 		FA58E4922205490700B788F8 /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4912205490700B788F8 /* WKWebViewController.m */; };
 		FA58E4AD2205784500B788F8 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4A72205784400B788F8 /* MineViewController.m */; };
 		FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4AA2205784500B788F8 /* DiscoverViewController.m */; };
@@ -82,6 +83,7 @@
 		9BB5E3DF6E7A80D531DC9322 /* Pods-MomentKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomentKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MomentKit/Pods-MomentKit.debug.xcconfig"; sourceTree = "<group>"; };
 		FA15602F22239686001B626B /* MMLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMLocationViewController.h; sourceTree = "<group>"; };
 		FA15603022239686001B626B /* MMLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMLocationViewController.m; sourceTree = "<group>"; };
+		FA45864122533E5000CF66E1 /* MK.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = MK.db; sourceTree = "<group>"; };
 		FA58E4902205490700B788F8 /* WKWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewController.h; sourceTree = "<group>"; };
 		FA58E4912205490700B788F8 /* WKWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewController.m; sourceTree = "<group>"; };
 		FA58E4A62205784400B788F8 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		8B3BA0AE1FDFE1BF00407D25 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FA45864022533E4A00CF66E1 /* Resource */,
 				8B3BA0B71FDFE1BF00407D25 /* Main.storyboard */,
 				8B3BA0BA1FDFE1BF00407D25 /* Assets.xcassets */,
 				8B3BA0BC1FDFE1BF00407D25 /* LaunchScreen.storyboard */,
@@ -291,6 +294,14 @@
 				FAA79A002227DB00000716F8 /* SearchResultViewController.m */,
 			);
 			path = Contacts;
+			sourceTree = "<group>";
+		};
+		FA45864022533E4A00CF66E1 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				FA45864122533E5000CF66E1 /* MK.db */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		FA58E4A22205784400B788F8 /* Message */ = {
@@ -426,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B3BA0BE1FDFE1BF00407D25 /* LaunchScreen.storyboard in Resources */,
+				FA45864222533E5000CF66E1 /* MK.db in Resources */,
 				8B3BA0BB1FDFE1BF00407D25 /* Assets.xcassets in Resources */,
 				8B3BA0B91FDFE1BF00407D25 /* Main.storyboard in Resources */,
 			);

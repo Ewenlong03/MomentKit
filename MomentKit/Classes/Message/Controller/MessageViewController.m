@@ -8,6 +8,7 @@
 
 #import "MessageViewController.h"
 #import "SearchResultViewController.h"
+#import "MMImageListView.h"
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -119,10 +120,10 @@
 
 @end
 
-
+#pragma mark - ------------------ 对话cell ------------------
 @interface MessageCell ()
 
-@property (nonatomic, strong) UIImageView * portraitView;
+@property (nonatomic, strong) MMImageView * avatarImageV;
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic, strong) UILabel * messageLabel;
 @property (nonatomic, strong) UILabel * timeLabel;
@@ -135,10 +136,27 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self.contentView addSubview:self.portraitView];
+        // 头像
+        _avatarImageV = [[MMImageView alloc] initWithFrame:CGRectMake(15, 10, 50, 50)];
+        _avatarImageV.layer.cornerRadius = 4.0;
+        _avatarImageV.layer.masksToBounds = YES;
+        [self.contentView addSubview:_avatarImageV];
+        // 昵称
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(75, 13, k_screen_width - 150, 25)];
+        _nameLabel.font = [UIFont systemFontOfSize:17.0];
+        _nameLabel.textColor = [UIColor blackColor];
         [self.contentView addSubview:self.nameLabel];
-        [self.contentView addSubview:self.messageLabel];
-        [self.contentView addSubview:self.timeLabel];
+        // 消息
+        _messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(75, 37, k_screen_width-100, 20)];
+        _messageLabel.font = [UIFont systemFontOfSize:14.0];
+        _messageLabel.textColor = [UIColor lightGrayColor];
+        [self.contentView addSubview:_messageLabel];
+        // 时间
+        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(k_screen_width-110, 10, 100, 25)];
+        _timeLabel.textAlignment = NSTextAlignmentRight;
+        _timeLabel.font = [UIFont systemFontOfSize:12.0];
+        _timeLabel.textColor = [UIColor lightGrayColor];
+        [self.contentView addSubview:_timeLabel];
     }
     return self;
 }
@@ -146,56 +164,10 @@
 #pragma mark - setter
 - (void)setMessage:(Message *)message
 {
-    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:message.userPortrait] placeholderImage:nil];
+    [self.avatarImageV sd_setImageWithURL:[NSURL URLWithString:message.userPortrait] placeholderImage:nil];
     self.nameLabel.text = message.userName;
     self.messageLabel.text = message.content;
     self.timeLabel.text = [NSString stringWithFormat:@"%@",[Utility getMessageTime:message.time]];
-}
-
-#pragma mark - lazy load
-- (UIImageView *)portraitView
-{
-    if (!_portraitView) {
-        _portraitView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 50, 50)];
-        _portraitView.backgroundColor = [UIColor lightGrayColor];
-        _portraitView.contentMode = UIViewContentModeScaleAspectFill;
-        _portraitView.contentScaleFactor = [[UIScreen mainScreen] scale];
-        _portraitView.clipsToBounds = YES;
-        _portraitView.layer.cornerRadius = 4.0;
-        _portraitView.layer.masksToBounds = YES;
-    }
-    return _portraitView;
-}
-
-- (UILabel *)nameLabel
-{
-    if (!_nameLabel) {
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(75, 13, k_screen_width-150, 25)];
-        _nameLabel.font = [UIFont systemFontOfSize:17.0];
-        _nameLabel.textColor = [UIColor blackColor];
-    }
-    return _nameLabel;
-}
-
-- (UILabel *)messageLabel
-{
-    if (!_messageLabel) {
-        _messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(75, 37, k_screen_width-100, 20)];
-        _messageLabel.font = [UIFont systemFontOfSize:14.0];
-        _messageLabel.textColor = [UIColor lightGrayColor];
-    }
-    return _messageLabel;
-}
-
-- (UILabel *)timeLabel
-{
-    if (!_timeLabel) {
-        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(k_screen_width-110, 10, 100, 25)];
-        _timeLabel.textAlignment = NSTextAlignmentRight;
-        _timeLabel.font = [UIFont systemFontOfSize:12.0];
-        _timeLabel.textColor = [UIColor lightGrayColor];
-    }
-    return _timeLabel;
 }
 
 @end 

@@ -6,7 +6,7 @@
 //  Copyright © 2019 LEA. All rights reserved.
 //
 
-#pragma mark - ###### 全局
+#pragma mark - ------------------ 全局 ------------------
 
 // 弱引用
 #define WS(wSelf)               __weak typeof(self) wSelf = self
@@ -32,7 +32,7 @@
 #define k_background_color      [UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]
 
 
-#pragma mark - ###### 朋友圈
+#pragma mark - ------------------ 朋友圈 ------------------
 
 // 头像视图的宽、高
 #define kAvatarWidth            40
