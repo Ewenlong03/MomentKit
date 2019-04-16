@@ -11,7 +11,7 @@
 
 @interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) MMTableView * tableView;
 @property (nonatomic, strong) NSArray * titles;
 
 @end
@@ -33,14 +33,9 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView = [[MMTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.estimatedRowHeight = 0.0;
-        _tableView.estimatedSectionHeaderHeight = 0.0;
-        _tableView.estimatedSectionFooterHeight = 0.0;
     }
     return _tableView;
 }

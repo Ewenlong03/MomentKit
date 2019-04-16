@@ -13,9 +13,9 @@
 // 朋友圈动态时间
 + (NSString *)getMomentTime:(long long)timestamp;
 // 消息时间
-+ (NSString *)getMessageTime:(long long)timeStemp;
++ (NSString *)getMessageTime:(long long)timestamp;
 // 获取单张图片的实际size
-+ (CGSize)getSingleSize:(CGSize)singleSize;
++ (CGSize)getMomentImageSize:(CGSize)size;
 // 颜色转图片
 + (UIImage *)imageWithRenderColor:(UIColor *)color renderSize:(CGSize)size;
 

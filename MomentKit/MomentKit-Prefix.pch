@@ -13,6 +13,7 @@
 #import "MomentMacros.h"
 #import "MomentConstant.h"
 #import "MLLabelUtil.h"
+#import "MMTableView.h"
 #import "Utility.h"
 #import "AppDelegate.h"
 

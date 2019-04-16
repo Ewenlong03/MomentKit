@@ -50,7 +50,7 @@
     self.likeBtn = btn;
     // 分割线
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(btn.right-5, 8, 0.5, kOperateHeight-16)];
-    line.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
+    line.backgroundColor = MMRGBColor(50.f, 50.f, 50.f);
     [view addSubview:line];
     // 评论
     btn = [[MMOperateMenuButton alloc] initWithFrame:CGRectMake(line.right, 0, btn.width, kOperateHeight)];

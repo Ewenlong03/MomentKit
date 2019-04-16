@@ -8,6 +8,7 @@
 
 #import "ContactsViewController.h"
 #import "SearchResultViewController.h"
+#import "MMUserDetailViewController.h"
 #import "MMImageListView.h"
 #import "NSString+Letter.h"
 #import "Utility.h"
@@ -15,7 +16,7 @@
 
 @interface ContactsViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) MMTableView * tableView;
 @property (nonatomic, strong) UILabel * contactNumLab;
 @property (nonatomic, strong) NSMutableArray * indexes;
 @property (nonatomic, strong) NSMutableArray * sectionTitles;
@@ -86,12 +87,10 @@
 }
 
 #pragma mark - lazy load
-- (UITableView *)tableView
+- (MMTableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, k_screen_height-k_top_height - k_bar_height)];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView = [[MMTableView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, k_screen_height-k_top_height - k_bar_height)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.sectionIndexColor = [UIColor blackColor];
@@ -126,7 +125,7 @@
         _contactNumLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, 50)];
         _contactNumLab.textAlignment = NSTextAlignmentCenter;
         _contactNumLab.font = [UIFont systemFontOfSize:15.0];
-        _contactNumLab.textColor = [UIColor colorWithRed:0.67 green:0.67 blue:0.67 alpha:1.0];
+        _contactNumLab.textColor = MMRGBColor(170.f, 170.f, 170.f);
         _contactNumLab.backgroundColor = [UIColor clearColor];
     }
     return _contactNumLab;
@@ -222,6 +221,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0) {
+        return;
+    }
+    MUser * user = [[self.userList objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    MMUserDetailViewController * controller = [[MMUserDetailViewController alloc] init];
+    controller.user = user;
+    controller.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark -

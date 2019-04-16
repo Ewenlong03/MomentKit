@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, MMOperateType) {
     MMOperateTypeDelete,        // 删除
     MMOperateTypeLocation,      // 位置
     MMOperateTypeFull,          // 显示全文
-    MMOperateTypeProfile,       // 点击头像
+    MMOperateTypeProfile,       // 用户详情
 };
 
 // 容器最小高度

@@ -19,12 +19,12 @@
 		8B3BA1591FDFE91400407D25 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3BA1411FDFE91400407D25 /* Comment.m */; };
 		8B3BA15A1FDFE91400407D25 /* Moment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3BA1431FDFE91400407D25 /* Moment.m */; };
 		8B3BA16E1FDFEAFD00407D25 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3BA16D1FDFEAFD00407D25 /* Utility.m */; };
-		8BD194131FE105AE00062E0A /* MLLabelUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD194121FE105AE00062E0A /* MLLabelUtil.m */; };
 		8BE52D151FE35CC200B305C2 /* MMOperateMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE52D141FE35CC200B305C2 /* MMOperateMenuView.m */; };
 		8BF765761FE2270C0064EC94 /* MomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF765751FE2270C0064EC94 /* MomentCell.m */; };
 		8BF765791FE2272A0064EC94 /* MMImageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF765781FE2272A0064EC94 /* MMImageListView.m */; };
 		8BF7657C1FE227450064EC94 /* MMImagePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7657B1FE227450064EC94 /* MMImagePreviewView.m */; };
 		FA15603122239686001B626B /* MMLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA15603022239686001B626B /* MMLocationViewController.m */; };
+		FA41721F22658F0C0061A3AA /* MMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA41721E22658F0C0061A3AA /* MMTableView.m */; };
 		FA45864222533E5000CF66E1 /* MK.db in Resources */ = {isa = PBXBuildFile; fileRef = FA45864122533E5000CF66E1 /* MK.db */; };
 		FA58E4922205490700B788F8 /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4912205490700B788F8 /* WKWebViewController.m */; };
 		FA58E4AD2205784500B788F8 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58E4A72205784400B788F8 /* MineViewController.m */; };
@@ -43,6 +43,8 @@
 		FAAE6985220426FA005EFFAF /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE6983220426FA005EFFAF /* JKDBModel.m */; };
 		FAAE698922043787005EFFAF /* MomentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAE698822043787005EFFAF /* MomentUtil.m */; };
 		FABE69D82248C21600E574D3 /* MMCommentInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE69D72248C21600E574D3 /* MMCommentInputView.m */; };
+		FAF29482226474F000226F8E /* MMUserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF29481226474F000226F8E /* MMUserDetailViewController.m */; };
+		FAF2948B2264A22700226F8E /* MLLabelUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF294892264A22700226F8E /* MLLabelUtil.m */; };
 		FAFA5FFC2251E29800129168 /* MLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFA5FFB2251E29800129168 /* MLocation.m */; };
 /* End PBXBuildFile section */
 
@@ -69,8 +71,6 @@
 		8B3BA16B1FDFEA2400407D25 /* MomentKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MomentKit-Prefix.pch"; sourceTree = "<group>"; };
 		8B3BA16C1FDFEAFD00407D25 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		8B3BA16D1FDFEAFD00407D25 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
-		8BD194111FE105AE00062E0A /* MLLabelUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLLabelUtil.h; sourceTree = "<group>"; };
-		8BD194121FE105AE00062E0A /* MLLabelUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLLabelUtil.m; sourceTree = "<group>"; };
 		8BE52D131FE35CC200B305C2 /* MMOperateMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMOperateMenuView.h; sourceTree = "<group>"; };
 		8BE52D141FE35CC200B305C2 /* MMOperateMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMOperateMenuView.m; sourceTree = "<group>"; };
 		8BF765741FE2270C0064EC94 /* MomentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentCell.h; sourceTree = "<group>"; };
@@ -83,6 +83,8 @@
 		9BB5E3DF6E7A80D531DC9322 /* Pods-MomentKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomentKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MomentKit/Pods-MomentKit.debug.xcconfig"; sourceTree = "<group>"; };
 		FA15602F22239686001B626B /* MMLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMLocationViewController.h; sourceTree = "<group>"; };
 		FA15603022239686001B626B /* MMLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMLocationViewController.m; sourceTree = "<group>"; };
+		FA41721D22658F0C0061A3AA /* MMTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMTableView.h; sourceTree = "<group>"; };
+		FA41721E22658F0C0061A3AA /* MMTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMTableView.m; sourceTree = "<group>"; };
 		FA45864122533E5000CF66E1 /* MK.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = MK.db; sourceTree = "<group>"; };
 		FA58E4902205490700B788F8 /* WKWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewController.h; sourceTree = "<group>"; };
 		FA58E4912205490700B788F8 /* WKWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewController.m; sourceTree = "<group>"; };
@@ -119,6 +121,10 @@
 		FAAE698822043787005EFFAF /* MomentUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentUtil.m; sourceTree = "<group>"; };
 		FABE69D62248C21600E574D3 /* MMCommentInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCommentInputView.h; sourceTree = "<group>"; };
 		FABE69D72248C21600E574D3 /* MMCommentInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMCommentInputView.m; sourceTree = "<group>"; };
+		FAF29480226474F000226F8E /* MMUserDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMUserDetailViewController.h; sourceTree = "<group>"; };
+		FAF29481226474F000226F8E /* MMUserDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMUserDetailViewController.m; sourceTree = "<group>"; };
+		FAF294892264A22700226F8E /* MLLabelUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLLabelUtil.m; sourceTree = "<group>"; };
+		FAF2948A2264A22700226F8E /* MLLabelUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLLabelUtil.h; sourceTree = "<group>"; };
 		FAFA5FFA2251E29800129168 /* MLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLocation.h; sourceTree = "<group>"; };
 		FAFA5FFB2251E29800129168 /* MLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLocation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,8 +298,19 @@
 				FAA799FD2227DB00000716F8 /* ContactsViewController.m */,
 				FAA799FE2227DB00000716F8 /* SearchResultViewController.h */,
 				FAA79A002227DB00000716F8 /* SearchResultViewController.m */,
+				FAF29480226474F000226F8E /* MMUserDetailViewController.h */,
+				FAF29481226474F000226F8E /* MMUserDetailViewController.m */,
 			);
 			path = Contacts;
+			sourceTree = "<group>";
+		};
+		FA41721C22658EED0061A3AA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA41721D22658F0C0061A3AA /* MMTableView.h */,
+				FA41721E22658F0C0061A3AA /* MMTableView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		FA45864022533E4A00CF66E1 /* Resource */ = {
@@ -309,6 +326,7 @@
 			children = (
 				FAA79A042227DB12000716F8 /* Controller */,
 				FAA79A032227DB12000716F8 /* Model */,
+				FA41721C22658EED0061A3AA /* View */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -367,10 +385,10 @@
 				FA7A75FA224B089E00A1A483 /* MomentMacros.h */,
 				FA7A75FF224B0B5200A1A483 /* MomentConstant.h */,
 				FA7A7600224B0B5200A1A483 /* MomentConstant.m */,
-				8BD194111FE105AE00062E0A /* MLLabelUtil.h */,
-				8BD194121FE105AE00062E0A /* MLLabelUtil.m */,
 				FAAE698722043787005EFFAF /* MomentUtil.h */,
 				FAAE698822043787005EFFAF /* MomentUtil.m */,
+				FAF2948A2264A22700226F8E /* MLLabelUtil.h */,
+				FAF294892264A22700226F8E /* MLLabelUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -494,7 +512,6 @@
 				8B3BA1171FDFE63A00407D25 /* UIView+Geometry.m in Sources */,
 				FA9597762249D425007CD252 /* UIScrollView+Category.m in Sources */,
 				FAA79A072227DB12000716F8 /* MessageViewController.m in Sources */,
-				8BD194131FE105AE00062E0A /* MLLabelUtil.m in Sources */,
 				FAAE6985220426FA005EFFAF /* JKDBModel.m in Sources */,
 				FAAE6984220426FA005EFFAF /* JKDBHelper.m in Sources */,
 				8B3BA16E1FDFEAFD00407D25 /* Utility.m in Sources */,
@@ -509,11 +526,14 @@
 				8B3BA15A1FDFE91400407D25 /* Moment.m in Sources */,
 				FA58E4922205490700B788F8 /* WKWebViewController.m in Sources */,
 				8BF7657C1FE227450064EC94 /* MMImagePreviewView.m in Sources */,
+				FA41721F22658F0C0061A3AA /* MMTableView.m in Sources */,
 				FAA79A0A2227DB22000716F8 /* Message.m in Sources */,
 				FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */,
 				FABE69D82248C21600E574D3 /* MMCommentInputView.m in Sources */,
 				8B3BA1351FDFE72300407D25 /* MainViewController.m in Sources */,
+				FAF29482226474F000226F8E /* MMUserDetailViewController.m in Sources */,
 				FAA79A1F2227E14E000716F8 /* MUser.m in Sources */,
+				FAF2948B2264A22700226F8E /* MLLabelUtil.m in Sources */,
 				FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */,
 				8BE52D151FE35CC200B305C2 /* MMOperateMenuView.m in Sources */,
 				8B3BA0B01FDFE1BF00407D25 /* main.m in Sources */,
@@ -589,7 +609,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -631,7 +651,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -646,7 +666,7 @@
 				DEVELOPMENT_TEAM = GRSZLFFNPH;
 				GCC_PREFIX_HEADER = "MomentKit/MomentKit-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/MomentKit/MomentKit-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lea.MomentKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -661,7 +681,7 @@
 				DEVELOPMENT_TEAM = GRSZLFFNPH;
 				GCC_PREFIX_HEADER = "MomentKit/MomentKit-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/MomentKit/MomentKit-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lea.MomentKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";

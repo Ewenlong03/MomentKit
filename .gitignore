@@ -635,3 +635,4 @@ Pods/Headers/Private/YYText/NSAttributedString+YYText.h
 Pods/Pods.xcodeproj/xcuserdata/macbook.xcuserdatad/xcschemes/UMengAnalytics-NO-IDFA.xcscheme
 Pods/Pods.xcodeproj/xcuserdata/macbook.xcuserdatad/xcschemes/UMengAnalytics-NO-IDFA.xcscheme
 MomentKit.xcworkspace/xcuserdata/macbook.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcworkspacedata

@@ -9,6 +9,7 @@
 #import "MomentViewController.h"
 #import "WKWebViewController.h"
 #import "MMLocationViewController.h"
+#import "MMUserDetailViewController.h"
 #import "MMCommentInputView.h"
 #import "MomentCell.h"
 #import "MomentUtil.h"
@@ -16,7 +17,7 @@
 @interface MomentViewController ()<UITableViewDelegate,UITableViewDataSource,UUActionSheetDelegate,MomentCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray * momentList;  // 朋友圈动态列表
-@property (nonatomic, strong) UITableView * tableView; // 表格
+@property (nonatomic, strong) MMTableView * tableView; // 表格
 @property (nonatomic, strong) UIView * tableHeaderView; // 表头
 @property (nonatomic, strong) MMImageView * coverImageView; // 封面
 @property (nonatomic, strong) MMImageView * avatarImageView; // 当前用户头像
@@ -70,18 +71,11 @@
     [view addSubview:self.avatarImageView];
     self.tableHeaderView = view;
     // 表格
-    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, k_screen_height-k_top_height)];
-    tableView.backgroundColor = [UIColor clearColor];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    tableView.separatorColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
+    MMTableView * tableView = [[MMTableView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, k_screen_height-k_top_height)];
     tableView.separatorInset = UIEdgeInsetsZero;
     tableView.dataSource = self;
     tableView.delegate = self;
-    tableView.estimatedRowHeight = 0;
-    tableView.estimatedSectionHeaderHeight = 0;
-    tableView.estimatedSectionFooterHeight = 0;
     tableView.tableHeaderView = self.tableHeaderView;
-    tableView.tableFooterView = [UIView new];
     [self.view addSubview:tableView];
     self.tableView = tableView;
     // 上拉加载更多
@@ -169,10 +163,12 @@
 {
     switch (operateType)
     {
-        case MMOperateTypeProfile: // 点击用户头像
+        case MMOperateTypeProfile: // 用户详情
         {
-            NSLog(@"击用户头像");
-             break;
+            MMUserDetailViewController * controller = [[MMUserDetailViewController alloc] init];
+            controller.user = cell.moment.user;
+            [self.navigationController pushViewController:controller animated:YES];
+            break;
         }
         case MMOperateTypeDelete: // 删除
         {
@@ -278,7 +274,6 @@
 // 点击高亮文字
 - (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText
 {
-    NSLog(@"点击高亮文字：%@",linkText);
     switch (link.linkType)
     {
         case MLLinkTypeURL: // 链接
@@ -300,8 +295,14 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mailto://%@",linkText]]];
             break;
         }
-        case MLLinkTypeUserHandle: // @
+        case MLLinkTypeOther: // 用户
         {
+            int pk = [link.linkValue intValue];
+            MUser * user = [MUser findByPK:pk];
+            
+            MMUserDetailViewController * controller = [[MMUserDetailViewController alloc] init];
+            controller.user = user;
+            [self.navigationController pushViewController:controller animated:YES];
             break;
         }
         default:
@@ -394,9 +395,7 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSIndexPath * indexPath =  [self.tableView indexPathForRowAtPoint:CGPointMake(scrollView.contentOffset.x, scrollView.contentOffset.y)];
-    MomentCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    cell.menuView.show = NO;
+    [kNotificationCenter postNotificationName:@"ResetMenuView" object:nil];
 }
 
 #pragma mark - lazy load

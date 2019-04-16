@@ -7,11 +7,13 @@
 //
 
 #import "MineViewController.h"
+#import "MMUserDetailViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) MMTableView * tableView;
 @property (nonatomic, strong) NSArray * titles;
+@property (nonatomic, strong) MUser * loginUser;
 
 @end
 
@@ -21,6 +23,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = k_background_color;
+    self.loginUser = [MUser findFirstByCriteria:@"WHERE type = 1"];
     self.titles = [NSArray arrayWithObjects:@[@" "],@[@"钱包"],@[@"收藏",@"相册",@"卡包",@"表情"],@[@"设置"], nil];
     [self.view addSubview:self.tableView];
 }
@@ -29,14 +32,9 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView = [[MMTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.estimatedRowHeight = 0.0;
-        _tableView.estimatedSectionHeaderHeight = 0.0;
-        _tableView.estimatedSectionFooterHeight = 0.0;
     }
     return _tableView;
 }
@@ -63,9 +61,9 @@
     }
     if (indexPath.section == 0) {
         cell.imageView.image = [UIImage imageNamed:@"mine_head"];
-        cell.textLabel.text = @"LEA";
+        cell.textLabel.text = self.loginUser.name;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:20.0];
-        cell.detailTextLabel.text = @"wxid189349546";
+        cell.detailTextLabel.text = self.loginUser.account;
         cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0];
         cell.detailTextLabel.textColor = [UIColor grayColor];
     } else {
@@ -98,6 +96,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section != 0) {
+        return;
+    }
+    MMUserDetailViewController * controller = [[MMUserDetailViewController alloc] init];
+    controller.user = self.loginUser;
+    controller.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark -

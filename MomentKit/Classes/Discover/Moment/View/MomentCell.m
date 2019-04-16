@@ -21,6 +21,15 @@ CGFloat lineSpacing = 5;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self configUI];
+        // 观察者
+        [kNotificationCenter addObserver:self
+                                selector:@selector(resetMenuView)
+                                    name:@"ResetMenuView"
+                                  object:nil];
+        [kNotificationCenter addObserver:self
+                                selector:@selector(resetLinkLabel)
+                                    name:UIMenuControllerWillHideMenuNotification
+                                  object:nil];
     }
     return self;
 }
@@ -34,63 +43,57 @@ CGFloat lineSpacing = 5;
         if ([wSelf.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
             [wSelf.delegate didOperateMoment:wSelf operateType:MMOperateTypeProfile];
         }
-        [wSelf hideMenu];
+        [wSelf resetMenuView];
     }];
     [self.contentView addSubview:_avatarImageView];
     // 名字视图
-    _nameLab = [[UILabel alloc] initWithFrame:CGRectMake(_avatarImageView.right + 10, _avatarImageView.top, kTextWidth, 20)];
-    _nameLab.font = [UIFont boldSystemFontOfSize:17.0];
-    _nameLab.textColor = kHLTextColor;
-    [self.contentView addSubview:_nameLab];
+    _nicknameBtn = [[UIButton alloc] init];
+    _nicknameBtn.tag = MMOperateTypeProfile;
+    _nicknameBtn.titleLabel.font = [UIFont boldSystemFontOfSize:17.0];
+    _nicknameBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [_nicknameBtn setTitleColor:kHLTextColor forState:UIControlStateNormal];
+    [_nicknameBtn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:_nicknameBtn];
     // 正文视图 ↓↓
-    // attributes
-    NSMutableDictionary * linkTextAttributes = [NSMutableDictionary dictionary];
-    [linkTextAttributes setObject:kLinkTextColor forKey:NSForegroundColorAttributeName]; // 前景色
-    NSMutableDictionary * activeLinkTextAttributes = [NSMutableDictionary dictionary];
-    [activeLinkTextAttributes setObject:kLinkTextColor forKey:NSForegroundColorAttributeName]; // 前景色
-    [activeLinkTextAttributes setObject:kHLBgColor forKey:NSBackgroundColorAttributeName]; // 背景色
-
-    _linkLabel = kMLLinkLabel();
+    _linkLabel = kMLLinkLabel(YES);
     _linkLabel.font = kTextFont;
     _linkLabel.delegate = self;
-    _linkLabel.linkTextAttributes = linkTextAttributes;
-    _linkLabel.activeLinkTextAttributes = activeLinkTextAttributes;
     [self.contentView addSubview:_linkLabel];
     // 查看'全文'按钮
     _showAllBtn = [[UIButton alloc] init];
+    _showAllBtn.tag = MMOperateTypeFull;
     _showAllBtn.titleLabel.font = kTextFont;
-    _showAllBtn.backgroundColor = [UIColor clearColor];
     [_showAllBtn setTitle:@"全文" forState:UIControlStateNormal];
     [_showAllBtn setTitle:@"收起" forState:UIControlStateSelected];
     [_showAllBtn setTitleColor:kHLTextColor forState:UIControlStateNormal];
-    [_showAllBtn addTarget:self action:@selector(fullTextClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_showAllBtn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_showAllBtn];
     [_showAllBtn sizeToFit];
     // 图片区
     _imageListView = [[MMImageListView alloc] initWithFrame:CGRectZero];
     [_imageListView setSingleTapHandler:^(MMImageView *imageView) {
-        [wSelf hideMenu];
+        [wSelf resetMenuView];
     }];
     [self.contentView addSubview:_imageListView];
     // 位置视图
     _locationBtn = [[UIButton alloc] init];
-    _locationBtn.backgroundColor = [UIColor clearColor];
+    _locationBtn.tag = MMOperateTypeLocation;
     _locationBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
     [_locationBtn setTitleColor:kHLTextColor forState:UIControlStateNormal];
-    [_locationBtn addTarget:self action:@selector(locationClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_locationBtn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_locationBtn];
     // 时间视图
-    _timeLab = [[UILabel alloc] init];
-    _timeLab.textColor = [UIColor colorWithRed:0.43 green:0.43 blue:0.43 alpha:1.0];
-    _timeLab.font = [UIFont systemFontOfSize:13.0f];
-    [self.contentView addSubview:_timeLab];
+    _timeLabel = [[UILabel alloc] init];
+    _timeLabel.textColor = MMRGBColor(110.f, 110.f, 110.f);
+    _timeLabel.font = [UIFont systemFontOfSize:13.0f];
+    [self.contentView addSubview:_timeLabel];
     // 删除视图
     _deleteBtn = [[UIButton alloc] init];
-    _deleteBtn.backgroundColor = [UIColor clearColor];
+    _deleteBtn.tag = MMOperateTypeDelete;
     _deleteBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
     [_deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
     [_deleteBtn setTitleColor:kHLTextColor forState:UIControlStateNormal];
-    [_deleteBtn addTarget:self action:@selector(deleteClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_deleteBtn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_deleteBtn];
     // 评论视图
     _bgImageView = [[UIImageView alloc] init];
@@ -116,11 +119,16 @@ CGFloat lineSpacing = 5;
     // 头像
     [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:moment.user.portrait] placeholderImage:nil];
     // 昵称
-    _nameLab.text = moment.user.name;
+    [_nicknameBtn setTitle:moment.user.name forState:UIControlStateNormal];
+    [_nicknameBtn sizeToFit];
+    if (_nicknameBtn.width > kTextWidth) {
+        _nicknameBtn.width = kTextWidth;
+    }
+    _nicknameBtn.frame = CGRectMake(_avatarImageView.right + 10, _avatarImageView.top, _nicknameBtn.width, 20);
     // 正文
     _showAllBtn.hidden = YES;
     _linkLabel.hidden = YES;
-    CGFloat bottom = _nameLab.bottom + kPaddingValue;
+    CGFloat bottom = _nicknameBtn.bottom + kPaddingValue;
     CGFloat rowHeight = 0;
     if ([moment.text length])
     {
@@ -140,37 +148,42 @@ CGFloat lineSpacing = 5;
             _showAllBtn.hidden = NO;
             _showAllBtn.selected = _moment.isFullText;
         }
-        _linkLabel.frame = CGRectMake(_nameLab.left, bottom, attrStrSize.width, labHeight);
-        _showAllBtn.frame = CGRectMake(_nameLab.left, _linkLabel.bottom + kArrowHeight, _showAllBtn.width, kMoreLabHeight);
+        _linkLabel.frame = CGRectMake(_nicknameBtn.left, bottom, attrStrSize.width, labHeight);
+        _showAllBtn.frame = CGRectMake(_nicknameBtn.left, _linkLabel.bottom + kArrowHeight, _showAllBtn.width, kMoreLabHeight);
         if (_showAllBtn.hidden) {
             bottom = _linkLabel.bottom + kPaddingValue;
         } else {
             bottom = _showAllBtn.bottom + kPaddingValue;
         }
+        // 添加长按手势
+        if (!_longPress) {
+            _longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressHandler:)];
+        }
+        [_linkLabel addGestureRecognizer:_longPress];
     }
     // 图片
     _imageListView.moment = moment;
     if ([moment.pictureList count] > 0) {
-        _imageListView.origin = CGPointMake(_nameLab.left, bottom);
+        _imageListView.origin = CGPointMake(_nicknameBtn.left, bottom);
         bottom = _imageListView.bottom + kPaddingValue;
     }
     // 位置
-    _timeLab.text = [Utility getMomentTime:moment.time];
-    [_timeLab sizeToFit];
+    _timeLabel.text = [Utility getMomentTime:moment.time];
+    [_timeLabel sizeToFit];
     if (moment.location) {
         [_locationBtn setTitle:moment.location.position forState:UIControlStateNormal];
         [_locationBtn sizeToFit];
         _locationBtn.hidden = NO;
-        _locationBtn.frame = CGRectMake(_nameLab.left, bottom, _locationBtn.width, kTimeLabelH);
+        _locationBtn.frame = CGRectMake(_nicknameBtn.left, bottom, _locationBtn.width, kTimeLabelH);
         bottom = _locationBtn.bottom + kPaddingValue;
     } else {
         _locationBtn.hidden = YES;
     }
-    _timeLab.frame = CGRectMake(_nameLab.left, bottom, _timeLab.width, kTimeLabelH);
-    _deleteBtn.frame = CGRectMake(_timeLab.right + 25, _timeLab.top, 30, kTimeLabelH);
-    bottom = _timeLab.bottom + kPaddingValue;
+    _timeLabel.frame = CGRectMake(_nicknameBtn.left, bottom, _timeLabel.width, kTimeLabelH);
+    _deleteBtn.frame = CGRectMake(_timeLabel.right + 25, _timeLabel.top, 30, kTimeLabelH);
+    bottom = _timeLabel.bottom + kPaddingValue;
     // 操作视图
-    _menuView.frame = CGRectMake(k_screen_width-kOperateWidth-10, _timeLab.top-(kOperateHeight-kTimeLabelH)/2, kOperateWidth, kOperateHeight);
+    _menuView.frame = CGRectMake(k_screen_width-kOperateWidth-10, _timeLabel.top-(kOperateHeight-kTimeLabelH)/2, kOperateWidth, kOperateHeight);
     _menuView.show = NO;
     _menuView.isLike = moment.isLike;
     // 处理评论/赞
@@ -180,11 +193,11 @@ CGFloat lineSpacing = 5;
     [_commentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     // 处理赞
     CGFloat top = 0;
-    CGFloat width = k_screen_width - kRightMargin - _nameLab.left;
+    CGFloat width = k_screen_width - kRightMargin - _nicknameBtn.left;
     if ([moment.likeList count]) {
-        MLLinkLabel * likeLabel = kMLLinkLabel();
+        MLLinkLabel * likeLabel = kMLLinkLabel(NO);
         likeLabel.delegate = self;
-        likeLabel.attributedText = kMLLinkLabelAttributedText(moment);
+        likeLabel.attributedText = kMLLinkAttributedText(moment);
         CGSize attrStrSize = [likeLabel preferredSizeWithMaxWidth:kTextWidth];
         likeLabel.frame = CGRectMake(5, 8, attrStrSize.width, attrStrSize.height);
         [_commentView addSubview:likeLabel];
@@ -197,108 +210,136 @@ CGFloat lineSpacing = 5;
     }
     // 处理评论
     NSInteger count = [moment.commentList count];
-    if (count > 0) {
-        for (NSInteger i = 0; i < count; i ++) {
-            CommentLabel * label = [[CommentLabel alloc] initWithFrame:CGRectMake(0, top, width, 0)];
-            label.comment = [moment.commentList objectAtIndex:i];
-            // 点击评论
-            [label setDidClickText:^(Comment *comment) {
-                // 当前moment相对tableView的frame
-                CGRect rect = [[label superview] convertRect:label.frame toView:self.superview];
-                [AppDelegate sharedInstance].convertRect = rect;
-                
-                if ([self.delegate respondsToSelector:@selector(didOperateMoment:selectComment:)]) {
-                    [self.delegate didOperateMoment:self selectComment:comment];
-                }
-                [self hideMenu];
-            }];
-            // 点击高亮
-            [label setDidClickLinkText:^(MLLink *link, NSString *linkText) {
-                if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
-                    [self.delegate didClickLink:link linkText:linkText];
-                }
-                [self hideMenu];
-            }];
-            [_commentView addSubview:label];
-            // 更新
-            top += label.height;
-        }
+    for (NSInteger i = 0; i < count; i ++) {
+        CommentLabel * label = [[CommentLabel alloc] initWithFrame:CGRectMake(0, top, width, 0)];
+        label.comment = [moment.commentList objectAtIndex:i];
+        // 点击评论
+        [label setDidClickText:^(Comment *comment) {
+            // 当前moment相对tableView的frame
+            CGRect rect = [[label superview] convertRect:label.frame toView:self.superview];
+            [AppDelegate sharedInstance].convertRect = rect;
+            
+            if ([self.delegate respondsToSelector:@selector(didOperateMoment:selectComment:)]) {
+                [self.delegate didOperateMoment:self selectComment:comment];
+            }
+            [self resetMenuView];
+        }];
+        // 点击高亮
+        [label setDidClickLinkText:^(MLLink *link, NSString *linkText) {
+            if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
+                [self.delegate didClickLink:link linkText:linkText];
+            }
+            [self resetMenuView];
+        }];
+        [_commentView addSubview:label];
+        // 更新
+        top += label.height;
     }
     // 更新UI
     if (top > 0) {
-        _bgImageView.frame = CGRectMake(_nameLab.left, bottom, width, top + kArrowHeight);
+        _bgImageView.frame = CGRectMake(_nicknameBtn.left, bottom, width, top + kArrowHeight);
         _bgImageView.image = [[UIImage imageNamed:@"comment_bg"] stretchableImageWithLeftCapWidth:40 topCapHeight:30];
-        _commentView.frame = CGRectMake(_nameLab.left, bottom + kArrowHeight, width, top);
+        _commentView.frame = CGRectMake(_nicknameBtn.left, bottom + kArrowHeight, width, top);
         rowHeight = _commentView.bottom + kBlank;
     } else {
-        rowHeight = _timeLab.bottom + kBlank;
+        rowHeight = _timeLabel.bottom + kBlank;
     }
     // 这样做就是起到缓存行高的作用，省去重复计算!!!
     _moment.rowHeight = rowHeight;
 }
 
 #pragma mark - 点击事件
-// 查看位置
-- (void)locationClicked:(UIButton *)sender
+// 点击昵称/查看位置/查看全文|收起/删除动态
+- (void)buttonClicked:(UIButton *)sender
 {
-    _locationBtn.titleLabel.backgroundColor = kHLBgColor;
+    MMOperateType operateType = sender.tag;
+    // 改变背景色
+    sender.titleLabel.backgroundColor = kHLBgColor;
     GCD_AFTER(0.3, ^{  // 延迟执行
-        _locationBtn.titleLabel.backgroundColor = [UIColor clearColor];
+        sender.titleLabel.backgroundColor = [UIColor clearColor];
+        if (operateType == MMOperateTypeFull) {
+            _moment.isFullText = !_moment.isFullText;
+            [_moment update];
+        }
         if ([self.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
-            [self.delegate didOperateMoment:self operateType:MMOperateTypeLocation];
+            [self.delegate didOperateMoment:self operateType:operateType];
         }
     });
-    [self hideMenu];
-}
-
-// 查看全文/收起
-- (void)fullTextClicked:(UIButton *)sender
-{
-    _showAllBtn.titleLabel.backgroundColor = kHLBgColor;
-    GCD_AFTER(0.3, ^{  // 延迟执行
-        _showAllBtn.titleLabel.backgroundColor = [UIColor clearColor];
-        _moment.isFullText = !_moment.isFullText;
-        [_moment update];
-        if ([self.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
-            [self.delegate didOperateMoment:self operateType:MMOperateTypeFull];
-        }
-    });
-    [self hideMenu];
-}
-
-// 删除动态
-- (void)deleteClicked:(UIButton *)sender
-{
-    _deleteBtn.titleLabel.backgroundColor = [UIColor lightGrayColor];
-    GCD_AFTER(0.3, ^{  // 延迟执行
-        _deleteBtn.titleLabel.backgroundColor = [UIColor clearColor];
-        if ([self.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
-            [self.delegate didOperateMoment:self operateType:MMOperateTypeDelete];
-        }
-    });
-    [self hideMenu];
+    [self resetMenuView];
 }
 
 #pragma mark - MLLinkLabelDelegate
 - (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText linkLabel:(MLLinkLabel *)linkLabel
 {
+    [self resetMenuView];
     // 点击动态正文或者赞高亮
     if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
         [self.delegate didClickLink:link linkText:linkText];
     }
-    [self hideMenu];
 }
 
-#pragma mark - UITouch
+#pragma mark - UIResponder
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self hideMenu];
+    [kNotificationCenter postNotificationName:@"ResetMenuView" object:nil];
 }
 
-// 隐藏评论Menu
-- (void)hideMenu
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    if (self.menuView.show) self.menuView.show = NO;
+    if (action == @selector(copyHandler)) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+#pragma mark - 长按拷贝
+- (void)longPressHandler:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
+    {
+        [self becomeFirstResponder];
+        
+        _linkLabel.backgroundColor = kHLBgColor;
+        CGRect frame = [[_linkLabel superview] convertRect:_linkLabel.frame toView:self];
+        CGRect menuFrame = CGRectMake(frame.origin.x + frame.size.width/2.0, frame.origin.y, 0, 0);
+        if (!_menuController) {
+            UIMenuItem * copyItem = [[UIMenuItem alloc] initWithTitle:@"拷贝" action:@selector(copyHandler)];
+            _menuController = [UIMenuController sharedMenuController];
+            [_menuController setMenuItems:@[copyItem]];
+        }
+        [_menuController setTargetRect:menuFrame inView:self];
+        [_menuController setMenuVisible:YES animated:YES];
+    }
+}
+
+- (void)copyHandler
+{
+    UIPasteboard * pasteboard = [UIPasteboard generalPasteboard];
+    [pasteboard setString:_moment.text];
+    [_menuController setMenuVisible:NO animated:YES];
+}
+
+- (void)resetLinkLabel
+{
+    _linkLabel.backgroundColor = [UIColor clearColor];
+}
+
+- (void)resetMenuView
+{
+    _menuView.show = NO;
+    [_menuController setMenuVisible:NO animated:YES];
+}
+
+#pragma mark -
+- (void)dealloc
+{
+    [kNotificationCenter removeObserver:self];
 }
 
 @end
@@ -310,7 +351,7 @@ CGFloat lineSpacing = 5;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _linkLabel = kMLLinkLabel();
+        _linkLabel = kMLLinkLabel(NO);
         _linkLabel.delegate = self;
         [self addSubview:_linkLabel];
     }
@@ -321,7 +362,7 @@ CGFloat lineSpacing = 5;
 - (void)setComment:(Comment *)comment
 {
     _comment = comment;
-    _linkLabel.attributedText = kMLLinkLabelAttributedText(comment);
+    _linkLabel.attributedText = kMLLinkAttributedText(comment);
     CGSize attrStrSize = [_linkLabel preferredSizeWithMaxWidth:kTextWidth];
     _linkLabel.frame = CGRectMake(5, 3, attrStrSize.width, attrStrSize.height);
     self.height = attrStrSize.height + 5;

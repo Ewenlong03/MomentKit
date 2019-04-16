@@ -21,10 +21,10 @@
 
 // 头像
 @property (nonatomic, strong) MMImageView * avatarImageView;
-// 名称
-@property (nonatomic, strong) UILabel * nameLab;
 // 时间
-@property (nonatomic, strong) UILabel * timeLab;
+@property (nonatomic, strong) UILabel * timeLabel;
+// 名称
+@property (nonatomic, strong) UIButton * nicknameBtn;
 // 位置
 @property (nonatomic, strong) UIButton * locationBtn;
 // 时间
@@ -41,12 +41,15 @@
 @property (nonatomic, strong) UIImageView * bgImageView;
 // 操作视图
 @property (nonatomic, strong) MMOperateMenuView * menuView;
+// 长按手势
+@property (nonatomic, strong) UILongPressGestureRecognizer * longPress;
+// 拷贝Menu
+@property (nonatomic, strong) UIMenuController * menuController;
 
 // 动态
 @property (nonatomic, strong) Moment * moment;
 // 代理
 @property (nonatomic, assign) id<MomentCellDelegate> delegate;
-
 
 @end
 

@@ -25,7 +25,7 @@
     webView.delegate = self;
     webView.displayProgressBar = YES;
     webView.allowsBackForwardNavigationGestures = YES;
-    webView.progressTintColor = [UIColor colorWithRed:30/255.0 green:191.0/255.0 blue:97.0/255.0 alpha:1.0];
+    webView.progressTintColor = MMRGBColor(30.f, 191.f, 97.f); 
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     [self.view addSubview:webView];
 }

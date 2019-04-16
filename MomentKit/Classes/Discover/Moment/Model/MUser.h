@@ -16,8 +16,12 @@
 @property (nonatomic, assign) int type;
 // 名字
 @property (nonatomic, copy) NSString * name;
+// 账号
+@property (nonatomic, copy) NSString * account;
 // 头像路径
 @property (nonatomic, copy) NSString * portrait;
+// 区域
+@property (nonatomic, copy) NSString * region;
 
 @end
 

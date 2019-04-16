@@ -24,8 +24,8 @@
     [super viewDidLoad];
     
     self.tabBar.layer.borderWidth = 0.5;
-    self.tabBar.layer.borderColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.0].CGColor;
-    self.tabBar.tintColor = [UIColor colorWithRed:14.0/255.0 green:178.0/255.0 blue:10.0/255.0 alpha:1.0];
+    self.tabBar.layer.borderColor = MMRGBColor(215.0, 215.0, 215.0).CGColor;
+    self.tabBar.tintColor = MMRGBColor(14.0, 178.0, 10.0);
     [self.tabBar setBackgroundImage:[Utility imageWithRenderColor:[UIColor whiteColor] renderSize:CGSizeMake(3, 3)]];
 
     // 初始化

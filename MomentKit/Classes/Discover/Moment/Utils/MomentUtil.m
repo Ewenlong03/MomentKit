@@ -196,12 +196,15 @@
     {
         // 用户
         MUser * user = [[MUser alloc] init];
+        user.type = 0;
         user.name = [names objectAtIndex:i];
         user.portrait = [images objectAtIndex:i];
+        user.account = @"wxid12345678";
+        user.region = @"浙江 杭州";
         [user save];
         // 消息
         Message * message = [[Message alloc] init];
-        message.time = 1549162615;
+        message.time = 1555382410;
         message.userName = [names objectAtIndex:i];
         message.userPortrait = [images objectAtIndex:i];
         message.content = [contents objectAtIndex:i];
@@ -232,8 +235,10 @@
     
     // 当前用户
     MUser * user = [[MUser alloc] init];
-    user.name = @"LEA";
     user.type = 1;
+    user.name = @"LEA";
+    user.account = @"wxid12345678";
+    user.region = @"浙江 杭州";
     [user save];
     
     // 位置
@@ -254,7 +259,7 @@
         moment.likeIds = [MomentUtil getIdsByMaxPK:arc4random() % 10 + 1];
         moment.commentIds = [MomentUtil getIdsByMaxPK:arc4random() % 5 + 1];
         moment.pictureIds = [MomentUtil getIdsByMaxPK:arc4random() % 9 + 1];
-        moment.time = 1549162615;
+        moment.time = 1555382410;
         moment.singleWidth = 500;
         moment.singleHeight = 302;
         moment.isLike = 0;

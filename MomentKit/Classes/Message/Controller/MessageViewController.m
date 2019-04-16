@@ -12,7 +12,7 @@
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) MMTableView * tableView;
 @property (nonatomic, strong) NSMutableArray * messageList;
 
 @end
@@ -35,12 +35,10 @@
 }
 
 #pragma mark - lazy load
-- (UITableView *)tableView
+- (MMTableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, k_screen_height-k_top_height - k_bar_height)];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView = [[MMTableView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, k_screen_height-k_top_height - k_bar_height)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         
@@ -63,7 +61,6 @@
         searchField.layer.cornerRadius = 5;
         searchField.backgroundColor = [UIColor whiteColor];
         _tableView.tableHeaderView = searchController.searchBar;
-        _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
 }

@@ -11,18 +11,24 @@
 
 @implementation MLLabelUtil
 
-MLLinkLabel *kMLLinkLabel()
+MLLinkLabel *kMLLinkLabel(BOOL isMoment)
 {
+    UIColor * foregroundColor = nil;
+    if (isMoment) {
+        foregroundColor = kLinkTextColor;
+    } else {
+        foregroundColor = kHLTextColor;
+    }
     // 行间距
     NSMutableParagraphStyle * style = [[NSMutableParagraphStyle alloc] init];
     style.lineSpacing = 5;
     // attributes
     NSMutableDictionary * linkTextAttributes = [NSMutableDictionary dictionary];
-    [linkTextAttributes setObject:kHLTextColor forKey:NSForegroundColorAttributeName]; // 前景色
+    [linkTextAttributes setObject:foregroundColor forKey:NSForegroundColorAttributeName]; // 前景色
     [linkTextAttributes setObject:style forKey:NSParagraphStyleAttributeName]; // 行距
-  
+    
     NSMutableDictionary * activeLinkTextAttributes = [NSMutableDictionary dictionary];
-    [activeLinkTextAttributes setObject:kHLTextColor forKey:NSForegroundColorAttributeName]; // 前景色
+    [activeLinkTextAttributes setObject:foregroundColor forKey:NSForegroundColorAttributeName]; // 前景色
     [activeLinkTextAttributes setObject:kHLBgColor forKey:NSBackgroundColorAttributeName]; // 背景色
     [activeLinkTextAttributes setObject:style forKey:NSParagraphStyleAttributeName]; // 行距
     
@@ -37,7 +43,7 @@ MLLinkLabel *kMLLinkLabel()
     return _linkLabel;
 }
 
-NSMutableAttributedString *kMLLinkLabelAttributedText(id object)
+NSMutableAttributedString *kMLLinkAttributedText(id object)
 {
     NSMutableAttributedString *attributedText = nil;
     if ([object isKindOfClass:[Comment class]])
@@ -49,27 +55,27 @@ NSMutableAttributedString *kMLLinkLabelAttributedText(id object)
         {
             NSString * likeString  = [NSString stringWithFormat:@"%@回复%@：%@",fromName,toName,comment.text];
             attributedText = [[NSMutableAttributedString alloc] initWithString:likeString];
-            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:fromName}
-                                    range:[likeString rangeOfString:fromName]];
-            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:toName}
-                                    range:[likeString rangeOfString:toName]];
+            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:[NSString stringWithFormat:@"%d",comment.fromUser.pk]} range:[likeString rangeOfString:fromName]];
+            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:[NSString stringWithFormat:@"%d",comment.toUser.pk]} range:[likeString rangeOfString:toName]];
         } else {
             NSString *likeString  = [NSString stringWithFormat:@"%@：%@",fromName,comment.text];
             attributedText = [[NSMutableAttributedString alloc] initWithString:likeString];
-            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:fromName}
-                                    range:[likeString rangeOfString:fromName]];
+            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:[NSString stringWithFormat:@"%d",comment.fromUser.pk]} range:[likeString rangeOfString:fromName]];
         }
     }
     if ([object isKindOfClass:[Moment class]])
     {
         Moment * moment = (Moment *)object;
         NSString * content = [MomentUtil getLikeString:moment];
-        NSString *likeString = [NSString stringWithFormat:@"[赞] %@",content];
+        NSString * likeString = [NSString stringWithFormat:@"[赞] %@",content];
         attributedText = [[NSMutableAttributedString alloc] initWithString:likeString];
-        NSArray *nameList = [content componentsSeparatedByString:@"，"];
-        for (NSString *name in nameList) {
-            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:name}
-                                    range:[likeString rangeOfString:name]];
+        
+        NSArray * nameList = [content componentsSeparatedByString:@"，"];
+        NSInteger count = [nameList count];
+        for (NSInteger i = 0; i < count; i ++) {
+            NSString * name = [nameList objectAtIndex:i];
+            MUser * user = [moment.likeList objectAtIndex:i];
+            [attributedText setAttributes:@{NSFontAttributeName:kComHLTextFont,NSLinkAttributeName:[NSString stringWithFormat:@"%d",user.pk]} range:[likeString rangeOfString:name]];
         }
         
         // 添加'赞'的图片
@@ -82,6 +88,5 @@ NSMutableAttributedString *kMLLinkLabelAttributedText(id object)
     }
     return attributedText;
 }
-
 
 @end

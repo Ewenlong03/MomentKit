@@ -14,8 +14,8 @@
 @interface MLLabelUtil : NSObject
 
 // 获取linkLabel
-MLLinkLabel *kMLLinkLabel();
+MLLinkLabel *kMLLinkLabel(BOOL isMoment);
 // 获取富文本
-NSMutableAttributedString *kMLLinkLabelAttributedText(id object);
+NSMutableAttributedString *kMLLinkAttributedText(id object);
 
 @end
