@@ -22,14 +22,8 @@ CGFloat lineSpacing = 5;
     if (self) {
         [self configUI];
         // 观察者
-        [kNotificationCenter addObserver:self
-                                selector:@selector(resetMenuView)
-                                    name:@"ResetMenuView"
-                                  object:nil];
-        [kNotificationCenter addObserver:self
-                                selector:@selector(resetLinkLabel)
-                                    name:UIMenuControllerWillHideMenuNotification
-                                  object:nil];
+        MM_AddObserver(self, @selector(resetMenuView), @"ResetMenuView");
+        MM_AddObserver(self, @selector(resetLinkLabel), UIMenuControllerWillHideMenuNotification);
     }
     return self;
 }
@@ -248,6 +242,12 @@ CGFloat lineSpacing = 5;
     _moment.rowHeight = rowHeight;
 }
 
+// 图片渲染
+- (void)loadPicture
+{
+    [_imageListView loadPicture];
+}
+
 #pragma mark - 点击事件
 // 点击昵称/查看位置/查看全文|收起/删除动态
 - (void)buttonClicked:(UIButton *)sender
@@ -256,7 +256,7 @@ CGFloat lineSpacing = 5;
     // 改变背景色
     sender.titleLabel.backgroundColor = kHLBgColor;
     GCD_AFTER(0.3, ^{  // 延迟执行
-        sender.titleLabel.backgroundColor = [UIColor clearColor];
+        sender.titleLabel.backgroundColor = [UIColor whiteColor];
         if (operateType == MMOperateTypeFull) {
             _moment.isFullText = !_moment.isFullText;
             [_moment update];
@@ -281,7 +281,7 @@ CGFloat lineSpacing = 5;
 #pragma mark - UIResponder
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [kNotificationCenter postNotificationName:@"ResetMenuView" object:nil];
+    MM_PostNotification(@"ResetMenuView", nil);
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
@@ -327,7 +327,7 @@ CGFloat lineSpacing = 5;
 
 - (void)resetLinkLabel
 {
-    _linkLabel.backgroundColor = [UIColor clearColor];
+    _linkLabel.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)resetMenuView
@@ -339,7 +339,7 @@ CGFloat lineSpacing = 5;
 #pragma mark -
 - (void)dealloc
 {
-    [kNotificationCenter removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

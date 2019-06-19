@@ -80,7 +80,7 @@
         self.ctHeight = 0;
         self.previousCtHeight = 0;
         // 键盘监听
-        [kNotificationCenter addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+        MM_AddObserver(self, @selector(keyboardFrameChange:), UIKeyboardWillChangeFrameNotification);
     }
     return self;
 }
@@ -205,7 +205,7 @@
 #pragma mark -
 - (void)dealloc
 {
-    [kNotificationCenter removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

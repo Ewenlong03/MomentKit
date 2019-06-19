@@ -15,9 +15,11 @@
 @interface MMImageListView : UIView
 
 // 动态
-@property (nonatomic,strong) Moment * moment;
+@property (nonatomic, strong) Moment * moment;
 // 点击小图
 @property (nonatomic, copy) void (^singleTapHandler)(MMImageView *imageView);
+// 图片渲染
+- (void)loadPicture;
 
 @end
 

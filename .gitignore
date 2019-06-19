@@ -795,3 +795,5 @@ Pods/Headers/Private/SDWebImage/NSBezierPath+RoundedCorners.h
 Pods/Headers/Private/MMWebView/MMWebViewJSBridgeBase.h
 Pods/Headers/Private/MMWebView/MMWebViewJS.h
 Podfile.lock
+MomentKit.xcworkspace/xcuserdata/macbook.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+MomentKit.xcworkspace/xcuserdata/macbook.xcuserdatad/IDEFindNavigatorScopes.plist

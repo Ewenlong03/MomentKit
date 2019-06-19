@@ -13,6 +13,8 @@
 #import "MMCommentInputView.h"
 #import "MomentCell.h"
 #import "MomentUtil.h"
+#import "MMRunLoopWorkDistribution.h"
+#import "MMFPSLabel.h"
 
 @interface MomentViewController ()<UITableViewDelegate,UITableViewDataSource,UUActionSheetDelegate,MomentCellDelegate>
 
@@ -48,7 +50,7 @@
 {
     self.loginUser = [MUser findFirstByCriteria:@"WHERE type = 1"];
     self.momentList = [[NSMutableArray alloc] init];
-    [self.momentList addObjectsFromArray:[MomentUtil getMomentList:0 pageNum:10]];
+    [self.momentList addObjectsFromArray:[MomentUtil getMomentList:0 pageNum:5]];
 }
 
 #pragma mark - UI
@@ -79,9 +81,9 @@
     [self.view addSubview:tableView];
     self.tableView = tableView;
     // 上拉加载更多
-    MJRefreshBackNormalFooter * footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    MJRefreshAutoNormalFooter * footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         Moment * moment = [self.momentList lastObject];
-        NSArray * tempList = [MomentUtil getMomentList:moment.pk pageNum:10];
+        NSArray * tempList = [MomentUtil getMomentList:moment.pk pageNum:5];
         if ([tempList count]) {
             [self.momentList addObjectsFromArray:tempList];
             [self.tableView reloadData];
@@ -90,13 +92,12 @@
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
         }
     }];
-    [footer.arrowView setImage:[UIImage imageNamed:@"refresh_pull"]];
-    [footer setTitle:@"上拉加载更多" forState:MJRefreshStateIdle];
-    [footer setTitle:@"松手加载更多" forState:MJRefreshStatePulling];
-    [footer setTitle:@"正在加载" forState:MJRefreshStateRefreshing];
     [footer setTitle:@"已加载全部" forState:MJRefreshStateNoMoreData];
     footer.stateLabel.font = [UIFont systemFontOfSize:14];
     self.tableView.mj_footer = footer;
+    // 悬浮FPS
+    MMFPSLabel * fpsLabel = [[MMFPSLabel alloc] initWithFrame:CGRectMake(0, 30, 80, 40)];
+    [self.view addSubview:fpsLabel];
 }
 
 #pragma mark - 发布动态
@@ -379,8 +380,17 @@
         cell.backgroundColor = [UIColor whiteColor];
     }
     cell.tag = indexPath.row;
-    cell.moment = [self.momentList objectAtIndex:indexPath.row];
+    cell.moment = [self.momentList objectAtIndex:indexPath.row]; // UITrackingRunLoopMode
     cell.delegate = self;
+    // 停止滚动时渲染图片
+    cell.currentIndexPath = indexPath;
+    [[MMRunLoopWorkDistribution sharedInstance] addTask:^BOOL{ // kCFRunLoopDefaultMode
+        if (![cell.currentIndexPath isEqual:indexPath]) {
+            return NO;
+        }
+        [cell loadPicture];
+        return YES;
+    } withKey:indexPath];
     return cell;
 }
 
@@ -395,7 +405,7 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [kNotificationCenter postNotificationName:@"ResetMenuView" object:nil];
+    MM_PostNotification(@"ResetMenuView", nil);
 }
 
 #pragma mark - lazy load
@@ -403,7 +413,6 @@
 {
     if (!_commentInputView) {
         _commentInputView = [[MMCommentInputView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-      
         WS(wSelf);
         [_commentInputView setMMCompleteInputTextBlock:^(NSString *commentText) { // 完成文本输入
             [wSelf addComment:commentText];

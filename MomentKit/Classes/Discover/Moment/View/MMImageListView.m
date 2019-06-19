@@ -32,6 +32,7 @@
         for (int i = 0; i < 9; i++) {
             MMImageView * imageView = [[MMImageView alloc] initWithFrame:CGRectZero];
             imageView.tag = 1000 + i;
+            imageView.backgroundColor = k_background_color;
             [imageView setClickHandler:^(MMImageView *imageView){
                 [self singleTapSmallViewCallback:imageView];
                 if (self.singleTapHandler) {
@@ -48,6 +49,7 @@
 }
 
 #pragma mark - Setter
+// 图片位置绘制
 - (void)setMoment:(Moment *)moment
 {
     _moment = moment;
@@ -82,16 +84,28 @@
             CGSize singleSize = [Utility getMomentImageSize:CGSizeMake(moment.singleWidth, moment.singleHeight)];
             frame = CGRectMake(0, 0, singleSize.width, singleSize.height);
         }
-        imageView = [self viewWithTag:1000+i];
+        imageView = [self viewWithTag:1000 + i];
         imageView.hidden = NO;
         imageView.frame = frame;
-        // 赋值
-        MPicture * picture = [moment.pictureList objectAtIndex:i];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:picture.thumbnail]
-                     placeholderImage:nil];
     }
     self.width = kTextWidth;
     self.height = imageView.bottom;
+}
+
+// 图片渲染
+- (void)loadPicture
+{
+    // 图片区
+    NSInteger count = [_moment.pictureList count];
+    MMImageView * imageView = nil;
+    for (NSInteger i = 0; i < count; i++)
+    {
+        imageView = [self viewWithTag:1000 + i];
+        // 赋值>图片渲染
+        MPicture * picture = [_moment.pictureList objectAtIndex:i];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:picture.thumbnail]
+                     placeholderImage:nil];
+    }
 }
 
 #pragma mark - 小图单击

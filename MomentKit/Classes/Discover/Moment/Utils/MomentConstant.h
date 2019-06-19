@@ -32,3 +32,5 @@ FOUNDATION_EXTERN CGFloat const MMDelCommentTag;
 
 // 延迟执行
 void GCD_AFTER(CGFloat time,dispatch_block_t block);
+void MM_AddObserver(id observer,SEL aSelector,NSNotificationName aName);
+void MM_PostNotification(NSNotificationName aName,id anObject);

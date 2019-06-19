@@ -15,41 +15,27 @@
 #import "Comment.h"
 
 //#### 动态
-
 @protocol MomentCellDelegate;
 @interface MomentCell : UITableViewCell <MLLinkLabelDelegate>
 
-// 头像
-@property (nonatomic, strong) MMImageView * avatarImageView;
-// 时间
-@property (nonatomic, strong) UILabel * timeLabel;
-// 名称
-@property (nonatomic, strong) UIButton * nicknameBtn;
-// 位置
-@property (nonatomic, strong) UIButton * locationBtn;
-// 时间
-@property (nonatomic, strong) UIButton * deleteBtn;
-// 全文
-@property (nonatomic, strong) UIButton * showAllBtn;
-// 内容
-@property (nonatomic, strong) MLLinkLabel * linkLabel;
-// 图片
-@property (nonatomic, strong) MMImageListView * imageListView;
-// 赞和评论视图
-@property (nonatomic, strong) UIView * commentView;
-// 赞和评论视图背景
-@property (nonatomic, strong) UIImageView * bgImageView;
-// 操作视图
-@property (nonatomic, strong) MMOperateMenuView * menuView;
-// 长按手势
-@property (nonatomic, strong) UILongPressGestureRecognizer * longPress;
-// 拷贝Menu
-@property (nonatomic, strong) UIMenuController * menuController;
+@property (nonatomic, strong) MMImageView * avatarImageView; // 头像
+@property (nonatomic, strong) UILabel * timeLabel; // 时间
+@property (nonatomic, strong) UIButton * nicknameBtn; // 名称
+@property (nonatomic, strong) UIButton * locationBtn; // 位置
+@property (nonatomic, strong) UIButton * deleteBtn; // 时间
+@property (nonatomic, strong) UIButton * showAllBtn; // 全文
+@property (nonatomic, strong) MLLinkLabel * linkLabel; // 内容
+@property (nonatomic, strong) MMImageListView * imageListView; // 图片
+@property (nonatomic, strong) UIView * commentView; // 赞和评论视图
+@property (nonatomic, strong) UIImageView * bgImageView; // 赞和评论视图背景
+@property (nonatomic, strong) MMOperateMenuView * menuView; // 操作视图
+@property (nonatomic, strong) UILongPressGestureRecognizer * longPress; // 长按手势
+@property (nonatomic, strong) UIMenuController * menuController; // 拷贝Menu
 
-// 动态
-@property (nonatomic, strong) Moment * moment;
-// 代理
-@property (nonatomic, assign) id<MomentCellDelegate> delegate;
+@property (nonatomic, strong) Moment * moment; // 动态
+@property (nonatomic, assign) id<MomentCellDelegate> delegate;// 代理
+// 图片渲染
+- (void)loadPicture;
 
 @end
 
