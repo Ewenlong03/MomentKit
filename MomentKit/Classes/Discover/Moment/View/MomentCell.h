@@ -61,9 +61,9 @@
 // 评论
 @property (nonatomic, strong) Comment * comment;
 // 点击评论高亮内容
-@property (nonatomic, copy) void (^didClickLinkText)(MLLink *link , NSString *linkText);
+@property (nonatomic, copy) void (^didClickLinkText)(CommentLabel *commentLab, MLLink *link , NSString *linkText);
 // 点击评论
-@property (nonatomic, copy) void (^didClickText)(Comment *comment);
+@property (nonatomic, copy) void (^didClickText)(CommentLabel *commentLab, Comment *comment);
 
 @end
 

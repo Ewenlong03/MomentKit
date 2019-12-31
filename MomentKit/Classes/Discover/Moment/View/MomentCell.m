@@ -32,7 +32,9 @@ CGFloat lineSpacing = 5;
 {
     WS(wSelf);
     // 头像视图
-    _avatarImageView = [[MMImageView alloc] initWithFrame:CGRectMake(10, kBlank, kAvatarWidth, kAvatarWidth)];
+    _avatarImageView = [[MMImageView alloc] initWithFrame:CGRectMake(kRightMargin, kBlank, kAvatarWidth, kAvatarWidth)];
+    _avatarImageView.layer.cornerRadius = kAvatarWidth/2;
+    
     [_avatarImageView setClickHandler:^(MMImageView *imageView) {
         if ([wSelf.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
             [wSelf.delegate didOperateMoment:wSelf operateType:MMOperateTypeProfile];
@@ -118,11 +120,11 @@ CGFloat lineSpacing = 5;
     if (_nicknameBtn.width > kTextWidth) {
         _nicknameBtn.width = kTextWidth;
     }
-    _nicknameBtn.frame = CGRectMake(_avatarImageView.right + 10, _avatarImageView.top, _nicknameBtn.width, 20);
+    _nicknameBtn.frame = CGRectMake(_avatarImageView.right + 10, _avatarImageView.top+2, _nicknameBtn.width, 20);
     // 正文
     _showAllBtn.hidden = YES;
     _linkLabel.hidden = YES;
-    CGFloat bottom = _nicknameBtn.bottom + kPaddingValue;
+    CGFloat bottom = _avatarImageView.bottom + kPaddingValue;
     CGFloat rowHeight = 0;
     if ([moment.text length])
     {
@@ -142,8 +144,8 @@ CGFloat lineSpacing = 5;
             _showAllBtn.hidden = NO;
             _showAllBtn.selected = _moment.isFullText;
         }
-        _linkLabel.frame = CGRectMake(_nicknameBtn.left, bottom, attrStrSize.width, labHeight);
-        _showAllBtn.frame = CGRectMake(_nicknameBtn.left, _linkLabel.bottom + kArrowHeight, _showAllBtn.width, kMoreLabHeight);
+        _linkLabel.frame = CGRectMake(kLeftMargin, bottom, attrStrSize.width, labHeight);
+        _showAllBtn.frame = CGRectMake(kLeftMargin, _linkLabel.bottom + kArrowHeight, _showAllBtn.width, kMoreLabHeight);
         if (_showAllBtn.hidden) {
             bottom = _linkLabel.bottom + kPaddingValue;
         } else {
@@ -158,7 +160,7 @@ CGFloat lineSpacing = 5;
     // 图片
     _imageListView.moment = moment;
     if ([moment.pictureList count] > 0) {
-        _imageListView.origin = CGPointMake(_nicknameBtn.left, bottom);
+        _imageListView.origin = CGPointMake(kLeftMargin, bottom);
         bottom = _imageListView.bottom + kPaddingValue;
     }
     // 位置
@@ -168,12 +170,12 @@ CGFloat lineSpacing = 5;
         [_locationBtn setTitle:moment.location.position forState:UIControlStateNormal];
         [_locationBtn sizeToFit];
         _locationBtn.hidden = NO;
-        _locationBtn.frame = CGRectMake(_nicknameBtn.left, bottom, _locationBtn.width, kTimeLabelH);
+        _locationBtn.frame = CGRectMake(kLeftMargin, bottom, _locationBtn.width, kTimeLabelH);
         bottom = _locationBtn.bottom + kPaddingValue;
     } else {
         _locationBtn.hidden = YES;
     }
-    _timeLabel.frame = CGRectMake(_nicknameBtn.left, bottom, _timeLabel.width, kTimeLabelH);
+    _timeLabel.frame = CGRectMake(kLeftMargin, bottom, _timeLabel.width, kTimeLabelH);
     _deleteBtn.frame = CGRectMake(_timeLabel.right + 25, _timeLabel.top, 30, kTimeLabelH);
     bottom = _timeLabel.bottom + kPaddingValue;
     // 操作视图
@@ -187,7 +189,7 @@ CGFloat lineSpacing = 5;
     [_commentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     // 处理赞
     CGFloat top = 0;
-    CGFloat width = k_screen_width - kRightMargin - _nicknameBtn.left;
+    CGFloat width = k_screen_width - kRightMargin - kLeftMargin;
     if ([moment.likeList count]) {
         MLLinkLabel * likeLabel = kMLLinkLabel(NO);
         likeLabel.delegate = self;
@@ -205,12 +207,13 @@ CGFloat lineSpacing = 5;
     // 处理评论
     NSInteger count = [moment.commentList count];
     for (NSInteger i = 0; i < count; i ++) {
-        CommentLabel * label = [[CommentLabel alloc] initWithFrame:CGRectMake(0, top, width, 0)];
+        __block CommentLabel * label = [[CommentLabel alloc] initWithFrame:CGRectMake(0, top, width, 0)];
         label.comment = [moment.commentList objectAtIndex:i];
         // 点击评论
-        [label setDidClickText:^(Comment *comment) {
+        
+        [label setDidClickText:^(CommentLabel *commentLab, Comment *comment) {
             // 当前moment相对tableView的frame
-            CGRect rect = [[label superview] convertRect:label.frame toView:self.superview];
+            CGRect rect = [[commentLab superview] convertRect:commentLab.frame toView:self.superview];
             [AppDelegate sharedInstance].convertRect = rect;
             
             if ([self.delegate respondsToSelector:@selector(didOperateMoment:selectComment:)]) {
@@ -219,7 +222,7 @@ CGFloat lineSpacing = 5;
             [self resetMenuView];
         }];
         // 点击高亮
-        [label setDidClickLinkText:^(MLLink *link, NSString *linkText) {
+        [label setDidClickLinkText:^(CommentLabel *commentLab, MLLink *link, NSString *linkText) {
             if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
                 [self.delegate didClickLink:link linkText:linkText];
             }
@@ -231,9 +234,9 @@ CGFloat lineSpacing = 5;
     }
     // 更新UI
     if (top > 0) {
-        _bgImageView.frame = CGRectMake(_nicknameBtn.left, bottom, width, top + kArrowHeight);
+        _bgImageView.frame = CGRectMake(kLeftMargin, bottom, width, top + kArrowHeight);
         _bgImageView.image = [[UIImage imageNamed:@"comment_bg"] stretchableImageWithLeftCapWidth:40 topCapHeight:30];
-        _commentView.frame = CGRectMake(_nicknameBtn.left, bottom + kArrowHeight, width, top);
+        _commentView.frame = CGRectMake(kLeftMargin, bottom + kArrowHeight, width, top);
         rowHeight = _commentView.bottom + kBlank;
     } else {
         rowHeight = _timeLabel.bottom + kBlank;
@@ -372,7 +375,7 @@ CGFloat lineSpacing = 5;
 - (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText linkLabel:(MLLinkLabel *)linkLabel
 {
     if (self.didClickLinkText) {
-        self.didClickLinkText(link,linkText);
+        self.didClickLinkText(self, link,linkText);
     }
 }
 
@@ -387,7 +390,7 @@ CGFloat lineSpacing = 5;
     GCD_AFTER(0.3, ^{  // 延迟执行
         self.backgroundColor = [UIColor clearColor];
         if (self.didClickText) {
-            self.didClickText(_comment);
+            self.didClickText(self, _comment);
         }
     });
 }

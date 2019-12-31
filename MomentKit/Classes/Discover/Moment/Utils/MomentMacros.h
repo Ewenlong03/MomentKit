@@ -34,7 +34,7 @@
 #pragma mark - ------------------ 朋友圈 ------------------
 
 // 头像视图的宽、高
-#define kAvatarWidth            40
+#define kAvatarWidth            48
 // 名字视图高度
 #define kNameLabelH             20
 // 时间视图高度
@@ -48,12 +48,14 @@
 #define kOperateWidth           200
 
 // 顶部和底部的留白
-#define kBlank                  15
+#define kBlank                  20
+
+#define kLeftMargin             16
 // 右侧留白
-#define kRightMargin            15
+#define kRightMargin            16
 
 // 内容视图宽度
-#define kTextWidth              (k_screen_width - 60 - 25)
+#define kTextWidth              (k_screen_width - kLeftMargin*2)
 // 正文字体
 #define kTextFont               [UIFont systemFontOfSize:17.0]
 // 评论字体

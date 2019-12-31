@@ -62,6 +62,7 @@
         self.size = CGSizeZero;
         return;
     }
+    CGFloat imageViewWidth = [self getImageWidthByCount:count];
     // 更新视图数据
     _previewView.pageNum = count;
     _previewView.scrollView.contentSize = CGSizeMake(_previewView.width*count, _previewView.height);
@@ -75,9 +76,9 @@
             rowNum = i / 2;
             colNum = i % 2;
         }
-        CGFloat imageX = colNum * (kImageWidth + kImagePadding);
-        CGFloat imageY = rowNum * (kImageWidth + kImagePadding);
-        CGRect frame = CGRectMake(imageX, imageY, kImageWidth, kImageWidth);
+        CGFloat imageX = colNum * (imageViewWidth + kImagePadding);
+        CGFloat imageY = rowNum * (imageViewWidth + kImagePadding);
+        CGRect frame = CGRectMake(imageX, imageY, imageViewWidth, imageViewWidth);
         
         // 单张图片需计算实际显示size
         if (count == 1) {
@@ -90,6 +91,19 @@
     }
     self.width = kTextWidth;
     self.height = imageView.bottom;
+}
+
+- (CGFloat)getImageWidthByCount:(NSInteger)imageCount {
+    CGFloat ratio = 0.5;
+    if (imageCount == 1) {
+        ratio = 0.5;
+    } else if (imageCount==2 || imageCount==4) {
+        ratio = 0.4;
+    } else {
+        ratio = 0.28;
+    }
+    
+    return k_screen_width * ratio;
 }
 
 // 图片渲染
