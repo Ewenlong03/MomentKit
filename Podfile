@@ -2,7 +2,6 @@ platform :ios, '9.0'
 
 target 'MomentKit' do
   
-  pod "UMengAnalytics-NO-IDFA"
   pod "SDWebImage"
   pod "MJRefresh"
   pod "MLLabel"

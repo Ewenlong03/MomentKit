@@ -50,17 +50,17 @@
         [searchController.searchBar setPositionAdjustment:UIOffsetMake((k_screen_width-60)/2.0, 0) forSearchBarIcon:UISearchBarIconSearch];
         [searchController.searchBar setBackgroundImage:[Utility imageWithRenderColor:k_background_color renderSize:CGSizeMake(1, 1)] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
         [searchController.searchBar sizeToFit];
-        // 输入框
-        UITextField * searchField = [searchController.searchBar valueForKey:@"_searchField"];
-        searchField.borderStyle = UITextBorderStyleNone;
-        searchField.textAlignment = NSTextAlignmentCenter;
-        searchField.textColor = [UIColor grayColor];
-        searchField.font = [UIFont systemFontOfSize:16];
-        searchField.placeholder = @"搜索";
-        searchField.layer.masksToBounds = YES;
-        searchField.layer.cornerRadius = 5;
-        searchField.backgroundColor = [UIColor whiteColor];
-        _tableView.tableHeaderView = searchController.searchBar;
+//        // 输入框
+//        UITextField * searchField = [searchController.searchBar valueForKey:@"_searchField"];
+//        searchField.borderStyle = UITextBorderStyleNone;
+//        searchField.textAlignment = NSTextAlignmentCenter;
+//        searchField.textColor = [UIColor grayColor];
+//        searchField.font = [UIFont systemFontOfSize:16];
+//        searchField.placeholder = @"搜索";
+//        searchField.layer.masksToBounds = YES;
+//        searchField.layer.cornerRadius = 5;
+//        searchField.backgroundColor = [UIColor whiteColor];
+//        _tableView.tableHeaderView = searchController.searchBar;
     }
     return _tableView;
 }

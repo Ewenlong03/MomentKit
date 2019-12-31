@@ -384,7 +384,7 @@
     cell.delegate = self;
     // 停止滚动时渲染图片
     cell.currentIndexPath = indexPath;
-    [[MMRunLoopWorkDistribution sharedInstance] addTask:^BOOL{ // kCFRunLoopDefaultMode
+    [[MMRunLoopWorkDistribution sharedInstance] addTask:^BOOL { // kCFRunLoopDefaultMode
         if (![cell.currentIndexPath isEqual:indexPath]) {
             return NO;
         }
