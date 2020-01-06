@@ -13,11 +13,12 @@
 
 @interface MMOperateMenuView : UIView
 
+@property (nonatomic, assign) BOOL isCommentMenu;
 // 显示|隐藏
 @property (nonatomic, assign) BOOL show;
 // 是否已赞
-@property (nonatomic, assign) BOOL isLike;
-// 赞|评论
+@property (nonatomic, assign) BOOL isReport;
+// 举报|删除
 @property (nonatomic, copy) void (^operateMenu)(MMOperateType operateType);
 
 @end

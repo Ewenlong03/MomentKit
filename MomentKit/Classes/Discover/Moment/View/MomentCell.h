@@ -13,18 +13,25 @@
 #import "MMImageListView.h"
 #import "Moment.h"
 #import "Comment.h"
+#import <YYText/YYText.h>
 
 //#### 动态
 @protocol MomentCellDelegate;
 @interface MomentCell : UITableViewCell <MLLinkLabelDelegate>
 
 @property (nonatomic, strong) MMImageView * avatarImageView; // 头像
-@property (nonatomic, strong) UILabel * timeLabel; // 时间
 @property (nonatomic, strong) UIButton * nicknameBtn; // 名称
+@property (nonatomic, strong) UIImageView *sexImageView;
+@property (nonatomic, strong) UILabel *ageLabel;
 @property (nonatomic, strong) UIButton * locationBtn; // 位置
-@property (nonatomic, strong) UIButton * deleteBtn; // 时间
+//@property (nonatomic, strong) UIButton * deleteBtn; // 删除
+@property (nonatomic, strong) UILabel * timeLabel; // 时间
+@property (nonatomic, strong) UIView *timeBreakReadView;
+@property (nonatomic, strong) UILabel * readLabel; // 阅读量
+@property (nonatomic, strong) UIButton *likeBtn;   //点赞
+@property (nonatomic, strong) UIButton *commentBtn;   //评论
 @property (nonatomic, strong) UIButton * showAllBtn; // 全文
-@property (nonatomic, strong) MLLinkLabel * linkLabel; // 内容
+@property (nonatomic, strong) YYLabel * linkLabel; // 内容
 @property (nonatomic, strong) MMImageListView * imageListView; // 图片
 @property (nonatomic, strong) UIView * commentView; // 赞和评论视图
 @property (nonatomic, strong) UIImageView * bgImageView; // 赞和评论视图背景
@@ -50,6 +57,7 @@
 // 点击高亮文字
 - (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText;
 
+- (void)didClickMoment;
 @end
 
 

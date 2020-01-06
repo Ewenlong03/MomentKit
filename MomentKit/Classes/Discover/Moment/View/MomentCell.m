@@ -8,11 +8,13 @@
 
 #import "MomentCell.h"
 
+#define MomentCellColor  RGB_Hex(0x999999)
+
 #pragma mark - ------------------ 动态 ------------------
 
 // 最大高度限制
 CGFloat maxLimitHeight = 0;
-CGFloat lineSpacing = 5;
+CGFloat lineSpacing = 10;
 
 @implementation MomentCell
 
@@ -45,15 +47,30 @@ CGFloat lineSpacing = 5;
     // 名字视图
     _nicknameBtn = [[UIButton alloc] init];
     _nicknameBtn.tag = MMOperateTypeProfile;
-    _nicknameBtn.titleLabel.font = [UIFont boldSystemFontOfSize:17.0];
+    _nicknameBtn.titleLabel.font = [UIFont fontWithName:PingFangFontSemibold size:14.0];
     _nicknameBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [_nicknameBtn setTitleColor:kHLTextColor forState:UIControlStateNormal];
+    [_nicknameBtn setTitleColor:RGB_Hex(0x333333) forState:UIControlStateNormal];
     [_nicknameBtn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_nicknameBtn];
+    
+    _sexImageView = [[UIImageView alloc] initWithFrame:CGRectMake(_nicknameBtn.left, _nicknameBtn.bottom, 16, 16)];
+    _sexImageView.image = [UIImage imageNamed:@"mine_2_0"];
+    [self.contentView addSubview: _sexImageView];
+    
+    _ageLabel = [[UILabel alloc] initWithFrame:CGRectMake(_sexImageView.right + 8, _sexImageView.top, 60, 16)];
+    _ageLabel.text = @"26岁";
+    _ageLabel.font = [UIFont fontWithName:PingFangFontRegular size:12];
+    _ageLabel.textColor = MomentCellColor;
+    _ageLabel.textAlignment = NSTextAlignmentLeft;
+    [self.contentView addSubview: _ageLabel];
+    
     // 正文视图 ↓↓
-    _linkLabel = kMLLinkLabel(YES);
-    _linkLabel.font = kTextFont;
-    _linkLabel.delegate = self;
+    _linkLabel = kYYLabel(YES);
+    
+    _linkLabel.textTapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+        NSLog(@"tap  text");
+        [wSelf doOperation: MMOperateTypeClickMoment];
+    };
     [self.contentView addSubview:_linkLabel];
     // 查看'全文'按钮
     _showAllBtn = [[UIButton alloc] init];
@@ -74,23 +91,43 @@ CGFloat lineSpacing = 5;
     // 位置视图
     _locationBtn = [[UIButton alloc] init];
     _locationBtn.tag = MMOperateTypeLocation;
-    _locationBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
-    [_locationBtn setTitleColor:kHLTextColor forState:UIControlStateNormal];
+    _locationBtn.layer.cornerRadius = kTimeLabelH/2;
+    _locationBtn.backgroundColor = RGB_Hex(0xF9F9F9);
+    _locationBtn.titleLabel.font = [UIFont fontWithName:PingFangFontRegular size:14.0];
+    [_locationBtn setTitleColor:MomentCellColor forState:UIControlStateNormal];
+    [_locationBtn setImage:[UIImage imageNamed:@"img_address"] forState:UIControlStateNormal];
+    [_locationBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
     [_locationBtn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_locationBtn];
     // 时间视图
     _timeLabel = [[UILabel alloc] init];
-    _timeLabel.textColor = MMRGBColor(110.f, 110.f, 110.f);
-    _timeLabel.font = [UIFont systemFontOfSize:13.0f];
+    _timeLabel.textColor = MomentCellColor;
+    _timeLabel.font = [UIFont fontWithName:PingFangFontRegular size:14.0];
     [self.contentView addSubview:_timeLabel];
-    // 删除视图
-    _deleteBtn = [[UIButton alloc] init];
-    _deleteBtn.tag = MMOperateTypeDelete;
-    _deleteBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
-    [_deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
-    [_deleteBtn setTitleColor:kHLTextColor forState:UIControlStateNormal];
-    [_deleteBtn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:_deleteBtn];
+    //分隔视图
+    _timeBreakReadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 4, 4)];
+    _timeBreakReadView.backgroundColor = RGB_Hex(0xD8D8D8);
+    _timeBreakReadView.layer.cornerRadius = 2.f;
+    [self.contentView addSubview: _timeBreakReadView];
+    //阅读量视图
+    _readLabel = [[UILabel alloc] init];
+    _readLabel.textColor = MomentCellColor;
+    _readLabel.font = [UIFont fontWithName:PingFangFontRegular size:14.0];
+    [self.contentView addSubview:_readLabel];
+    //点赞
+    _likeBtn = [[UIButton alloc] init];
+    _likeBtn.tag = MMOperateTypeLike;
+    [_likeBtn setImage:[UIImage imageNamed:@"moment_like"] forState:UIControlStateNormal];
+    [_likeBtn setImage:[UIImage imageNamed:@"moment_like_hl"] forState:UIControlStateSelected];
+    [_likeBtn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:_likeBtn];
+    //评论
+    _commentBtn = [[UIButton alloc] init];
+    _commentBtn.tag = MMOperateTypeComment;
+    [_commentBtn setImage:[UIImage imageNamed:@"moment_comment"] forState:UIControlStateNormal];
+    [_commentBtn setImage:[UIImage imageNamed:@"moment_comment_hl"] forState:UIControlStateSelected];
+    [_commentBtn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:_commentBtn];
     // 评论视图
     _bgImageView = [[UIImageView alloc] init];
     [self.contentView addSubview:_bgImageView];
@@ -108,6 +145,58 @@ CGFloat lineSpacing = 5;
     maxLimitHeight = (_linkLabel.font.lineHeight + lineSpacing) * 6;
 }
 
+- (NSMutableAttributedString *)subjectTitle:(NSString *)title {
+    
+    NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@""];
+    NSMutableAttributedString *format = [[NSMutableAttributedString alloc] initWithString:@"  "];
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString: title];
+    
+    [one appendAttributedString:format];
+    [one appendAttributedString: attrTitle];
+    [one appendAttributedString: format];
+    //设置字号
+    one.yy_font = [UIFont boldSystemFontOfSize:14];
+    //设置字体颜色红色
+    one.yy_color = RGB_Hex(0x3AA8EF);
+    
+    //字体边框
+    YYTextBorder *border = [YYTextBorder new];
+//    //边框圆角
+    border.cornerRadius = 8;
+    border.fillColor = RGB_Hex(0xE6F5FF);
+//    //边框边距
+    border.insets = UIEdgeInsetsMake(-2, 0, -2, 0);
+//    //边框线宽
+    border.strokeWidth = 0.5;
+//    //边框颜色等于字体颜色
+    border.strokeColor = RGB_Hex(0xE6F5FF);
+    border.lineStyle = YYTextLineStyleSingle;
+    [one setYy_textBackgroundBorder: border];
+
+//    //高亮边框
+//     YYTextBorder *highlightBorder = border.copy;
+//     highlightBorder.strokeWidth = 0;
+//     highlightBorder.strokeColor = one.yy_color;
+//
+//    //填充颜色红色
+//     highlightBorder.fillColor = one.yy_color;
+//
+//    //设置高亮颜色
+//    YYTextHighlight *highlight = [YYTextHighlight new];
+//    [highlight setColor:[UIColor whiteColor]];
+//
+//    //高亮的背景框
+//    [highlight setBackgroundBorder: highlightBorder];
+//
+//    //点击高亮回调
+//    highlight.tapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
+//                NSLog(@"高亮1");
+//            };
+//    [one yy_setTextHighlight: highlight range:[one yy_rangeOfAll]];
+    [one appendAttributedString: format];
+    return one;
+}
+
 #pragma mark - setter
 - (void)setMoment:(Moment *)moment
 {
@@ -120,8 +209,10 @@ CGFloat lineSpacing = 5;
     if (_nicknameBtn.width > kTextWidth) {
         _nicknameBtn.width = kTextWidth;
     }
-    _nicknameBtn.frame = CGRectMake(_avatarImageView.right + 10, _avatarImageView.top+2, _nicknameBtn.width, 20);
+    _nicknameBtn.frame = CGRectMake(_avatarImageView.right + 10, _avatarImageView.left + 4, _nicknameBtn.width, 20);
     // 正文
+    _sexImageView.frame = CGRectMake(_nicknameBtn.left, _avatarImageView.bottom-20, 16, 16);
+    _ageLabel.frame = CGRectMake(_sexImageView.right + 2, _sexImageView.top, 60, 16);
     _showAllBtn.hidden = YES;
     _linkLabel.hidden = YES;
     CGFloat bottom = _avatarImageView.bottom + kPaddingValue;
@@ -129,13 +220,30 @@ CGFloat lineSpacing = 5;
     if ([moment.text length])
     {
         _linkLabel.hidden = NO;
+        NSMutableAttributedString *subject = [self subjectTitle:@"#最美的微笑"];
+        NSMutableAttributedString * attributedText = [[NSMutableAttributedString alloc] initWithString: moment.text];
+        attributedText.yy_font = kTextFont;
+        [subject appendAttributedString: attributedText];
         NSMutableParagraphStyle * style = [[NSMutableParagraphStyle alloc] init];
         style.lineSpacing = lineSpacing;
-        NSMutableAttributedString * attributedText = [[NSMutableAttributedString alloc] initWithString:moment.text];
-        [attributedText addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0,[moment.text length])];
-        _linkLabel.attributedText = attributedText;
+        style.firstLineHeadIndent = 2;
+        [subject addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0,[subject length])];
+
+        YYTextLinePositionSimpleModifier *modifier = [YYTextLinePositionSimpleModifier new];
+        modifier.fixedLineHeight = 24;
+            
+        YYTextContainer *container = [YYTextContainer new];
+        container.size = CGSizeMake(kTextWidth, CGFLOAT_MAX);
+        container.linePositionModifier = modifier;
+            
+        YYTextLayout *layout = [YYTextLayout layoutWithContainer:container text:subject];
+        CGSize attrStrSize = layout.textBoundingSize;
+        _linkLabel.size = attrStrSize;
+        _linkLabel.textLayout = layout;
+        
+        _linkLabel.attributedText = subject;
         // 判断显示'全文'/'收起'
-        CGSize attrStrSize = [_linkLabel preferredSizeWithMaxWidth:kTextWidth];
+        
         CGFloat labHeight = attrStrSize.height;
         if (labHeight > maxLimitHeight) {
             if (!_moment.isFullText) {
@@ -166,22 +274,31 @@ CGFloat lineSpacing = 5;
     // 位置
     _timeLabel.text = [Utility getMomentTime:moment.time];
     [_timeLabel sizeToFit];
+    _readLabel.text = @"23456阅读";
+    [_readLabel sizeToFit];
     if (moment.location) {
-        [_locationBtn setTitle:moment.location.position forState:UIControlStateNormal];
+        [_locationBtn setTitle: moment.location.position forState:UIControlStateNormal];
         [_locationBtn sizeToFit];
         _locationBtn.hidden = NO;
-        _locationBtn.frame = CGRectMake(kLeftMargin, bottom, _locationBtn.width, kTimeLabelH);
+        _locationBtn.frame = CGRectMake(kLeftMargin, bottom, _locationBtn.width+20, kTimeLabelH);
         bottom = _locationBtn.bottom + kPaddingValue;
     } else {
         _locationBtn.hidden = YES;
     }
     _timeLabel.frame = CGRectMake(kLeftMargin, bottom, _timeLabel.width, kTimeLabelH);
-    _deleteBtn.frame = CGRectMake(_timeLabel.right + 25, _timeLabel.top, 30, kTimeLabelH);
-    bottom = _timeLabel.bottom + kPaddingValue;
+    _timeBreakReadView.centerY = _timeLabel.centerY;
+    _timeBreakReadView.left = _timeLabel.right + 6;
+    _readLabel.frame = CGRectMake(_timeBreakReadView.right + 6, _timeLabel.top, _readLabel.width, kTimeLabelH);
+    bottom = _timeLabel.bottom + kPaddingValue ;
+    
+    //点赞视图
+    _likeBtn.frame = CGRectMake(kLeftMargin, bottom, kOperateBtnWidth, kOperateBtnWidth);
+    //评论视图
+    _commentBtn.frame = CGRectMake(_likeBtn.right+45, bottom, kOperateBtnWidth, _likeBtn.height);
     // 操作视图
-    _menuView.frame = CGRectMake(k_screen_width-kOperateWidth-10, _timeLabel.top-(kOperateHeight-kTimeLabelH)/2, kOperateWidth, kOperateHeight);
+    _menuView.frame = CGRectMake(k_screen_width-kOperateWidth-10, _likeBtn.top-(kOperateHeight-kOperateBtnWidth)/2, kOperateWidth, kOperateHeight);
     _menuView.show = NO;
-    _menuView.isLike = moment.isLike;
+    _menuView.isReport = moment.isLike;
     // 处理评论/赞
     _commentView.frame = CGRectZero;
     _bgImageView.frame = CGRectZero;
@@ -190,48 +307,51 @@ CGFloat lineSpacing = 5;
     // 处理赞
     CGFloat top = 0;
     CGFloat width = k_screen_width - kRightMargin - kLeftMargin;
-    if ([moment.likeList count]) {
-        MLLinkLabel * likeLabel = kMLLinkLabel(NO);
-        likeLabel.delegate = self;
-        likeLabel.attributedText = kMLLinkAttributedText(moment);
-        CGSize attrStrSize = [likeLabel preferredSizeWithMaxWidth:kTextWidth];
-        likeLabel.frame = CGRectMake(5, 8, attrStrSize.width, attrStrSize.height);
-        [_commentView addSubview:likeLabel];
-        // 分割线
-        UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, likeLabel.bottom + 7, width, 0.5)];
-        line.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
-        [_commentView addSubview:line];
-        // 更新
-        top = attrStrSize.height + 15;
-    }
-    // 处理评论
-    NSInteger count = [moment.commentList count];
-    for (NSInteger i = 0; i < count; i ++) {
-        __block CommentLabel * label = [[CommentLabel alloc] initWithFrame:CGRectMake(0, top, width, 0)];
-        label.comment = [moment.commentList objectAtIndex:i];
-        // 点击评论
-        
-        [label setDidClickText:^(CommentLabel *commentLab, Comment *comment) {
-            // 当前moment相对tableView的frame
-            CGRect rect = [[commentLab superview] convertRect:commentLab.frame toView:self.superview];
-            [AppDelegate sharedInstance].convertRect = rect;
+    if (moment.showCommentView) {
+        if ([moment.likeList count]) {
+            MLLinkLabel * likeLabel = kMLLinkLabel(NO);
+            likeLabel.delegate = self;
+            likeLabel.attributedText = kMLLinkAttributedText(moment);
+            CGSize attrStrSize = [likeLabel preferredSizeWithMaxWidth:kTextWidth];
+            likeLabel.frame = CGRectMake(5, 8, attrStrSize.width, attrStrSize.height);
+            [_commentView addSubview:likeLabel];
+            // 分割线
+            UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, likeLabel.bottom + 7, width, 0.5)];
+            line.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3];
+            [_commentView addSubview:line];
+            // 更新
+            top = attrStrSize.height + 15;
+        }
+        // 处理评论
+        NSInteger count = [moment.commentList count];
+        for (NSInteger i = 0; i < count; i ++) {
+            __block CommentLabel * label = [[CommentLabel alloc] initWithFrame:CGRectMake(0, top, width, 0)];
+            label.comment = [moment.commentList objectAtIndex:i];
+            // 点击评论
             
-            if ([self.delegate respondsToSelector:@selector(didOperateMoment:selectComment:)]) {
-                [self.delegate didOperateMoment:self selectComment:comment];
-            }
-            [self resetMenuView];
-        }];
-        // 点击高亮
-        [label setDidClickLinkText:^(CommentLabel *commentLab, MLLink *link, NSString *linkText) {
-            if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
-                [self.delegate didClickLink:link linkText:linkText];
-            }
-            [self resetMenuView];
-        }];
-        [_commentView addSubview:label];
-        // 更新
-        top += label.height;
+            [label setDidClickText:^(CommentLabel *commentLab, Comment *comment) {
+                // 当前moment相对tableView的frame
+                CGRect rect = [[commentLab superview] convertRect:commentLab.frame toView:self.superview];
+                [AppDelegate sharedInstance].convertRect = rect;
+                
+                if ([self.delegate respondsToSelector:@selector(didOperateMoment:selectComment:)]) {
+                    [self.delegate didOperateMoment:self selectComment:comment];
+                }
+                [self resetMenuView];
+            }];
+            // 点击高亮
+            [label setDidClickLinkText:^(CommentLabel *commentLab, MLLink *link, NSString *linkText) {
+                if ([self.delegate respondsToSelector:@selector(didClickLink:linkText:)]) {
+                    [self.delegate didClickLink:link linkText:linkText];
+                }
+                [self resetMenuView];
+            }];
+            [_commentView addSubview:label];
+            // 更新
+            top += label.height;
+        }
     }
+    
     // 更新UI
     if (top > 0) {
         _bgImageView.frame = CGRectMake(kLeftMargin, bottom, width, top + kArrowHeight);
@@ -239,7 +359,7 @@ CGFloat lineSpacing = 5;
         _commentView.frame = CGRectMake(kLeftMargin, bottom + kArrowHeight, width, top);
         rowHeight = _commentView.bottom + kBlank;
     } else {
-        rowHeight = _timeLabel.bottom + kBlank;
+        rowHeight = _likeBtn.bottom + kBlank;
     }
     // 这样做就是起到缓存行高的作用，省去重复计算!!!
     _moment.rowHeight = rowHeight;
@@ -269,6 +389,15 @@ CGFloat lineSpacing = 5;
         }
     });
     [self resetMenuView];
+}
+
+- (void)doOperation:(MMOperateType)operateType {
+    
+    [self resetMenuView];
+    
+    if ([self.delegate respondsToSelector:@selector(didOperateMoment:operateType:)]) {
+        [self.delegate didOperateMoment:self operateType:operateType];
+    }
 }
 
 #pragma mark - MLLinkLabelDelegate
@@ -324,7 +453,7 @@ CGFloat lineSpacing = 5;
 - (void)copyHandler
 {
     UIPasteboard * pasteboard = [UIPasteboard generalPasteboard];
-    [pasteboard setString:_moment.text];
+    [pasteboard setString: _moment.text];
     [_menuController setMenuVisible:NO animated:YES];
 }
 
@@ -399,5 +528,4 @@ CGFloat lineSpacing = 5;
 {
     self.backgroundColor = [UIColor clearColor];
 }
-
 @end

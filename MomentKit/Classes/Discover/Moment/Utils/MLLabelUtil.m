@@ -43,6 +43,36 @@ MLLinkLabel *kMLLinkLabel(BOOL isMoment)
     return _linkLabel;
 }
 
+YYLabel *kYYLabel(BOOL isMoment)
+{
+    UIColor * foregroundColor = nil;
+    if (isMoment) {
+        foregroundColor = kLinkTextColor;
+    } else {
+        foregroundColor = kHLTextColor;
+    }
+    // 行间距
+    NSMutableParagraphStyle * style = [[NSMutableParagraphStyle alloc] init];
+    style.lineSpacing = 5;
+    // attributes
+    NSMutableDictionary * linkTextAttributes = [NSMutableDictionary dictionary];
+    [linkTextAttributes setObject:foregroundColor forKey:NSForegroundColorAttributeName]; // 前景色
+    [linkTextAttributes setObject:style forKey:NSParagraphStyleAttributeName]; // 行距
+    
+    NSMutableDictionary * activeLinkTextAttributes = [NSMutableDictionary dictionary];
+    [activeLinkTextAttributes setObject:foregroundColor forKey:NSForegroundColorAttributeName]; // 前景色
+    [activeLinkTextAttributes setObject:kHLBgColor forKey:NSBackgroundColorAttributeName]; // 背景色
+    [activeLinkTextAttributes setObject:style forKey:NSParagraphStyleAttributeName]; // 行距
+    
+    YYLabel *_linkLabel = [YYLabel new];
+    _linkLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    _linkLabel.textColor = [UIColor blackColor];
+    _linkLabel.font = kTextFont;
+    _linkLabel.numberOfLines = 0;
+
+    return _linkLabel;
+}
+
 NSMutableAttributedString *kMLLinkAttributedText(id object)
 {
     NSMutableAttributedString *attributedText = nil;

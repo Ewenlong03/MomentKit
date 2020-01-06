@@ -171,7 +171,7 @@
             [self.navigationController pushViewController:controller animated:YES];
             break;
         }
-        case MMOperateTypeDelete: // 删除
+        case MMOperateTypeDeleteMoment: // 删除
         {
             UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"确定删除吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -250,6 +250,9 @@
             }
             break;
         }
+        case MMOperateTypeClickMoment: //跳转到动态详情
+            
+            break;
         default:
             break;
     }

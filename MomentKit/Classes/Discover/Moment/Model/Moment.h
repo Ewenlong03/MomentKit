@@ -16,6 +16,7 @@
 
 @interface Moment : JKDBModel
 
+@property (nonatomic, assign) BOOL showCommentView;
 // 正文
 @property (nonatomic, copy) NSString * text;
 // 发布时间戳

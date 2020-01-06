@@ -12,8 +12,8 @@
 
 @property (nonatomic, strong) UIView * menuView;
 @property (nonatomic, strong) UIButton * menuBtn;
-@property (nonatomic, strong) UIButton * likeBtn;
-@property (nonatomic, strong) UIButton * commentBtn;
+@property (nonatomic, strong) UIButton * reportBtn;
+@property (nonatomic, strong) UIButton * deleteBtn;
 
 @end
 
@@ -38,29 +38,26 @@
     view.layer.cornerRadius = 4.0;
     view.layer.masksToBounds = YES;
     [self addSubview:view];
-    // 点赞
+    // 举报
     MMOperateMenuButton *btn = [[MMOperateMenuButton alloc] initWithFrame:CGRectMake(0, 0, view.width/2, kOperateHeight)];
-    btn.tag = MMOperateTypeLike;
+    btn.tag = MMOperateTypeReport;
     btn.allowAnimation = YES;
-    [btn setTitle:@"赞" forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"moment_like"] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"moment_like_hl"] forState:UIControlStateHighlighted];
+    [btn setTitle:@"举报" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:btn];
-    self.likeBtn = btn;
+    self.reportBtn = btn;
     // 分割线
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(btn.right-5, 8, 0.5, kOperateHeight-16)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(btn.right+0.5, 8, 0.5, kOperateHeight-16)];
     line.backgroundColor = MMRGBColor(50.f, 50.f, 50.f);
     [view addSubview:line];
-    // 评论
+    // 删除
     btn = [[MMOperateMenuButton alloc] initWithFrame:CGRectMake(line.right, 0, btn.width, kOperateHeight)];
-    btn.tag = MMOperateTypeComment;
-    [btn setTitle:@"评论" forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"moment_comment"] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"moment_comment_hl"] forState:UIControlStateHighlighted];
+    btn.tag = self.isCommentMenu ? MMOperateTypeDeleteComment : MMOperateTypeDeleteMoment;
+    [btn setTitle:@"删除" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:btn];
-    self.commentBtn = btn;
+    self.deleteBtn = btn;
+    
     self.menuView = view;
     // 菜单操作按钮
     UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(kOperateWidth-kOperateBtnWidth, 0, kOperateBtnWidth, kOperateHeight)];
@@ -85,12 +82,12 @@
     self.menuView.left = menu_left;
 }
 
-- (void)setIsLike:(BOOL)isLike
+- (void)setIsReport:(BOOL)isReport
 {
-    if (isLike) {
-        [self.likeBtn setTitle:@"取消" forState:UIControlStateNormal];
+    if (isReport) {
+        [self.reportBtn setTitle:@"已举报" forState:UIControlStateNormal];
     } else {
-        [self.likeBtn setTitle:@"赞" forState:UIControlStateNormal];
+        [self.reportBtn setTitle:@"举报" forState:UIControlStateNormal];
     }
 }
 

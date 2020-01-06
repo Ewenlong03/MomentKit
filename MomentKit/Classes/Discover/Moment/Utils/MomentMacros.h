@@ -38,14 +38,14 @@
 // 名字视图高度
 #define kNameLabelH             20
 // 时间视图高度
-#define kTimeLabelH             15
+#define kTimeLabelH             24
 
 // 操作按钮的宽度
 #define kOperateBtnWidth        30
 // 操作视图的高度
-#define kOperateHeight          38
+#define kOperateHeight          40
 // 操作视图的高度
-#define kOperateWidth           200
+#define kOperateWidth           160
 
 // 顶部和底部的留白
 #define kBlank                  20
@@ -57,11 +57,11 @@
 // 内容视图宽度
 #define kTextWidth              (k_screen_width - kLeftMargin*2)
 // 正文字体
-#define kTextFont               [UIFont systemFontOfSize:17.0]
+#define kTextFont               [UIFont systemFontOfSize:16.0]
 // 评论字体
-#define kComTextFont            [UIFont systemFontOfSize:16.0]
+#define kComTextFont            [UIFont systemFontOfSize:14.0]
 // 评论高亮字体
-#define kComHLTextFont          [UIFont boldSystemFontOfSize:16.0]
+#define kComHLTextFont          [UIFont boldSystemFontOfSize:14.0]
 // 主色调高亮颜色（暗蓝色）
 #define kHLTextColor            [UIColor colorWithRed:0.28 green:0.35 blue:0.54 alpha:1.0]
 // 正文高亮颜色（蓝色）

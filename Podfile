@@ -10,6 +10,6 @@ target 'MomentKit' do
   pod "AMap3DMap"
   pod "UUActionSheet"
   pod "UUButton"
-  pod "MMWebView"
+  pod 'Masonry'
 
 end

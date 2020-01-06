@@ -12,10 +12,13 @@
 typedef NS_ENUM(NSInteger, MMOperateType) {
     MMOperateTypeLike = 1,      // 点赞
     MMOperateTypeComment,       // 评论
-    MMOperateTypeDelete,        // 删除
+    MMOperateTypeDeleteMoment, // 删除动态
     MMOperateTypeLocation,      // 位置
     MMOperateTypeFull,          // 显示全文
     MMOperateTypeProfile,       // 用户详情
+    MMOperateTypeReport,        //举报
+    MMOperateTypeDeleteComment, // 删除评论
+    MMOperateTypeClickMoment
 };
 
 // 容器最小高度

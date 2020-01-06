@@ -10,11 +10,14 @@
 #import <MLLabel/MLLinkLabel.h>
 #import "Moment.h"
 #import "Comment.h"
+#import <YYText/YYLabel.h>
 
 @interface MLLabelUtil : NSObject
 
-// 获取linkLabel
+// 获取ML_linkLabel
 MLLinkLabel *kMLLinkLabel(BOOL isMoment);
+// 获取yy_linkLabel
+YYLabel *kYYLabel(BOOL isMoment);
 // 获取富文本
 NSMutableAttributedString *kMLLinkAttributedText(id object);
 

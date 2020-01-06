@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		367CD8A423BF24B3004E437C /* MMCellTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 367CD8A323BF24B3004E437C /* MMCellTopView.m */; };
+		367CD8A723BF25A7004E437C /* MMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 367CD8A623BF25A7004E437C /* MMImageView.m */; };
+		367CD8AA23BF31A5004E437C /* UIView+HLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 367CD8A923BF31A5004E437C /* UIView+HLExtension.m */; };
 		36DF825823B4D81D0042D4F5 /* MMWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DF825323B4D81D0042D4F5 /* MMWebView.m */; };
 		36DF825923B4D81D0042D4F5 /* MMWebViewJS.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DF825423B4D81D0042D4F5 /* MMWebViewJS.m */; };
 		36DF825A23B4D81D0042D4F5 /* MMWebViewJSBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DF825523B4D81D0042D4F5 /* MMWebViewJSBridgeBase.m */; };
@@ -55,6 +58,12 @@
 
 /* Begin PBXFileReference section */
 		2A914DEBA05CE3BE1B2BF4BF /* Pods-MomentKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomentKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-MomentKit/Pods-MomentKit.release.xcconfig"; sourceTree = "<group>"; };
+		367CD8A223BF24B3004E437C /* MMCellTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCellTopView.h; sourceTree = "<group>"; };
+		367CD8A323BF24B3004E437C /* MMCellTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMCellTopView.m; sourceTree = "<group>"; };
+		367CD8A523BF25A7004E437C /* MMImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMImageView.h; sourceTree = "<group>"; };
+		367CD8A623BF25A7004E437C /* MMImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMImageView.m; sourceTree = "<group>"; };
+		367CD8A823BF31A5004E437C /* UIView+HLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLExtension.h"; sourceTree = "<group>"; };
+		367CD8A923BF31A5004E437C /* UIView+HLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLExtension.m"; sourceTree = "<group>"; };
 		36DF825223B4D81D0042D4F5 /* MMWebViewJSBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWebViewJSBridgeBase.h; sourceTree = "<group>"; };
 		36DF825323B4D81D0042D4F5 /* MMWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWebView.m; sourceTree = "<group>"; };
 		36DF825423B4D81D0042D4F5 /* MMWebViewJS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWebViewJS.m; sourceTree = "<group>"; };
@@ -230,6 +239,8 @@
 		8B3BA1141FDFE62600407D25 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				367CD8A823BF31A5004E437C /* UIView+HLExtension.h */,
+				367CD8A923BF31A5004E437C /* UIView+HLExtension.m */,
 				FAAE697F220426EE005EFFAF /* JKDBModel */,
 				8B3BA16C1FDFEAFD00407D25 /* Utility.h */,
 				8B3BA16D1FDFEAFD00407D25 /* Utility.m */,
@@ -303,6 +314,10 @@
 				FABE69D72248C21600E574D3 /* MMCommentInputView.m */,
 				FA7CB05322B8D4AB003E91CC /* MMFPSLabel.h */,
 				FA7CB05422B8D4AB003E91CC /* MMFPSLabel.m */,
+				367CD8A223BF24B3004E437C /* MMCellTopView.h */,
+				367CD8A323BF24B3004E437C /* MMCellTopView.m */,
+				367CD8A523BF25A7004E437C /* MMImageView.h */,
+				367CD8A623BF25A7004E437C /* MMImageView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -553,6 +568,7 @@
 				FAA79A222227E159000716F8 /* MPicture.m in Sources */,
 				FAAE698922043787005EFFAF /* MomentUtil.m in Sources */,
 				FAA79A012227DB00000716F8 /* ContactsViewController.m in Sources */,
+				367CD8A423BF24B3004E437C /* MMCellTopView.m in Sources */,
 				8B3BA1581FDFE91400407D25 /* MomentViewController.m in Sources */,
 				FA58E4AD2205784500B788F8 /* MineViewController.m in Sources */,
 				FAFA5FFC2251E29800129168 /* MLocation.m in Sources */,
@@ -566,6 +582,8 @@
 				36DF825923B4D81D0042D4F5 /* MMWebViewJS.m in Sources */,
 				FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */,
 				FABE69D82248C21600E574D3 /* MMCommentInputView.m in Sources */,
+				367CD8AA23BF31A5004E437C /* UIView+HLExtension.m in Sources */,
+				367CD8A723BF25A7004E437C /* MMImageView.m in Sources */,
 				8B3BA1351FDFE72300407D25 /* MainViewController.m in Sources */,
 				FAF29482226474F000226F8E /* MMUserDetailViewController.m in Sources */,
 				36DF825823B4D81D0042D4F5 /* MMWebView.m in Sources */,
