@@ -6,24 +6,19 @@
 //  Copyright © 2017年 LEA. All rights reserved.
 //
 
-#import "MomentViewController.h"
+#import "MomentDetailViewController.h"
 #import "WKWebViewController.h"
 #import "MMLocationViewController.h"
 #import "MMUserDetailViewController.h"
-#import "MomentDetailViewController.h"
 #import "MMCommentInputView.h"
 #import "MomentCell.h"
 #import "MomentUtil.h"
 #import "MMRunLoopWorkDistribution.h"
-#import "MMFPSLabel.h"
 
-@interface MomentViewController ()<UITableViewDelegate,UITableViewDataSource,UUActionSheetDelegate,MomentCellDelegate>
+@interface MomentDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UUActionSheetDelegate,MomentCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray * momentList;  // 朋友圈动态列表
 @property (nonatomic, strong) MMTableView * tableView; // 表格
-@property (nonatomic, strong) UIView * tableHeaderView; // 表头
-@property (nonatomic, strong) MMImageView * coverImageView; // 封面
-@property (nonatomic, strong) MMImageView * avatarImageView; // 当前用户头像
 @property (nonatomic, strong) MMCommentInputView * commentInputView; // 评论输入框
 @property (nonatomic, strong) MomentCell * operateCell; // 当前操作朋友圈动态
 @property (nonatomic, strong) Comment * operateComment; // 当前操作评论
@@ -33,14 +28,13 @@
 
 @end
 
-@implementation MomentViewController
+@implementation MomentDetailViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"好友动态";
+    self.title = @"动态详情";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"moment_camera"] style:UIBarButtonItemStylePlain target:self action:@selector(addMoment)];
     
     [self configData];
     [self configUI];
@@ -50,55 +44,18 @@
 - (void)configData
 {
     self.loginUser = [MUser findFirstByCriteria:@"WHERE type = 1"];
-    self.momentList = [[NSMutableArray alloc] init];
-    [self.momentList addObjectsFromArray:[MomentUtil getMomentList:0 pageNum:5]];
 }
 
 #pragma mark - UI
 - (void)configUI
 {
-    // 封面
-    MMImageView * imageView = [[MMImageView alloc] initWithFrame:CGRectMake(0, -k_top_height, k_screen_width, 270)];
-    imageView.image = [UIImage imageNamed:@"moment_cover"];
-    self.coverImageView = imageView;
-    // 用户头像
-    imageView = [[MMImageView alloc] initWithFrame:CGRectMake(k_screen_width-85, self.coverImageView.bottom-40, 75, 75)];
-    imageView.layer.borderColor = [[UIColor whiteColor] CGColor];
-    imageView.layer.borderWidth = 2;
-    imageView.image = [UIImage imageNamed:@"moment_head"];
-    self.avatarImageView = imageView;
-    // 表头
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, 270)];
-    view.userInteractionEnabled = YES;
-    [view addSubview:self.coverImageView];
-    [view addSubview:self.avatarImageView];
-    self.tableHeaderView = view;
     // 表格
     MMTableView * tableView = [[MMTableView alloc] initWithFrame:CGRectMake(0, 0, k_screen_width, k_screen_height-k_top_height)];
     tableView.separatorInset = UIEdgeInsetsZero;
     tableView.dataSource = self;
     tableView.delegate = self;
-    tableView.tableHeaderView = self.tableHeaderView;
     [self.view addSubview:tableView];
     self.tableView = tableView;
-    // 上拉加载更多
-    MJRefreshAutoNormalFooter * footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        Moment * moment = [self.momentList lastObject];
-        NSArray * tempList = [MomentUtil getMomentList:moment.pk pageNum:5];
-        if ([tempList count]) {
-            [self.momentList addObjectsFromArray:tempList];
-            [self.tableView reloadData];
-            [tableView.mj_footer endRefreshing];
-        } else {
-            [self.tableView.mj_footer endRefreshingWithNoMoreData];
-        }
-    }];
-    [footer setTitle:@"已加载全部" forState:MJRefreshStateNoMoreData];
-    footer.stateLabel.font = [UIFont systemFontOfSize:14];
-    self.tableView.mj_footer = footer;
-    // 悬浮FPS
-    MMFPSLabel * fpsLabel = [[MMFPSLabel alloc] initWithFrame:CGRectMake(0, 30, 80, 40)];
-    [self.view addSubview:fpsLabel];
 }
 
 #pragma mark - 发布动态
@@ -252,12 +209,7 @@
             break;
         }
         case MMOperateTypeClickMoment: //跳转到动态详情
-        {
-            MomentDetailViewController *vc = [MomentDetailViewController new];
-            vc.moment = cell.moment;
-            vc.moment.showCommentView = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+            
             break;
         default:
             break;
@@ -376,7 +328,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.momentList count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -389,7 +341,7 @@
         cell.backgroundColor = [UIColor whiteColor];
     }
     cell.tag = indexPath.row;
-    cell.moment = [self.momentList objectAtIndex:indexPath.row]; // UITrackingRunLoopMode
+    cell.moment = self.moment; // UITrackingRunLoopMode
     cell.delegate = self;
     // 停止滚动时渲染图片
     cell.currentIndexPath = indexPath;
@@ -407,7 +359,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // 使用缓存行高，避免计算多次
-    Moment * moment = [self.momentList objectAtIndex:indexPath.row];
+    Moment * moment = self.moment;
     return moment.rowHeight;
 }
 

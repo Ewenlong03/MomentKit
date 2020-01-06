@@ -295,6 +295,7 @@ CGFloat lineSpacing = 10;
     _likeBtn.frame = CGRectMake(kLeftMargin, bottom, kOperateBtnWidth, kOperateBtnWidth);
     //评论视图
     _commentBtn.frame = CGRectMake(_likeBtn.right+45, bottom, kOperateBtnWidth, _likeBtn.height);
+    bottom = _likeBtn.bottom + kPaddingValue ;
     // 操作视图
     _menuView.frame = CGRectMake(k_screen_width-kOperateWidth-10, _likeBtn.top-(kOperateHeight-kOperateBtnWidth)/2, kOperateWidth, kOperateHeight);
     _menuView.show = NO;
@@ -307,6 +308,7 @@ CGFloat lineSpacing = 10;
     // 处理赞
     CGFloat top = 0;
     CGFloat width = k_screen_width - kRightMargin - kLeftMargin;
+    
     if (moment.showCommentView) {
         if ([moment.likeList count]) {
             MLLinkLabel * likeLabel = kMLLinkLabel(NO);

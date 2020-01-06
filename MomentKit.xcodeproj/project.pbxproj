@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		367CD8A423BF24B3004E437C /* MMCellTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 367CD8A323BF24B3004E437C /* MMCellTopView.m */; };
 		367CD8A723BF25A7004E437C /* MMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 367CD8A623BF25A7004E437C /* MMImageView.m */; };
-		367CD8AA23BF31A5004E437C /* UIView+HLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 367CD8A923BF31A5004E437C /* UIView+HLExtension.m */; };
+		36A7B1EB23C317A000259F30 /* MomentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A7B1EA23C317A000259F30 /* MomentDetailViewController.m */; };
 		36DF825823B4D81D0042D4F5 /* MMWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DF825323B4D81D0042D4F5 /* MMWebView.m */; };
 		36DF825923B4D81D0042D4F5 /* MMWebViewJS.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DF825423B4D81D0042D4F5 /* MMWebViewJS.m */; };
 		36DF825A23B4D81D0042D4F5 /* MMWebViewJSBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DF825523B4D81D0042D4F5 /* MMWebViewJSBridgeBase.m */; };
@@ -62,8 +62,8 @@
 		367CD8A323BF24B3004E437C /* MMCellTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMCellTopView.m; sourceTree = "<group>"; };
 		367CD8A523BF25A7004E437C /* MMImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMImageView.h; sourceTree = "<group>"; };
 		367CD8A623BF25A7004E437C /* MMImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMImageView.m; sourceTree = "<group>"; };
-		367CD8A823BF31A5004E437C /* UIView+HLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLExtension.h"; sourceTree = "<group>"; };
-		367CD8A923BF31A5004E437C /* UIView+HLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLExtension.m"; sourceTree = "<group>"; };
+		36A7B1E923C317A000259F30 /* MomentDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentDetailViewController.h; sourceTree = "<group>"; };
+		36A7B1EA23C317A000259F30 /* MomentDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentDetailViewController.m; sourceTree = "<group>"; };
 		36DF825223B4D81D0042D4F5 /* MMWebViewJSBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWebViewJSBridgeBase.h; sourceTree = "<group>"; };
 		36DF825323B4D81D0042D4F5 /* MMWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWebView.m; sourceTree = "<group>"; };
 		36DF825423B4D81D0042D4F5 /* MMWebViewJS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWebViewJS.m; sourceTree = "<group>"; };
@@ -239,8 +239,6 @@
 		8B3BA1141FDFE62600407D25 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				367CD8A823BF31A5004E437C /* UIView+HLExtension.h */,
-				367CD8A923BF31A5004E437C /* UIView+HLExtension.m */,
 				FAAE697F220426EE005EFFAF /* JKDBModel */,
 				8B3BA16C1FDFEAFD00407D25 /* Utility.h */,
 				8B3BA16D1FDFEAFD00407D25 /* Utility.m */,
@@ -274,6 +272,8 @@
 			children = (
 				8B3BA13D1FDFE91400407D25 /* MomentViewController.h */,
 				8B3BA13E1FDFE91400407D25 /* MomentViewController.m */,
+				36A7B1E923C317A000259F30 /* MomentDetailViewController.h */,
+				36A7B1EA23C317A000259F30 /* MomentDetailViewController.m */,
 				FA58E4902205490700B788F8 /* WKWebViewController.h */,
 				FA58E4912205490700B788F8 /* WKWebViewController.m */,
 				FA15602F22239686001B626B /* MMLocationViewController.h */,
@@ -582,7 +582,6 @@
 				36DF825923B4D81D0042D4F5 /* MMWebViewJS.m in Sources */,
 				FA58E4BA22058B0900B788F8 /* JPinYinUtil.m in Sources */,
 				FABE69D82248C21600E574D3 /* MMCommentInputView.m in Sources */,
-				367CD8AA23BF31A5004E437C /* UIView+HLExtension.m in Sources */,
 				367CD8A723BF25A7004E437C /* MMImageView.m in Sources */,
 				8B3BA1351FDFE72300407D25 /* MainViewController.m in Sources */,
 				FAF29482226474F000226F8E /* MMUserDetailViewController.m in Sources */,
@@ -590,6 +589,7 @@
 				FAA79A1F2227E14E000716F8 /* MUser.m in Sources */,
 				FAF2948B2264A22700226F8E /* MLLabelUtil.m in Sources */,
 				FA58E4AE2205784500B788F8 /* DiscoverViewController.m in Sources */,
+				36A7B1EB23C317A000259F30 /* MomentDetailViewController.m in Sources */,
 				36DF825A23B4D81D0042D4F5 /* MMWebViewJSBridgeBase.m in Sources */,
 				8BE52D151FE35CC200B305C2 /* MMOperateMenuView.m in Sources */,
 				8B3BA0B01FDFE1BF00407D25 /* main.m in Sources */,
